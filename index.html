@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リンクボタンサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .button-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>リンクボタンのあるサイト</h1>
+    <div class="button-container">
+        <button onclick="window.open('https://www.google.com', '_blank')">Google</button>
+        <button onclick="window.open('https://www.yahoo.co.jp', '_blank')">Yahoo! Japan</button>
+        <button onclick="window.open('https://www.bing.com', '_blank')">Bing</button>
+        <button onclick="window.open('https://www.youtube.com', '_blank')">YouTube</button>
+        <button onclick="window.open('https://www.wikipedia.org', '_blank')">Wikipedia</button>
+        <button onclick="window.open('https://www.amazon.co.jp', '_blank')">Amazon Japan</button>
+    </div>
+</body>
+</html>
