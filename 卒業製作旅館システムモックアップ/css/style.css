@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#company_name{
+    text-align: center;
+}
+
+#text{
+    text-align: center;
+    color: aqua;
+}
