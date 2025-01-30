@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+
+        h1 {
+            text-align: center;
+            width: 100%;
+        }
+        .container1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+
+        }
+        .item {
+            width:80%;
+            padding: 20px;
+            margin-top: 20px;
+            margin-left: 10%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .item h2 {
+            color: #4CAF50;
+        }
+        .item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">千景</h1>
+            <nav class="nav">
+                <button class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="./uwReserve_01_01.html">ホーム</a></li>
+                    <li><a href="#reservation">宿泊予約</a></li>
+                    <li><a href="#room">客室</a></li>
+                    <li><a href="#meal">お食事</a></li>
+                    <li><a href="#spa">温泉</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="#Q&A">Q&A</a></li>
+                    <li><a href="#announce">お知らせ</a></li>
+                    <li><a href="#reservation_check">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <h1>客室</h1>
+
+    <div class="container1">
+        <div class="item">
+            <h2>スタンダードルーム</h2>
+            <p><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="50%"height="50%"></p>
+            <p>広さ：10畳</p>
+            <p>定員：4名</p>
+            <p>説明：和室＊一階・二階指定不可<br>
+                純和風のお部屋です。ふかふかの畳の上で、心地よい時間を過ごせます。疲れた身体を癒すため、大浴場もご用意しております。
+            </p>
+        </div>
+
+        <div class="item">
+            <h2>スタンダードルーム</h2>
+            <p><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="50%"height="50%"></p>
+            <p>広さ：10畳</p>
+            <p>定員：4名</p>
+            <p>説明：洋室＊一階・二階指定不可<br>
+                ベットの付いた洋風のお部屋です。疲れた身体を癒すため、大浴場もご用意しております。
+            </p>
+        </div>
+
+        <div class="item">
+            <h2>露天付デラックスルーム</h2>
+            <p><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="50%"height="50%"></p>
+            <p>広さ：14畳</p>
+            <p>定員：5名</p>
+            <p>説明：和室＊一階<br>
+                広々とした純和風のお部屋です。窓の外には庭園が広がり、四季折々の変化をお楽しみいただけます。湯につかりながら、贅沢なひとときを、心ゆくまでご堪能ください。
+            </p>
+        </div>
+
+        <div class="item">
+            <h2>スイートルーム</h2>
+            <p><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="50%"height="50%"></p>
+            <p>広さ：16畳</p>
+            <p>定員：5名</p>
+            <p>説明：ベットの付いたお部屋です。細部にまでこだわった空間で、特別な思い出を提供いたします。
+                
+            </p>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    });
+</script>
+</html>

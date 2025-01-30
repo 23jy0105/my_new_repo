@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約フォーム</title>
+    <style>
+        .header{
+            background-color: #333;
+            padding: 20px 0;
+        }
+        .header .nav {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav-menu-left,
+        .nav-menu-right {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu-left li,
+        .nav-menu-right li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .nav-menu-left a,
+        .nav-menu-right a {
+            text-decoration: none;
+            color:#ccc;
+            font-size: 16px;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        .form-select-top{
+            display: flex;
+            width: 100%;
+        }
+        .form-select-bottom{
+            display: flex;
+        }
+        .form-row {
+            margin-bottom: 15px;
+            margin-right: 15px;
+
+        }
+        select, button, input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .radio-group {
+            margin-bottom: 10px;
+            margin-right:100px;
+            display: flex;
+        }
+        #search-button,#sort-options{
+            margin-top:30px;
+            height: 30px;
+            position: absolute;
+            right:70px;
+        } 
+        #date-select{
+            margin-right: 30px;
+            width:150px;
+        }
+        #date-picker{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <ul class="nav-menu-left" id="nav-menu-left">
+                    <li><a href="./uwReserve_01_01.html">千景</a></li>
+                </ul>
+                <ul class="nav-menu-right" id="nav-menu-right">
+                    <li><a href="./uwReserve_05.html">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>ご予約確認</h1>
+        <div class="form-container">
+            <div class="form-select-top">
+                <div class="form-row">
+                    <label for="stay-days">宿泊日数</label>
+                    <select id="stay-days" name="stay-days">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="people-count">人数</label>
+                    <select id="people-count" name="people-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="room-count">部屋数</label>
+                    <select id="room-count" name="room-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <button type="button" id="search-button">検索</button>
+
+            </div>
+            <div class="form-select-bottom">
+                <div class="form-row">
+                    <div class="radio-group">
+                        <input type="radio" id="date-not-specified" name="date" value="not-specified" checked>
+                        <label for="date-not-specified" id="date-select">日付未定</label>
+                        <input type="radio" id="date-specified" name="date" value="specified">
+                        <label for="date-specified" id="date-select">日付を指定する</label>
+                        <input type="date" id="date-picker" name="date-picker" disabled>                       
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <select id="sort-options" name="sort-options">
+                        <option value="default">並び替え</option>
+                        <option value="price-asc">価格の安い順</option>
+                        <option value="price-desc">価格の高い順</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </main>
+    <script>
+        const dateNotSpecified = document.getElementById('date-not-specified');
+        const dateSpecified = document.getElementById('date-specified');
+        const datePicker = document.getElementById('date-picker');
+
+        dateNotSpecified.addEventListener('change', () => {
+            datePicker.disabled = true;
+            datePicker.style.visibility = "hidden";
+        });
+
+        dateSpecified.addEventListener('change', () => {
+            datePicker.disabled = false;
+            datePicker.style.visibility = "visible";
+        });
+    </script>
+</body>
+
+</html>
