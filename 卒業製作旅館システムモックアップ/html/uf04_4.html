@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            margin: 10px 20px; /* ヘッダーに余白を追加 */
+        }
+
+        .top-button {
+            background-color: #818181;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            float: right; /* 右寄せにする */
+        }
+
+        .checkout-button {
+            float: right;
+            background-color: #818181;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 50px 20px; /* 右と下に余白を追加 */
+        }
+
+        .container {
+            margin-top: 100px; /* ヘッダーと重ならないようにする */
+            margin: 20px;
+            background-color: #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button onclick="location.href='uf04_2.html'" class="top-button">戻る</button>
+    </header>
+    <main>
+        <button onclick="location.href='uf02_1.html'" class="checkout-button">チェックアウト</button>
+        <div class="container">
+            <p>部屋番号 101</p>
+            <p>予約番号 1234567</p>
+            <p>宿泊日時 2024/12/20～21</p>
+            <p>顧客氏名 山田 太郎(やまだ たろう)</p>
+            <p>宿泊人数 2名</p>
+            <p>宿泊状況 チェックイン済</p>
+            <p>食事時間 18:00</p>
+            <p>アレルギー あり(食事なし)</p>
+        </div>
+    </main>
+</body>
+</html>
