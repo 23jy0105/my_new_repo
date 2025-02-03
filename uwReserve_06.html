@@ -3,81 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>予約フォーム</title>
-    <style>
-        .header{
-            background-color: #333;
-            padding: 20px 0;
-        }
-        .header .nav {
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        .nav-menu-left,
-        .nav-menu-right {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-menu-left li,
-        .nav-menu-right li {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .nav-menu-left a,
-        .nav-menu-right a {
-            text-decoration: none;
-            color:#ccc;
-            font-size: 16px;
-        }
-        .form-container {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 0 auto;
-        }
-        .form-select-top{
-            display: flex;
-            width: 100%;
-        }
-        .form-select-bottom{
-            display: flex;
-        }
-        .form-row {
-            margin-bottom: 15px;
-            margin-right: 15px;
-
-        }
-        select, button, input[type="radio"] {
-            margin-right: 10px;
-        }
-        .form-actions {
-            margin-top: 20px;
-            text-align: right;
-        }
-        .radio-group {
-            margin-bottom: 10px;
-            margin-right:100px;
-            display: flex;
-        }
-        #search-button,#sort-options{
-            margin-top:30px;
-            height: 30px;
-            position: absolute;
-            right:70px;
-        } 
-        #date-select{
-            margin-right: 30px;
-            width:150px;
-        }
-        #date-picker{
-            visibility: hidden;
-        }
-    </style>
+    <title>予約フォーム（結果）</title>
+    <link rel="stylesheet" href="./css/search.css">
 </head>
 <body>
     <header class="header">
@@ -126,7 +53,7 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <button type="button" id="search-button" onclick="location.href='./uwReserve_06.html'">検索</button>
+                <button type="button" id="search-button">検索</button>
 
             </div>
             <div class="form-select-bottom">
@@ -148,11 +75,24 @@
                     </select>
                 </div>
             </div>
-
-
-
-
         </div>
+    <h2>検索結果：10件</h2>
+    <div class="result">
+        <div class="result-item">
+            <div class="result-image"><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="100px"height="100px"alt="プラン画像1"></div>
+            <div class="result-details">
+                <p><h2>基本プラン</h2></p>
+                <h3>概要</h3>
+                <p>料金	￥19,800～</p>
+                <p>朝食・夕食ありのプランです。一品一品丁寧にお作りしたお料理をご提供しております。</p>
+            </div>
+            <div class="result-buttons">
+                <button>詳細</button>
+                <button>予約</button>
+            </div>
+        </div>
+
+    </div>
     </main>
     <script>
         const dateNotSpecified = document.getElementById('date-not-specified');
@@ -168,6 +108,7 @@
             datePicker.disabled = false;
             datePicker.style.visibility = "visible";
         });
+
     </script>
 </body>
 

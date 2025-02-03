@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カレンダー</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="prev">◀ 前の月</button>
+        <h2 id="current-month"></h2>
+        <button id="next">次の月 ▶</button>
+    </div>
+    <div id="calendar-container"></div>
+    <script>
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth();
+
+        function createCalendar(year, month) {
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const firstDay = new Date(year, month, 1).getDay();
+            const calendar = document.createElement("table");
+            calendar.innerHTML = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+            
+            let row = document.createElement("tr");
+            for (let i = 0; i < firstDay; i++) {
+                row.appendChild(document.createElement("td"));
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cell = document.createElement("td");
+                cell.textContent = day;
+                row.appendChild(cell);
+                
+                if ((firstDay + day) % 7 === 0) {
+                    calendar.appendChild(row);
+                    row = document.createElement("tr");
+                }
+            }
+            
+            if (row.children.length > 0) {
+                calendar.appendChild(row);
+            }
+            
+            return calendar;
+        }
+
+        function updateCalendar() {
+            const container = document.getElementById("calendar-container");
+            container.innerHTML = "";
+            document.getElementById("current-month").textContent = `${currentYear}年 ${currentMonth + 1}月`;
+            container.appendChild(createCalendar(currentYear, currentMonth));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCalendar();
+            document.getElementById("prev").addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            });
+            document.getElementById("next").addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            });
+        });
+    </script>
+</body>
+</html>
