@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約情報確認</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .top-button, .cancel-button {
+            background-color: #ccc;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .cancel-button {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        .info {
+            margin-bottom: 15px;
+        }
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>予約情報</h2>
+        <button class="top-button">戻る</button>
+    </div>
+    
+    <div class="info"><strong>予約番号 :</strong> 231145149654</div>
+    <div class="info"><strong>ステータス:</strong> <span class="status">予約済み</span> <button class="cancel-button" style="margin-left: 50px;">予約をキャンセルする</button></div>
+    <div class="info"><strong>予約プラン:</strong> スイートルーム / 朝食, 夕食</div>
+    <div class="info"><strong>宿泊期間:</strong> 2024/11/20 ~ 2024/11/21 (YYYY/MM/DD)</div>
+    <div class="info"><strong>氏名 :</strong> (姓) 山田 (名) 太郎</div>
+    <div class="info"><strong>ふりがな :</strong> (姓) やまだ (名) たろう</div>
+    <div class="info"><strong>電話番号 :</strong> 08012345555</div>
+    <div class="info"><strong>郵便番号 :</strong> 000-0000</div>
+    <div class="info"><strong>住所 :</strong> 東京都新宿区百人町9-99</div>
+    
+</body>
+</html>
