@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部屋のステータス(清掃)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .legend {
+            background-color: #eee;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .legend span {
+            margin-right: 15px;
+        }
+        .room-container {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .floor-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .rooms {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .room {
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            border: 1px solid #000;
+            margin: 5px;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .not-cleaned {
+            background-color: orange;
+        }
+        .cleaning {
+            background-color: rgb(247, 247, 72);
+        }
+        .cleaned {
+            background-color: skyblue;
+        }
+        .top-button {
+            float: right;
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="top-button" onclick="location.href='toppage.html'">トップに戻る</button>
+    
+    <div class="room-container">
+        <div class="floor-title">1階</div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room cleaned">101<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">102<br>清掃済</div></a>
+            <a href="uh01_4.html"><div class="room not-cleaned">103<br>未清掃</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">105<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">106<br>清掃済</div></a>
+        </div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room cleaned">107<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">108<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaning">110<br>清掃中</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">111<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">112<br>清掃済</div></a>
+        </div>
+    </div>
+    
+    <div class="room-container">
+        <div class="floor-title">2階</div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room cleaned">201<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">202<br>清掃済</div></a>
+            <a href="uh01_4.html"><div class="room not-cleaned">203<br>未清掃</div></a>
+            <a href="uf04_4.html"><div class="room cleaning">205<br>清掃中</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">206<br>清掃済</div></a>
+        </div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room cleaned">207<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaning">208<br>清掃中</div></a>
+            <a href="uh01_4.html"><div class="room not-cleaned">210<br>未清掃</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">211<br>清掃済</div></a>
+            <a href="uf04_4.html"><div class="room cleaned">212<br>清掃済</div></a>
+        </div>
+    </div>
+</body>
+</html>

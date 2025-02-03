@@ -34,6 +34,10 @@
     right: 20px;
     bottom: 20px;
     position: fixed;
+    background-color: #b0b0b0;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
 }
 
 .top_button{
@@ -61,7 +65,4 @@
 
 .checkout_title{
     float: left;
-}
-.checkout_button1{
-    
 }

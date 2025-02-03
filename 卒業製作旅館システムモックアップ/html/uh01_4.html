@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            margin: 10px 20px; /* ヘッダーに余白を追加 */
+        }
+
+        .back-button {
+            background-color: #818181;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .cleaned-button {
+            background-color: #818181;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 50px 0 0 0/* 右と下に余白を追加 */
+        }
+
+        .container {
+            margin-top: 100px; /* ヘッダーと重ならないようにする */
+            margin: 20px;
+            background-color: #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <p>部屋番号 101 清掃中</p>
+            <p>清掃を開始しました</p>
+            <p>清掃後、清掃完了を選択してください</p>
+            <p>中断する場合は戻るを選択してください</p>
+            <button class="back-button" onclick="location.href='uh01_2.html'">戻る</button>
+            <button class="cleaned-button" onclick="location.href='uh01_6.html'">清掃完了</button>
+        </div>
+    </main>
+</body>
+</html>

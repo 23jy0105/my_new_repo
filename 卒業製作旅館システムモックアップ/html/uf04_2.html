@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部屋のステータス</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .legend {
+            background-color: #eee;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .legend span {
+            margin-right: 15px;
+        }
+        .room-container {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .floor-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .rooms {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .room {
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            border: 1px solid #000;
+            margin: 5px;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .check-in {
+            background-color: #90EE90;
+        }
+        .check-out {
+            background-color: #FF6B6B;
+        }
+        .empty {
+            background-color: #D3D3D3;
+        }
+        .top-button {
+            float: right;
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="legend">
+        <span style="color: green;">緑：チェックイン</span>
+        <span style="color: red;">赤：チェックアウト済み</span>
+        <span style="color: gray;">灰：空室</span>
+    </div>
+    <button class="top-button" onclick="location.href='toppage.html'">トップに戻る</button>
+    
+    <div class="room-container">
+        <div class="floor-title">1階</div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room check-in">101<br>1234567</div></a>
+            <a href="uf04_4.html"><div class="room empty">102<br>―</div></a>
+            <a href="uf04_4.html"><div class="room check-out">103<br>2441151</div></a>
+            <a href="uf04_4.html"><div class="room empty">105<br>―</div></a>
+            <a href="uf04_4.html"><div class="room empty">106<br>―</div></a>
+        </div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room empty">107<br>―</div></a>
+            <a href="uf04_4.html"><div class="room check-in">108<br>2384414</div></a>
+            <a href="uf04_4.html"><div class="room check-out">110<br>3541145</div></a>
+            <a href="uf04_4.html"><div class="room check-in">111<br>3453452</div></a>
+            <a href="uf04_4.html"><div class="room check-in">112<br>337745</div></a>
+        </div>
+    </div>
+    
+    <div class="room-container">
+        <div class="floor-title">2階</div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room check-in">201<br>4451221</div></a>
+            <a href="uf04_4.html"><div class="room check-in">202<br>1122115</div></a>
+            <a href="uf04_4.html"><div class="room check-out">203<br>4115121</div></a>
+            <a href="uf04_4.html"><div class="room check-out">205<br>3511442</div></a>
+            <a href="uf04_4.html"><div class="room check-in">206<br>5411221</div></a>
+        </div>
+        <div class="rooms">
+            <a href="uf04_4.html"><div class="room check-in">207<br>1111111</div></a>
+            <a href="uf04_4.html"><div class="room check-out">208<br>4152221</div></a>
+            <a href="uf04_4.html"><div class="room check-out">210<br>1222331</div></a>
+            <a href="uf04_4.html"><div class="room check-in">211<br>5142210</div></a>
+            <a href="uf04_4.html"><div class="room empty">212<br>―</div></a>
+        </div>
+    </div>
+</body>
+</html>
+
+
