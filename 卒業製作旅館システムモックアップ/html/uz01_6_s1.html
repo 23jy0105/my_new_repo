@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宿泊プラン登録確認</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .form-container {
+            width: 60%;
+        }
+        .side-container {
+            width: 35%;
+        }
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input, textarea, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+        textarea {
+            height: 150px;
+        }
+        button {
+            width: 48%;
+            display: inline-block;
+            padding: 15px;
+            font-size: 1.2em;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="form-container">
+        <h2>プラン名:</h2>
+        <a>＜2食付き＞松</a>
+        
+        <h2>概要:</h2>
+        <a>最上級のおもてなしによるくつろぎをどうぞ。</a>
+        
+        <h2>詳細:</h2>
+        ■プラン内容■
+
+            ①選べるドリンク付き（ご夕食時に提供いたします）
+            
+            ビール・季節のカクテル・スパークリングワイン・ソフトドリンクなどからお1人様1杯お選びいただけます。
+            
+            追加料金でスパークリング日本酒に変更いただけます。
+            
+            ※お子様の場合、選べるドリンクは付いておりません。
+            
+            
+            
+            ②ご夕食の最後にデザートプレート（メッセージ付き）を提供いたします。
+            
+            メッセージ(20文字程度）ご希望の方は予約時備考欄に記載してください。
+            
+            
+            
+            ③チェックアウト12:00
+            
+            通常11:00までのところ、12:00までごゆっくりお過ごしいただけます。
+            
+            
+            
+            <br>◆チェックイン◆ 15:00
+            
+            ◆チェックアウト◆ 12:00
+            
+            
+            
+            <br>◇夕食◇　ひととせの鍋「すき焼き」メインディナー
+            
+            ・食前茶
+            
+            ・先付
+            
+            ・八寸
+            
+            ・お造り
+            
+            ・ひととせの鍋「すき焼き」
+            
+            ・食事
+            
+            ・デザート
+            
+            
+            
+            ※旬な食材を利用するため、食材や調理方法は毎月異なります。
+            
+            夕食のお時間は17:30/18:00/18:30/19:00の4枠からお選びください。（21時ラストオーダー、22時閉店）
+            
+            ご希望のお時間などをお伺いさせていただくため、ご連絡させていただく場合がございます。
+            
+            
+            
+            ※夕食コース内容には、ドリンクは含まれておりません。
+            
+            ご利用の場合は別途ご注文くださいませ。利き酒師おすすめの日本酒や国産ジュースなどがございます。
+            
+            
+            
+            
+            <br>◇和朝食◇
+            
+            ・先付
+            
+            ・八寸・前菜
+            
+            ・焼物
+            
+            ・煮物
+            
+            ・ご飯、味噌汁、香の物
+            
+            ・果物
+            
+            
+            
+            朝食営業時間：7:30～11:00(L/O09:30）
+            
+            朝食のお時間はチェックインにいらした方から先着順でお選びいただきます。
+            
+            時間の事前予約はできませんので予めご了承くださいませ。
+            
+            
+            
+            <br>□お食事場所（朝食、夕食）：割烹 月かげ
+            
+            
+            
+            <br>△子供の食事について△
+            夕食：天麩羅の盛り合わせと冷たいおうどんまたはそば(低学年向け)
+            　　　お子様御膳(高学年向け、オプションのページで選択可能です)
+            朝食：サラダ・出し巻き卵・焼き魚・ごはん・味噌汁の5品のご提供をいたします。
+            
+            
+            ※ご予約の変更にともなう飲食代のご返金はいたしかねますので、予めご了承くださいませ。
+            
+            
+            
+            <br>■大浴場のご案内■
+            
+            箱根・芦ノ湖温泉の源泉から運ぶ露天風呂は、肌に良いアルカリ性単純温泉。
+            
+            女湯にはオリジナルアロマのミストサウナを、男湯にはドライサウナを併設し、
+            
+            専用庭を臨む内湯では時間の移ろいにそった音景がくつろぎの湯浴みを演出します。
+            
+            <br>□温浴営業時間
+            
+            平日：16:00 ～ 25:00、朝 6:00 ～ 13:00
+            
+            休日：16:00 ～ 25:00、朝 6:00 ～ 14:00
+        
+        <h2>値段:</h2>
+        <a>80000円</a>
+    </div>
+    
+    <div class="side-container">
+        <h2>開始期間:</h2>
+        <input type="date" id="start-date" name="start-date" value="2025-12-01">
+        
+        <h2>終了期間:</h2>
+        <input type="date" id="end-date" name="end-date" value="2025-03-10">
+        
+        <h2>部屋の種類:</h2>
+        <select id="room-type" name="room-type">
+            <option value="和室">和室</option>
+            <option value="洋室">洋室</option>
+            <option value="スイートルーム">スイートルーム</option>
+            <option value="露天風呂付" selected>露天風呂付</option>
+        </select>
+        
+        <h2>食事の種類:</h2>
+        <select id="meal-type" name="meal-type">
+            <option value="朝食のみ">朝食のみ</option>
+            <option value="夕食のみ">夕食のみ</option>
+            <option value="朝食・夕食付き" selected>朝食・夕食付き</option>
+            <option value="食事なし">食事なし</option>
+        </select>
+
+        <h2>画像ファイル</h2>
+        
+        <button onclick="location.href='uz01_4.html'">戻る</button>
+        <button type="submit" onclick="location.href='uz01_6_s1_1.html'">登録</button>
+    </div>
+</body>
+</html>
