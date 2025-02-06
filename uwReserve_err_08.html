@@ -3,9 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>予約フォーム</title>
-    <link rel="stylesheet" href="./css/search.css">
+    <title>予約フォームエラー</title>
+    <link rel="stylesheet" type="text/css" href="./css/err.css">
+    <style>
+        .header{
+            background-color: #333;
+            padding: 20px 0;
+        }
+        .header .nav {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 10px 20px;
+        }
 
+        .nav-menu-left,
+        .nav-menu-right {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu-left li,
+        .nav-menu-right li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .nav-menu-left a,
+        .nav-menu-right a {
+            text-decoration: none;
+            color:#ccc;
+            font-size: 16px;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        .form-select-top{
+            display: flex;
+            width: 100%;
+        }
+        .form-select-bottom{
+            display: flex;
+        }
+        .form-row {
+            margin-bottom: 15px;
+            margin-right: 15px;
+
+        }
+        select, button, input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .radio-group {
+            margin-bottom: 10px;
+            margin-right:100px;
+            display: flex;
+        }
+        #search-button,#sort-options{
+            margin-top:30px;
+            height: 30px;
+            position: absolute;
+            right:70px;
+        } 
+        #date-select{
+            margin-right: 30px;
+            width:150px;
+        }
+        #date-picker{
+            visibility: hidden;
+        }
+        #stay-start{
+            visibility: hidden;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -77,11 +153,9 @@
                     </select>
                 </div>
             </div>
-
-
-
-
         </div>
+        <h2>検索結果：0件</h2>
+        <p id="errmessage">空室が見つかりませんでした</p>
     </main>
     <script>
         const dateNotSpecified = document.getElementById('date-not-specified');

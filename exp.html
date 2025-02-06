@@ -133,32 +133,38 @@
         let currentMonth = new Date().getMonth();
 
         function createCalendar(year, month) {
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const firstDay = new Date(year, month, 1).getDay();
-            const calendar = document.createElement("table");
-            calendar.innerHTML = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+        const calendar = document.createElement("table");
+        calendar.innerHTML = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+        
+        let row = document.createElement("tr");
+        for (let i = 0; i < firstDay; i++) {
+            row.appendChild(document.createElement("td"));
+        }
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("td");
             
-            let row = document.createElement("tr");
-            for (let i = 0; i < firstDay; i++) {
-                row.appendChild(document.createElement("td"));
-            }
+            // Create a link for the day
+            const link = document.createElement("a");
+            link.href = `#${year}-${month + 1}-${day}`;  // 例えば、"2025-2-5"のように日付をリンクにする
+            link.textContent = day;
+            cell.appendChild(link);
             
-            for (let day = 1; day <= daysInMonth; day++) {
-                const cell = document.createElement("td");
-                cell.textContent = day;
-                row.appendChild(cell);
-                
-                if ((firstDay + day) % 7 === 0) {
-                    calendar.appendChild(row);
-                    row = document.createElement("tr");
-                }
-            }
+            row.appendChild(cell);
             
-            if (row.children.length > 0) {
+            if ((firstDay + day) % 7 === 0) {
                 calendar.appendChild(row);
+                row = document.createElement("tr");
             }
-            
-            return calendar;
+        }
+        
+        if (row.children.length > 0) {
+            calendar.appendChild(row);
+        }
+        
+        return calendar;
         }
 
         function updateCalendar() {

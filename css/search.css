@@ -95,8 +95,73 @@ select, button, input[type="radio"] {
 .result-buttons {
     display: flex;
     flex-direction: column;
+    position:fixed;
+    right:20px;
 }
 .result-buttons button {
     margin-bottom: 5px;
     padding: 5px 10px;
+}
+#calendar-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+/* モーダル（ポップアップ）のスタイル */
+.modal {
+    display: none; /* 最初は非表示 */
+    position: fixed;
+    z-index: 1; /* 前面に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 背景色 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* 閉じるボタン */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#stay-start{
+    visibility: hidden;
 }

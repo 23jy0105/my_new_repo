@@ -63,6 +63,7 @@
                         <label for="date-not-specified" id="date-select">日付未定</label>
                         <input type="radio" id="date-specified" name="date" value="specified">
                         <label for="date-specified" id="date-select">日付を指定する</label>
+                        <div id="stay-start">(宿泊開始日)</div>
                         <input type="date" id="date-picker" name="date-picker" disabled>                       
                     </div>
 
@@ -81,34 +82,159 @@
         <div class="result-item">
             <div class="result-image"><img src="./img/Gemini_Generated_Image_9am1kp9am1kp9am1.jpg"width="100px"height="100px"alt="プラン画像1"></div>
             <div class="result-details">
-                <p><h2>基本プラン</h2></p>
+                <h2>基本プラン</h2>
                 <h3>概要</h3>
                 <p>料金	￥19,800～</p>
                 <p>朝食・夕食ありのプランです。一品一品丁寧にお作りしたお料理をご提供しております。</p>
             </div>
             <div class="result-buttons">
-                <button>詳細</button>
-                <button>予約</button>
+                <button class="details-button">詳細</button>
+                <button id="reserve-button">予約</button>
             </div>
         </div>
+        <div class="result-item">
+            <div class="result-image"><img src="./img/DXroom.png"width="100px"height="100px"alt="プラン画像1"></div>
+            <div class="result-details">
+                <h2>デラックスプラン</h2>
+                <h3>概要</h3>
+                <p>料金	￥24,900～</p>
+                <p>ワンランク上の贅沢な滞在をお求めの方に――<br>
+                    特別なお部屋とお食事で、心に残る至福のひとときをお届けします。</p>
+            </div>
+            <div class="result-buttons">
+                <button class="details-button">詳細</button>
+                <button id="reserve-button">予約</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>プラン詳細</h2>
+            <p>ここにプランの詳細情報が表示されます。</p>
+            <p>例えば、料金や追加情報を含むことができます。</p>
+        </div>
+    </div>
 
+    <div id="calendar-container">
+        <div class="nav-buttons">
+            <button id="prev">◀ 前の月</button>
+            <h2 id="current-month"></h2>
+            <button id="next">次の月 ▶</button>
+        </div>
+        <div id="calendar"></div>
+        <button id="close-calendar">閉じる</button>        
     </div>
     </main>
     <script>
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth();
+
+        function createCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+        const calendar = document.createElement("table");
+        calendar.innerHTML = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+        
+        let row = document.createElement("tr");
+        for (let i = 0; i < firstDay; i++) {
+            row.appendChild(document.createElement("td"));
+        }
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("td");
+            
+            // Create a link for the day
+            const link = document.createElement("a");
+            link.href = `#${year}-${month + 1}-${day}`;  // 例えば、"2025-2-5"のように日付をリンクにする
+            link.textContent = day;
+            cell.appendChild(link);
+            
+            row.appendChild(cell);
+            
+            if ((firstDay + day) % 7 === 0) {
+                calendar.appendChild(row);
+                row = document.createElement("tr");
+            }
+        }
+        
+        if (row.children.length > 0) {
+            calendar.appendChild(row);
+        }
+        
+        return calendar;
+        }
+
+        function updateCalendar() {
+            const container = document.getElementById("calendar");
+            container.innerHTML = "";
+            document.getElementById("current-month").textContent = `${currentYear}年 ${currentMonth + 1}月`;
+            container.appendChild(createCalendar(currentYear, currentMonth));
+        }
+        document.querySelectorAll("#reserve-button").forEach(button => {button.addEventListener("click", () => {
+            document.getElementById("calendar-container").style.display = "block";
+            updateCalendar();
+        });
+    });
+
+        document.getElementById("close-calendar").addEventListener("click", () => {
+            document.getElementById("calendar-container").style.display = "none";
+        });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            updateCalendar();
+        });
+
+        document.getElementById("next").addEventListener("click", () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateCalendar();
+        });
         const dateNotSpecified = document.getElementById('date-not-specified');
         const dateSpecified = document.getElementById('date-specified');
         const datePicker = document.getElementById('date-picker');
+        const dateStart = document.getElementById('stay-start');
 
         dateNotSpecified.addEventListener('change', () => {
             datePicker.disabled = true;
             datePicker.style.visibility = "hidden";
+            dateStart.style.visibility = "hidden";
         });
 
         dateSpecified.addEventListener('change', () => {
             datePicker.disabled = false;
             datePicker.style.visibility = "visible";
+            dateStart.style.visibility = "visible";
+        });
+        const modal = document.getElementById("myModal");
+        const closeButton = document.getElementsByClassName("close")[0];
+        const detailsButtons = document.querySelectorAll(".details-button");
+
+        detailsButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                modal.style.display = "block";
+            });
         });
 
+        // 閉じるボタンをクリックしたときにモーダルを閉じる
+        closeButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // モーダル外の部分をクリックするとモーダルを閉じる
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
     </script>
 </body>
 
