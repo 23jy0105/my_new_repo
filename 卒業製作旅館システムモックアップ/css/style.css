@@ -34,18 +34,25 @@
 .div1{
     padding-left: 300px;
 
-    padding-top: 80px;
+    padding-top: 50px;
+}
+.div1 a{
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(66, 89, 124)
 }
 
 .button{
     display: flex;
     right: 20px;
     bottom: 20px;
-    position: fixed;
-    background-color: #b0b0b0;
+    
+    background-color: #7a9dff;
     color: white;
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 10px 200px;
+    
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .top_button{
@@ -77,10 +84,11 @@
 
 .dish{
     padding: 30px;
-    font-size: 150%;
+    font-size: 250%;
 }
 select{
-    width: 100px;
-    height: 30px;
-    font-size: 150%;
+    width: 200px;
+    height: 40px;
+    font-size: 200%;
+    text-align: center;
 }
