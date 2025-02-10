@@ -93,3 +93,37 @@ body {
         text-align: center;
     }
 }
+
+.button {
+    font-size: 26px;
+    font-weight: bold;
+    padding: 8px 15px;
+    margin-right: 5px;
+    border: none;
+    background-color: #808080;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #fff;
+}
+.button:hover {
+    background-color: #525252;
+}
+
+.b-button {
+    color: white;
+    font-weight: bold;
+    padding: 6px 15px;
+    margin-right: 5px;
+    border: none;
+    background-color: #3c91ff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.b-button:hover {
+    background-color: #4171a8;
+}
+
+#input-box{
+    width: 300px;
+    height: 25px;
+}
