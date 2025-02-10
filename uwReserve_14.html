@@ -69,6 +69,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         .form-group {
             display: flex;
@@ -88,11 +89,25 @@
             display: flex;
             gap: 10px;
         }
-        .form-group2{
-
-        }
         #caution{
             color:red;
+        }
+        .hidden {
+            display: none;
+        }
+        #submit {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -116,7 +131,7 @@
     </div>
 
     <div class="form-container">
-        <form action="#" method="post">
+        <form id="customer-form" action="./uwReserve_20.html" method="post">
             <div class="form-group-inline">
                 <div class="form-group">
                     <label for="last-name">姓</label>
@@ -167,8 +182,42 @@
                 <input type="text" id="building" placeholder="Placeholder">
             </div>
             <div class="form-group2">
-                <input type="radio" id="bookInstead">
-                <label for="bookInstead">宿泊者本人以外の予約はこちらをチェック</label>
+                <input type="radio" id="bookInsteadNo" name="bookInstead" value="no" onclick="toggleVisibility(false)" checked>
+                <label for="bookInsteadNo">宿泊者本人の予約</label>
+                <br>
+                <input type="radio" id="bookInsteadYes" name="bookInstead" value="yes" onclick="toggleVisibility(true)">
+                <label for="bookInsteadYes">宿泊者本人以外の予約はこちらをチェック</label>
+            </div>
+            <div id="extra-fields" class="hidden">
+                <h3>予約者情報</h3>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="reserver-last-name">姓</label>
+                        <input type="text" id="reserver-last-name" placeholder="Placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="reserver-first-name">名</label>
+                        <input type="text" id="reserver-first-name" placeholder="Placeholder">
+                    </div>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="reserver-last-kana">せい</label>
+                        <input type="text" id="reserver-last-kana" placeholder="Placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="reserver-first-kana">めい</label>
+                        <input type="text" id="reserver-first-kana" placeholder="Placeholder">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reserver-email">メールアドレス</label>
+                    <input type="email" id="reserver-email" placeholder="Placeholder">
+                </div>
+                <div class="form-group">
+                    <label for="reserver-phone">電話番号</label>
+                    <input type="tel" id="reserver-phone" placeholder="Placeholder">
+                </div>
             </div>
             <p id="caution">
                 ＊食事は以下のアレルギー品目を含みます<br>
@@ -180,16 +229,39 @@
             </p>
             <div>
                 <label for="allergy">アレルギーの方の人数を選択してください</label>
-                <select>
+                <select id="allergy" name="allergy">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="2">3</option>
-                    <option value="2">4</option>
-                    <option value="2">5</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
             </div>
+            <input type="submit" id="submit" value="入力">
         </form>
     </div>
+    <script>
+        function toggleVisibility(showExtra) {
+            const extraFields = document.getElementById('extra-fields');
+            const personalFields = document.getElementById('personal-fields');
+            if (showExtra) {
+                extraFields.classList.remove('hidden');
+            } else {
+                extraFields.classList.add('hidden');
+            }
+        }
+        document.getElementById('customer-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            const formData = new FormData(this);
+            const formObject = {};
+            formData.forEach((value, key) => formObject[key] = value);
+            localStorage.setItem('customerFormData', JSON.stringify(formObject));
+
+            // Redirect to the confirmation page
+            window.location.href = this.action;
+        });
+    </script>
 </body>
 </html>
