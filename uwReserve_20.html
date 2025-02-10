@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入力確認</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group p {
+            margin: 5px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        #confirm, #edit {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #confirm:hover, #edit:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>入力確認</h2>
+        <form action="./reservation-confirmation.html" method="post">
+            <div class="form-group">
+                <label>姓</label>
+                <p id="confirm-last-name"></p>
+            </div>
+            <div class="form-group">
+                <label>名</label>
+                <p id="confirm-first-name"></p>
+            </div>
+            <div class="form-group">
+                <label>せい</label>
+                <p id="confirm-last-kana"></p>
+            </div>
+            <div class="form-group">
+                <label>めい</label>
+                <p id="confirm-first-kana"></p>
+            </div>
+            <div class="form-group">
+                <label>メールアドレス</label>
+                <p id="confirm-email"></p>
+            </div>
+            <div class="form-group">
+                <label>郵便番号</label>
+                <p id="confirm-postal-code"></p>
+            </div>
+            <div class="form-group">
+                <label>都道府県</label>
+                <p id="confirm-prefecture"></p>
+            </div>
+            <div class="form-group">
+                <label>電話番号</label>
+                <p id="confirm-phone"></p>
+            </div>
+            <div class="form-group">
+                <label>住所</label>
+                <p id="confirm-address"></p>
+            </div>
+            <div class="form-group">
+                <label>建物名</label>
+                <p id="confirm-building"></p>
+            </div>
+
+            <div class="form-group">
+                <label>予約者情報</label>
+                <div id="confirm-extra-fields"></div>
+            </div>
+
+            <div class="form-group">
+                <label>アレルギー人数</label>
+                <p id="confirm-allergy"></p>
+            </div>
+
+            <div class="button-container">
+                <button type="button" id="edit">修正する</button>
+                <button type="submit" id="confirm">確定する</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // ここで前のページからデータを受け取り、入力内容を表示します。
+        document.getElementById('confirm-last-name').innerText = localStorage.getItem('last-name');
+        document.getElementById('confirm-first-name').innerText = localStorage.getItem('first-name');
+        document.getElementById('confirm-last-kana').innerText = localStorage.getItem('last-kana');
+        document.getElementById('confirm-first-kana').innerText = localStorage.getItem('first-kana');
+        document.getElementById('confirm-email').innerText = localStorage.getItem('email');
+        document.getElementById('confirm-postal-code').innerText = localStorage.getItem('postal-code');
+        document.getElementById('confirm-prefecture').innerText = localStorage.getItem('prefecture');
+        document.getElementById('confirm-phone').innerText = localStorage.getItem('phone');
+        document.getElementById('confirm-address').innerText = localStorage.getItem('address');
+        document.getElementById('confirm-building').innerText = localStorage.getItem('building');
+
+        // 予約者情報（追加の項目）
+        if (localStorage.getItem('bookInstead') === 'yes') {
+            document.getElementById('confirm-extra-fields').innerHTML = `
+                <p>姓: ${localStorage.getItem('reserver-last-name')}</p>
+                <p>名: ${localStorage.getItem('reserver-first-name')}</p>
+                <p>せい: ${localStorage.getItem('reserver-last-kana')}</p>
+                <p>めい: ${localStorage.getItem('reserver-first-kana')}</p>
+                <p>メールアドレス: ${localStorage.getItem('reserver-email')}</p>
+                <p>電話番号: ${localStorage.getItem('reserver-phone')}</p>
+            `;
+        }
+
+        document.getElementById('confirm-allergy').innerText = localStorage.getItem('allergy');
+
+        // 編集ボタンで前のページに戻る
+        document.getElementById('edit').addEventListener('click', function() {
+            window.history.back();
+        });
+    </script>
+</body>
+</html>
