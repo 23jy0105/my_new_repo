@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お客様情報フォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            height:50px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background-color: #ccc;
+            width: 100%;
+            z-index: 1;
+            transform: translateY(-50%);
+
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 33%; /* Update this value to reflect progress */
+            z-index: 2;
+            position: relative;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        .progress-step .circle {
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .progress-step.active .circle {
+            background-color: #4caf50;
+        }
+        .progress-step span {
+            font-size: 20px;
+            padding-top: 10px;
+
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            width: 100px;
+            line-height: 32px;
+        }
+        .form-group input, .form-group select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group-inline {
+            display: flex;
+            gap: 10px;
+        }
+        .form-group2{
+
+        }
+        #caution{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-step active">
+            <div class="circle">1</div>
+            <span>お客様情報</span>
+        </div>
+        <div class="progress-step">
+            <div class="circle">2</div>
+            <span>入力確認</span>
+        </div>
+        <div class="progress-step">
+            <div class="circle">3</div>
+            <span>予約確定</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form action="#" method="post">
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label for="last-name">姓</label>
+                    <input type="text" id="last-name" placeholder="Placeholder">
+                </div>
+                <div class="form-group">
+                    <label for="first-name">名</label>
+                    <input type="text" id="first-name" placeholder="Placeholder">
+                </div>
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label for="last-kana">せい</label>
+                    <input type="text" id="last-kana" placeholder="Placeholder">
+                </div>
+                <div class="form-group">
+                    <label for="first-kana">めい</label>
+                    <input type="text" id="first-kana" placeholder="Placeholder">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" placeholder="Placeholder">
+            </div>
+            <div class="form-group">
+                <label for="postal-code">郵便番号</label>
+                <input type="text" id="postal-code" placeholder="Placeholder">
+            </div>
+            <div class="form-group">
+                <label for="prefecture">都道府県</label>
+                <select id="prefecture">
+                    <option value="">select</option>
+                    <option value="tokyo">東京都</option>
+                    <option value="osaka">大阪府</option>
+                    <option value="hokkaido">北海道</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" placeholder="Placeholder">
+            </div>
+            <div class="form-group">
+                <label for="address">住所</label>
+                <input type="text" id="address" placeholder="Placeholder">
+            </div>
+            <div class="form-group">
+                <label for="building">建物名</label>
+                <input type="text" id="building" placeholder="Placeholder">
+            </div>
+            <div class="form-group2">
+                <input type="radio" id="bookInstead">
+                <label for="bookInstead">宿泊者本人以外の予約はこちらをチェック</label>
+            </div>
+            <p id="caution">
+                ＊食事は以下のアレルギー品目を含みます<br>
+                卵・乳・小麦・そば・落花生(ピーナッツ)・えび・かに・くるみ
+            </p>
+            <p id="caution">
+                ＊アレルギーの方への食事提供はいたしません。<br>
+　              金額は変わらないのでご了承ください。
+            </p>
+            <div>
+                <label for="allergy">アレルギーの方の人数を選択してください</label>
+                <select>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="2">3</option>
+                    <option value="2">4</option>
+                    <option value="2">5</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
