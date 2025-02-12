@@ -4,69 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約情報確認</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .search-container label {
-            margin-right: 10px;
-        }
-        .search-container input {
-            margin-right: 10px;
-            padding: 5px;
-        }
-        .search-container button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        .small-text {
-            font-size: 0.8em;
-            color: gray;
-        }
-    </style>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="header">
         <h2>予約情報確認</h2>
-        <button>トップに戻る</button>
+        <button class="button" onclick="location.href='./toppage.html'">トップに戻る</button>
     </div>
     
     <div class="search-container">
         <label for="reservation-number">予約番号:</label>
         <input type="text" id="reservation-number" name="reservation-number" style="background-color: rgb(255, 147, 165);">
-        <button>検索</button>
+        <button class="b-button" onclick="location.href='./uf01_1.html'">検索</button>
     </div>
     <div class="search-container">
         <label for="reservation-number-2">電話番号:</label>
         <input type="text" id="reservation-number-2" name="reservation-number-2" style="background-color: rgb(255, 147, 165);">
-        <button>検索</button>
+        <button class="b-button" onclick="location.href='./uf01_1.html'">検索</button>
     </div>
     <b style="color: red;">予約番号もしくは電話番号を入力してください。</b>
     
