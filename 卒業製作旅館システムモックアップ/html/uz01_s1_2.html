@@ -38,7 +38,14 @@
             padding: 15px;
             font-size: 1.2em;
         }
+        
     </style>
+    <script>
+        function onClick() {
+            ret=window.confirm("よろしいでしょうか？");
+            document.write(ret);
+        }
+     </script>
 </head>
 <body>
     <div class="form-container">
@@ -170,6 +177,7 @@
     </div>
     
     <div class="side-container">
+        <button onclick="location.href='uz01_s2_2.html'">削除</button>
         <h2>開始期間:</h2>
         <input type="date" id="start-date" name="start-date" value="2025-01-01">
         
