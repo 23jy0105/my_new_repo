@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お客様情報フォーム</title>
+    <title>お客様情報フォーム（未入力）</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -109,6 +109,11 @@
         #submit:hover {
             background-color: #45a049;
         }
+        h1{
+            text-align: center;
+            margin-top: 50px;
+            color:red;
+        }
     </style>
 </head>
 <body>
@@ -129,7 +134,7 @@
             <span>予約確定</span>
         </div>
     </div>
-
+    <h1>エラー：入力が正しくないまたは未入力です</h1>   
     <div class="form-container">
         <form id="customer-form" action="./uwReserve_20.html" method="post">
             <div class="form-group-inline">

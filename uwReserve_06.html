@@ -146,8 +146,15 @@
             
             // Create a link for the day
             const link = document.createElement("a");
-            link.href = `#${year}-${month + 1}-${day}`;  // 例えば、"2025-2-5"のように日付をリンクにする
+            link.href = `#`;  // 例えば、"2025-2-5"のように日付をリンクにする
             link.textContent = day;
+            link.addEventListener("click", (event) => {
+            event.preventDefault();  // デフォルトのリンク動作を防ぐ
+
+                const selectedDate = `${year}-${month + 1}-${day}`;  // YYYY-MM-DD 形式
+                window.location.href = `uwReserve_14.html?date=${selectedDate}`;
+            });
+
             cell.appendChild(link);
             
             row.appendChild(cell);
@@ -234,6 +241,17 @@
             if (event.target === modal) {
                 modal.style.display = "none";
             }
+        });
+        document.querySelectorAll("#reserve-button").forEach(button => {
+        button.addEventListener("click", () => {
+            const stayDays = document.getElementById("stay-days").value;
+            const peopleCount = document.getElementById("people-count").value;
+            const roomCount = document.getElementById("room-count").value;
+            localStorage.setItem("stayDays",stayDays);
+            localStorage.setItem("peopleCount", peopleCount);
+            localStorage.setItem("roomCount", roomCount);
+
+            });
         });
     </script>
 </body>

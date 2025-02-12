@@ -5,50 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>入力確認</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-        .form-group p {
-            margin: 5px 0;
-        }
-        .button-container {
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .form-group label {
+        display: inline-block;
+        width: 120px; /* ラベルの幅を調整 */
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    .form-group p {
+        margin: 0;
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    #confirm, #edit {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #confirm:hover, #edit:hover {
+        background-color: #45a049;
+    }
+    .fee-group {
+        margin-top: 30px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .fee-group h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #333;
+    }
+    .fee-group p {
+        font-size: 28px;
+        color: #d32f2f;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .progress-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            height:50px;
+            margin-top: 50px;
+            margin-bottom: 50px;
         }
-        #confirm, #edit {
-            padding: 10px 20px;
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background-color: #ccc;
+            width: 100%;
+            z-index: 1;
+            transform: translateY(-50%);
+
+        }
+        .progress-bar-fill {
+            height: 100%;
             background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            width: 66%; /* Update this value to reflect progress */
+            z-index: 2;
+            position: relative;
         }
-        #confirm:hover, #edit:hover {
-            background-color: #45a049;
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        .progress-step .circle {
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .progress-step.active .circle {
+            background-color: #4caf50;
+        }
+        .progress-step span {
+            font-size: 20px;
+            padding-top: 10px;
+
         }
     </style>
 </head>
 <body>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-step">
+            <div class="circle">1</div>
+            <span>お客様情報</span>
+        </div>
+        <div class="progress-step active">
+            <div class="circle">2</div>
+            <span>入力確認</span>
+        </div>
+        <div class="progress-step">
+            <div class="circle">3</div>
+            <span>予約確定</span>
+        </div>
+    </div>
     <div class="form-container">
         <h2>入力確認</h2>
-        <form action="./reservation-confirmation.html" method="post">
+        <form action="./uwReserve_24.html" method="post">
             <div class="form-group">
                 <label>姓</label>
                 <p id="confirm-last-name"></p>
@@ -94,12 +186,22 @@
                 <label>予約者情報</label>
                 <div id="confirm-extra-fields"></div>
             </div>
-
+            <div  class="form-group">
+                <label>人数</label>
+                <div id="confirm-people"></div>
+            </div>
+            <div class="form-group">
+                <label>部屋数</label>
+                <div id="confirm-room"></div>
+            </div>
             <div class="form-group">
                 <label>アレルギー人数</label>
-                <p id="confirm-allergy"></p>
+                <div id="confirm-allergy"></div>
             </div>
-
+            <div class="fee-group">
+                <h2>料金</h2>
+                <p>19,896円</p>
+            </div>
             <div class="button-container">
                 <button type="button" id="edit">修正する</button>
                 <button type="submit" id="confirm">確定する</button>
@@ -108,29 +210,34 @@
     </div>
 
     <script>
-        // ここで前のページからデータを受け取り、入力内容を表示します。
-        document.getElementById('confirm-last-name').innerText = localStorage.getItem('last-name');
-        document.getElementById('confirm-first-name').innerText = localStorage.getItem('first-name');
-        document.getElementById('confirm-last-kana').innerText = localStorage.getItem('last-kana');
-        document.getElementById('confirm-first-kana').innerText = localStorage.getItem('first-kana');
-        document.getElementById('confirm-email').innerText = localStorage.getItem('email');
-        document.getElementById('confirm-postal-code').innerText = localStorage.getItem('postal-code');
-        document.getElementById('confirm-prefecture').innerText = localStorage.getItem('prefecture');
-        document.getElementById('confirm-phone').innerText = localStorage.getItem('phone');
-        document.getElementById('confirm-address').innerText = localStorage.getItem('address');
-        document.getElementById('confirm-building').innerText = localStorage.getItem('building');
+    // ここで前のページからデータを受け取り、入力内容を表示します。
+    document.getElementById('confirm-last-name').innerText = localStorage.getItem('lastName');  // 修正
+    document.getElementById('confirm-first-name').innerText = localStorage.getItem('firstName');  // 修正
+    document.getElementById('confirm-last-kana').innerText = localStorage.getItem('lastKana');  // 修正
+    document.getElementById('confirm-first-kana').innerText = localStorage.getItem('firstKana');  // 修正
+    document.getElementById('confirm-email').innerText = localStorage.getItem('email');
+    document.getElementById('confirm-postal-code').innerText = localStorage.getItem('postalCode');  // 修正
+    document.getElementById('confirm-prefecture').innerText = localStorage.getItem('prefecture');
+    document.getElementById('confirm-phone').innerText = localStorage.getItem('phone');
+    document.getElementById('confirm-address').innerText = localStorage.getItem('address');
+    document.getElementById('confirm-building').innerText = localStorage.getItem('building');
+    document.getElementById('confirm-people').innerText = localStorage.getItem('peopleCount');
+    document.getElementById('confirm-room').innerText = localStorage.getItem('roomCount');
 
-        // 予約者情報（追加の項目）
-        if (localStorage.getItem('bookInstead') === 'yes') {
-            document.getElementById('confirm-extra-fields').innerHTML = `
-                <p>姓: ${localStorage.getItem('reserver-last-name')}</p>
-                <p>名: ${localStorage.getItem('reserver-first-name')}</p>
-                <p>せい: ${localStorage.getItem('reserver-last-kana')}</p>
-                <p>めい: ${localStorage.getItem('reserver-first-kana')}</p>
-                <p>メールアドレス: ${localStorage.getItem('reserver-email')}</p>
-                <p>電話番号: ${localStorage.getItem('reserver-phone')}</p>
-            `;
-        }
+    // 予約者情報（追加の項目）
+    if (localStorage.getItem('bookInstead') === 'yes') {
+        document.getElementById('confirm-extra-fields').innerHTML = `
+            <p>姓: ${localStorage.getItem('reserverLastName')}</p>  <!-- 修正 -->
+            <p>名: ${localStorage.getItem('reserverFirstName')}</p>  <!-- 修正 -->
+            <p>せい: ${localStorage.getItem('reserverLastKana')}</p>  <!-- 修正 -->
+            <p>めい: ${localStorage.getItem('reserverFirstKana')}</p>  <!-- 修正 -->
+            <p>メールアドレス: ${localStorage.getItem('reserverEmail')}</p>  <!-- 修正 -->
+            <p>電話番号: ${localStorage.getItem('reserverPhone')}</p>  <!-- 修正 -->
+        `;
+    }else{
+        document.getElementById('confirm-extra-fields').innerHTML = 
+        `<p>ご本人様</p>`;
+    }
 
         document.getElementById('confirm-allergy').innerText = localStorage.getItem('allergy');
 

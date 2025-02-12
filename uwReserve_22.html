@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お客様情報フォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button-container a:hover {
+            background-color: #45a049;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            height:50px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background-color: #ccc;
+            width: 100%;
+            z-index: 1;
+            transform: translateY(-50%);
+
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 100%; /* Update this value to reflect progress */
+            z-index: 2;
+            position: relative;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        .progress-step .circle {
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .progress-step.active .circle {
+            background-color: #4caf50;
+        }
+        .progress-step span {
+            font-size: 20px;
+            padding-top: 10px;
+        }
+        h1{
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-step">
+            <div class="circle">1</div>
+            <span>お客様情報</span>
+        </div>
+        <div class="progress-step">
+            <div class="circle">2</div>
+            <span>入力確認</span>
+        </div>
+        <div class="progress-step active">
+            <div class="circle">3</div>
+            <span>予約確定</span>
+        </div>
+    </div>
+    <h1>予約を受け付けました</h1>
+
+    <div class="button-container">
+        <a href="./uwReserve_01_01.html">トップに戻る</a>
+        <a href="./uwReserve_06.html">宿泊予約に戻る</a>
+    </div>
+</body>
+</html>
