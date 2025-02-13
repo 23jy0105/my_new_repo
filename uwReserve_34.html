@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約キャンセル</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cancel-button {
+            background-color: #ccc;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>予約をキャンセルする</h2>
+        <p>予約日時: 2024/12/20〜2024/12/21</p>
+        <p>プラン名: 基本プラン朝・夕食付き</p>
+        <p>予約人数: 二人</p>
+        <p>姓: 田中　名: 太郎</p>
+        <p>せい: たなか　めい: たろう</p>
+        <h3>キャンセルする場合、キャンセル料が発生する場合があります。</h3>
+        <table>
+            <tr>
+                <th>キャンセル日</th>
+                <th>8日前</th>
+                <th>7〜4日前</th>
+                <th>3日前</th>
+                <th>2〜1日前</th>
+                <th>当日</th>
+            </tr>
+            <tr>
+                <td>発生料金</td>
+                <td>なし</td>
+                <td>プラン料金の20%</td>
+                <td>プラン料金の50%</td>
+                <td>プラン料金の80%</td>
+                <td>プラン料金の全額</td>
+            </tr>
+        </table>
+        <p>料金詳細は登録メールアドレスに送信されます。</p>
+        <div class="button-container">
+            <button class="cancel-button" disabled>キャンセルする</button>
+        </div>
+    </div>
+</body>
+</html>
