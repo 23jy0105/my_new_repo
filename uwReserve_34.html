@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約キャンセル</title>
+    <link rel="stylesheet" href="./css/styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
-        .container {
+        .container1 {
             max-width: 600px;
             margin: 0 auto;
-            border: 1px solid #ccc;
             padding: 20px;
         }
         h2 {
@@ -69,7 +69,30 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">千景</h1>
+            <nav class="nav">
+                <button class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home">ホーム</a></li>
+                    <li><a href="./uwReserve_05.html">宿泊予約</a></li>
+                    <li><a href="./uwReserve_24.html">客室</a></li>
+                    <li><a href="#meal">お食事</a></li>
+                    <li><a href="#spa">温泉</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="#Q&A">Q&A</a></li>
+                    <li><a href="#info">お知らせ</a></li>
+                    <li><a href="#reservation_check">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container1">
         <h2>予約をキャンセルする</h2>
         <p>予約日時: 2024/12/20〜2024/12/21</p>
         <p>プラン名: 基本プラン朝・夕食付き</p>
@@ -117,6 +140,14 @@
         function closeModal() {
             document.getElementById("cancelModal").style.display = "none";
         }
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    });
     </script>
 </body>
 </html>
