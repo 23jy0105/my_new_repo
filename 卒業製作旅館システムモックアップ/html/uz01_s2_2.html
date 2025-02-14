@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除確認ダイアログ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .modal {
+            width: 350px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .modal p {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .modal .warning {
+            color: red;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn.cancel {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn.delete {
+            background: #ff7b7b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal">
+        <h3>プランを削除しますか？</h3>
+        <p>この操作により、このプランは <span class="warning">削除</span> されます。</p>
+        <div class="buttons">
+            <button class="btn cancel" onclick="location.href='uz01_s1_2.html'">戻る</button>
+            <button class="btn delete" onclick="location.href='uz01_s2_4.html'">削除する</button>
+        </div>
+    </div>
+
+</body>
+</html>

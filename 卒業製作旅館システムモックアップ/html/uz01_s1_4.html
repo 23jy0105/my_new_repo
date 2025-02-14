@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宿泊プラン登録</title>
+    <title>宿泊プラン登録確認</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,17 +39,18 @@
             font-size: 1.2em;
         }
     </style>
+    
 </head>
 <body>
     <div class="form-container">
         <h2>プラン名:</h2>
-        <input type="text" id="plan-name" name="plan-name" value="＜2食付き＞松">
+        <a>＜2食付き＞松</a>
         
         <h2>概要:</h2>
-        <textarea id="summary" name="summary">最上級のおもてなしによるくつろぎをどうぞ。</textarea>
+        <a>最上級のおもてなしによるくつろぎをどうぞ。</a>
         
         <h2>詳細:</h2>
-        <textarea id="details" name="details">■プラン内容■
+        ■プラン内容■
 
             ①選べるドリンク付き（ご夕食時に提供いたします）
             
@@ -73,13 +74,13 @@
             
             
             
-            ◆チェックイン◆ 15:00
+            <br>◆チェックイン◆ 15:00
             
             ◆チェックアウト◆ 12:00
             
             
             
-            ◇夕食◇　ひととせの鍋「すき焼き」メインディナー
+            <br>◇夕食◇　ひととせの鍋「すき焼き」メインディナー
             
             ・食前茶
             
@@ -112,7 +113,7 @@
             
             
             
-            ◇和朝食◇
+            <br>◇和朝食◇
             
             ・先付
             
@@ -136,11 +137,11 @@
             
             
             
-            □お食事場所（朝食、夕食）：割烹 月かげ
+            <br>□お食事場所（朝食、夕食）：割烹 月かげ
             
             
             
-            △子供の食事について△
+            <br>△子供の食事について△
             夕食：天麩羅の盛り合わせと冷たいおうどんまたはそば(低学年向け)
             　　　お子様御膳(高学年向け、オプションのページで選択可能です)
             朝食：サラダ・出し巻き卵・焼き魚・ごはん・味噌汁の5品のご提供をいたします。
@@ -150,7 +151,7 @@
             
             
             
-            ■大浴場のご案内■
+            <br>■大浴場のご案内■
             
             箱根・芦ノ湖温泉の源泉から運ぶ露天風呂は、肌に良いアルカリ性単純温泉。
             
@@ -158,30 +159,29 @@
             
             専用庭を臨む内湯では時間の移ろいにそった音景がくつろぎの湯浴みを演出します。
             
-            □温浴営業時間
+            <br>□温浴営業時間
             
             平日：16:00 ～ 25:00、朝 6:00 ～ 13:00
             
             休日：16:00 ～ 25:00、朝 6:00 ～ 14:00
-            </textarea>
         
         <h2>値段:</h2>
-        <input type="text" id="price" name="price" value="70000">
+        <a>80000円</a>
     </div>
     
     <div class="side-container">
         <h2>開始期間:</h2>
-        <input type="date" id="start-date" name="start-date" value="2025-01-01">
+        <input type="date" id="start-date" name="start-date" value="2025-12-01">
         
         <h2>終了期間:</h2>
-        <input type="date" id="end-date" name="end-date" value="2026-01-01">
+        <input type="date" id="end-date" name="end-date" value="2025-03-10">
         
         <h2>部屋の種類:</h2>
         <select id="room-type" name="room-type">
             <option value="和室">和室</option>
-            <option value="洋室" selected>洋室</option>
+            <option value="洋室">洋室</option>
             <option value="スイートルーム">スイートルーム</option>
-            <option value="露天風呂付">露天風呂付</option>
+            <option value="露天風呂付" selected>露天風呂付</option>
         </select>
         
         <h2>食事の種類:</h2>
@@ -193,11 +193,9 @@
         </select>
 
         <h2>画像ファイル</h2>
-        <input type="file">
-
         
-        <button onclick="location.href='uz01_2.html'">戻る</button>
-        <button type="submit" onclick="location.href='uz01_6_s1.html'">登録</button>
+        <button onclick="location.href='uz01_4.html'">戻る</button>
+        <button type="submit" onclick="location.href='uz01_s1_6.html'">登録</button>
     </div>
 </body>
 </html>
