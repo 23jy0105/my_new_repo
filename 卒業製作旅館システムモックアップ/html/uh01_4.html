@@ -44,28 +44,9 @@
             <p>清掃を開始しました</p>
             <p>清掃後、清掃完了を選択してください</p>
             <p>中断する場合は戻るを選択してください</p>
-            <div class="button-container">
-                <button class="cancel-button" onclick="openModal()">清掃完了</button>
-            </div>
-        </div>
-        <div class="modal" id="cancelModal">
-            <div class="modal-header">
-                清掃を完了します。よろしいですか？
-                <span class="close-btn" onclick="closeModal()">&#10006;</span>
-            </div>
-            <div class="modal-body">
-                <button class="cancel-button" onclick="location.href='uwReserve_36.html'">清掃完了</button>
-            </div>
-        </div>
+            <button class="back-button" onclick="location.href='uh01_2.html'">戻る</button>
+            <button class="cleaned-button" onclick="location.href='uh01_6.html'">清掃完了</button>
         </div>
     </main>
-    <script>
-        function openModal() {
-            document.getElementById("cancelModal").style.display = "block";
-        }
-        function closeModal() {
-            document.getElementById("cancelModal").style.display = "none";
-        }
-    </script>
 </body>
 </html>
