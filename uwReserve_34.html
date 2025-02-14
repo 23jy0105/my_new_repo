@@ -40,6 +40,32 @@
             font-size: 16px;
             cursor: not-allowed;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .modal-body {
+            margin-top: 10px;
+        }
+        .close-btn {
+            cursor: pointer;
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -71,8 +97,26 @@
         </table>
         <p>料金詳細は登録メールアドレスに送信されます。</p>
         <div class="button-container">
-            <button class="cancel-button" disabled>キャンセルする</button>
+            <button class="cancel-button" onclick="openModal()">キャンセルする</button>
         </div>
     </div>
+    <div class="modal" id="cancelModal">
+        <div class="modal-header">
+            本当に予約をキャンセルしますか？
+            <span class="close-btn" onclick="closeModal()">&#10006;</span>
+        </div>
+        <div class="modal-body">
+            <p>取り消すことはできません。</p>
+            <button class="cancel-button" onclick="location.href='uwReserve_36.html'">予約をキャンセル</button>
+        </div>
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById("cancelModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("cancelModal").style.display = "none";
+        }
+    </script>
 </body>
 </html>
