@@ -3,35 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP</title>
+    <title>予約キャンセル</title>
     <link rel="stylesheet" href="./css/styles.css">
     <style>
-        main{
-            font-size:1.3em;
-            text-align: center;
-
-
-        }
-       
-        .item {
-            width: 30%;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
             padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 50px;
+            color: red;
+        }
+        .button-container {
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
+            margin-top: 20px;
+            
         }
-        .item h2 {
-            color: #4CAF50;
+        .top-button {
+            background-color: #ccc;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: not-allowed;
         }
-        .item p {
-            font-size: 1.1em;
-            color: #555;
+        .modal-body {
+            margin-top: 10px;
         }
-        #map{
-            height:500px;width:500px;
+        .container1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
             align-items: center;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -59,31 +78,20 @@
             </nav>
         </div>
     </header>
-    <main>
-        <div class="container-block" style="margin-top: 20px;">
-        <h1 style="margin-top: 20px;">ご予約確認</h1>
-        <h3>該当する予約番号とパスワードを入力してください。</h3>
-        <div style="padding: 10px;">
-            <label>予約番号:</label>
-        <input type="text" id="input-box"name="reservation-number" value="">
-        </div>
-        
-
-        <label>パスワード:</label>
-        <input type="text" id="input-box" name="password" value="" style="width: 278px;">
-        <br>
-        <br>
-        <button class="button" onclick="location.href='./uf01_4.html'" style="width: 200px;">確認</button>
-        <br>
-        <div style="padding-top: 80px; text-align: left;">
-        <a href="../err/ur02_E1">予約番号またはパスワードをお忘れの方></a>
+    <div class="container">
+        <h2>この予約はキャンセル済みです</h2>
     </div>
+    <div class="button-container">
+        <button class="top-button">トップに戻る</button>
     </div>
-    
-    </main>
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        function openModal() {
+            document.getElementById("cancelModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("cancelModal").style.display = "none";
+        }
+        document.addEventListener('DOMContentLoaded', () => {
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
 
@@ -91,5 +99,6 @@
             navMenu.classList.toggle('active');
         });
     });
-</script>
+    </script>
+</body>
 </html>
