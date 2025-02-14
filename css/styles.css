@@ -87,8 +87,8 @@ a:hover{
         flex-direction: column;
         background: #333;
         position: absolute;
-        top: 50px;
-        right: 20px;
+        top: 80px;
+        left: 20px;
         width: 150px;
         border-radius: 5px;
         padding: 10px 0;
@@ -161,4 +161,16 @@ a:hover{
     left: -20px;
     right: -20px;
     box-shadow: inset 0 0 15px 15px rgb(255, 255, 255);
+}
+
+.center-body{
+    text-align: center;
+    background-color: #fff;
+}
+
+.foot{
+    background-color: rgb(107, 122, 80);
+    margin: 20px 0;
+    padding: 50px 300px;
+    color: #fff;
 }
