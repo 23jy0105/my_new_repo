@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+
+        h1 {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .onseninfo{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">千景</h1>
+            <nav class="nav">
+                <button class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="./uwReserve_01_01.html">ホーム</a></li>
+                    <li><a href="#reservation">宿泊予約</a></li>
+                    <li><a href="#room">客室</a></li>
+                    <li><a href="#meal">お食事</a></li>
+                    <li><a href="#spa">温泉</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="#Q&A">Q&A</a></li>
+                    <li><a href="#announce">お知らせ</a></li>
+                    <li><a href="#reservation_check">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="onseninfo">
+        <h1>温泉</h1>
+        <div class="onsen1">
+            <h2>大浴場</h2>
+            <img src="./img/onsen1.png"width="35%"height="35%">
+            <p></p>
+        </div>
+
+        <h2>露天風呂</h2>
+        <img src="./img/onsen2.png"width="35%"height="35%">
+    </div>
+    
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    });
+</script>
+</html>

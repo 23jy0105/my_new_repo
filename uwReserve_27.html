@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+
+        h1 {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .access{
+            text-align: center;
+        }
+        .img img{
+            width: 50%;
+            height:50%;
+        }
+        .access p{
+            padding: 20px;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">千景</h1>
+            <nav class="nav">
+                <button class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="./uwReserve_01_01.html">ホーム</a></li>
+                    <li><a href="#reservation">宿泊予約</a></li>
+                    <li><a href="#room">客室</a></li>
+                    <li><a href="#meal">お食事</a></li>
+                    <li><a href="#spa">温泉</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="#Q&A">Q&A</a></li>
+                    <li><a href="#announce">お知らせ</a></li>
+                    <li><a href="#reservation_check">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="access">
+        <h1>アクセス</h1>
+        <div class="img"><img src="./img/map.png"alt="周辺MAP"></div>
+        <a href="https://www.google.co.jp/maps/@35.2409693,139.0473174,15z?hl=ja&entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D">googleMapで見る</a>
+        <h1>到着時のご案内</h1>
+        <div class="img"><img src="./img/map2.png"alt="駅からの画像"></div>
+        <p>JR小田原駅から箱根登山線乗り換え小涌谷駅から出て右側に歩いて徒歩10分
+        </p>
+    </div>
+    
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    });
+</script>
+</html>
