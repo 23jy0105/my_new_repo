@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .faq-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .faq-question::before {
+            content: "Q.";
+            font-weight: bold;
+            font-size: 26px;
+            margin-right: 10px;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            font-size: 18px;
+            color: #666;
+            animation: fadeIn 0.3s ease-in-out;
+            user-select: none;
+        }
+
+        .faq-answer::before {
+            content: "A.";
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .faq-arrow {
+            transition: transform 0.3s ease-in-out;
+            
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="faq-container">
+    <div class="faq-item">
+        <div class="faq-question">
+            チェックイン、チェックアウトの時間を教えて下さい。
+            <span class="faq-arrow"><img src="./img/triangle_ku_under-1.png" alt="try" width="30px"></span>
+        </div>
+        <div class="faq-answer">
+            チェックイン：15:00～<br>
+            チェックアウト：～11:00
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+            const parent = item.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>
