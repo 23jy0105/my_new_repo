@@ -96,7 +96,7 @@ select, button, input[type="radio"] {
     display: flex;
     flex-direction: column;
     position:fixed;
-    right:20px;
+    right:70px;
 }
 .result-buttons button {
     margin-bottom: 5px;
@@ -164,4 +164,20 @@ th, td {
 }
 #stay-start{
     visibility: hidden;
+}
+
+.button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+    margin-right: 5px;
+    border: none;
+    background-color: #808080;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #fff;
+    font-family: 'MS PMincho', Arial, sans-serif;
+}
+.button:hover {
+    background-color: #525252;
 }
