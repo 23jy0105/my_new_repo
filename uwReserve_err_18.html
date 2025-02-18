@@ -70,13 +70,14 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+            margin-bottom: 150px;
         }
         .form-group {
             display: flex;
-            margin-bottom: 15px;
+            margin-top: 15px;
         }
         .form-group label {
-            width: 100px;
+            width: 130px;
             line-height: 32px;
         }
         .form-group input, .form-group select {
@@ -115,6 +116,17 @@
             margin-top: 50px;
             color:red;
         }
+
+        .err-input{
+            outline: solid 1px red;
+        }
+        #err-label{
+            color: red;
+            font-size: 14px;
+            padding-left: 130px;
+            margin-top: 0;
+            padding-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -141,52 +153,104 @@
             <div class="form-group-inline">
                 <div class="form-group">
                     <label for="last-name">姓</label>
-                    <input type="text" id="last-name" placeholder="Placeholder">
+                    <input type="text" id="last-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。" class="err-input">
                 </div>
+                
                 <div class="form-group">
-                    <label for="first-name">名</label>
-                    <input type="text" id="first-name" placeholder="Placeholder">
+                    <label for="first-name" style="width: 85px;">名</label>
+                    <input type="text" id="first-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。" class="err-input">
                 </div>
             </div>
+            <label id="err-label">入力してください。</label><label id="err-label" style="padding-left: 156px;">入力してください。</label>
             <div class="form-group-inline">
                 <div class="form-group">
                     <label for="last-kana">せい</label>
-                    <input type="text" id="last-kana" placeholder="Placeholder">
+                    <input type="text" id="last-kana" placeholder="ひらがなを入力してください。" class="err-input">
                 </div>
                 <div class="form-group">
-                    <label for="first-kana">めい</label>
-                    <input type="text" id="first-kana" placeholder="Placeholder">
+                    <label for="first-kana" style="width: 85px;">めい</label>
+                    <input type="text" id="first-kana" placeholder="ひらがなを入力してください。" class="err-input">
                 </div>
             </div>
+            <label id="err-label">入力してください。</label><label id="err-label" style="padding-left: 156px;">入力してください。</label>
             <div class="form-group">
                 <label for="email">メールアドレス</label>
-                <input type="email" id="email" placeholder="Placeholder">
+                <input type="email" id="email" placeholder="メールアドレスを入力してください。" class="err-input">
             </div>
+            <label id="err-label">正しいメールアドレスを入力してください。</label>
             <div class="form-group">
                 <label for="postal-code">郵便番号</label>
-                <input type="text" id="postal-code" placeholder="Placeholder">
+                <input type="text" id="postal-code" placeholder="郵便番号を入力してください。" class="err-input">
             </div>
             <div class="form-group">
                 <label for="prefecture">都道府県</label>
-                <select id="prefecture">
-                    <option value="">select</option>
-                    <option value="tokyo">東京都</option>
-                    <option value="osaka">大阪府</option>
+                <select id="prefecture"  class="err-input">
+                    <option value="">選択</option>
                     <option value="hokkaido">北海道</option>
+                    <option value="aomori">青森県</option>
+                    <option value="iwate">岩手県</option>
+                    <option value="miyagi">宮城県</option>
+                    <option value="akita">秋田県</option>
+                    <option value="yamagata">山形県</option>
+                    <option value="fukushima">福島県</option>
+                    <option value="ibaraki">茨城県</option>
+                    <option value="tochigi">栃木県</option>
+                    <option value="gunma">群馬県</option>
+                    <option value="saitama">埼玉県</option>
+                    <option value="chiba">千葉県</option>
+                    <option value="tokyo">東京都</option>
+                    <option value="kanagawa">神奈川県</option>
+                    <option value="niigata">新潟県</option>
+                    <option value="toyama">富山県</option>
+                    <option value="ishikawa">石川県</option>
+                    <option value="fukui">福井県</option>
+                    <option value="yamanashi">山梨県</option>
+                    <option value="nagano">長野県</option>
+                    <option value="gifu">岐阜県</option>
+                    <option value="shizuoka">静岡県</option>
+                    <option value="aichi">愛知県</option>
+                    <option value="mie">三重県</option>
+                    <option value="shiga">滋賀県</option>
+                    <option value="kyoto">京都府</option>
+                    <option value="osaka">大阪府</option>
+                    <option value="hyogo">兵庫県</option>
+                    <option value="nara">奈良県</option>
+                    <option value="wakayama">和歌山県</option>
+                    <option value="tottori">鳥取県</option>
+                    <option value="shimane">島根県</option>
+                    <option value="okayama">岡山県</option>
+                    <option value="hiroshima">広島県</option>
+                    <option value="yamaguchi">山口県</option>
+                    <option value="tokushima">徳島県</option>
+                    <option value="kagawa">香川県</option>
+                    <option value="ehime">愛媛県</option>
+                    <option value="kochi">高知県</option>
+                    <option value="fukuoka">福岡県</option>
+                    <option value="saga">佐賀県</option>
+                    <option value="nagasaki">長崎県</option>
+                    <option value="kumamoto">熊本県</option>
+                    <option value="oita">大分県</option>
+                    <option value="miyazaki">宮崎県</option>
+                    <option value="kagoshima">鹿児島県</option>
+                    <option value="okinawa">沖縄県</option>
                 </select>
             </div>
+            <label id="err-label">選択してください。</label>
             <div class="form-group">
                 <label for="phone">電話番号</label>
-                <input type="tel" id="phone" placeholder="Placeholder">
+                <input type="tel" id="phone" placeholder="電話番号を入力してください。(半角数字)" class="err-input">
             </div>
+            <label id="err-label">電話番号を入力してください。</label>
             <div class="form-group">
                 <label for="address">住所</label>
-                <input type="text" id="address" placeholder="Placeholder">
+                <input type="text" id="address" placeholder="住所を入力してください。" class="err-input">
             </div>
+            <label id="err-label">住所を入力してください。</label>
             <div class="form-group">
                 <label for="building">建物名</label>
-                <input type="text" id="building" placeholder="Placeholder">
+                <input type="text" id="building" placeholder="">
             </div>
+            <br>
             <div class="form-group2">
                 <input type="radio" id="bookInsteadNo" name="bookInstead" value="no" onclick="toggleVisibility(false)" checked>
                 <label for="bookInsteadNo">宿泊者本人の予約</label>
@@ -199,30 +263,30 @@
                 <div class="form-group-inline">
                     <div class="form-group">
                         <label for="reserver-last-name">姓</label>
-                        <input type="text" id="reserver-last-name" placeholder="Placeholder">
+                        <input type="text" id="reserver-last-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
                     </div>
                     <div class="form-group">
-                        <label for="reserver-first-name">名</label>
-                        <input type="text" id="reserver-first-name" placeholder="Placeholder">
+                        <label for="reserver-first-name"  style="width: 85px;">名</label>
+                        <input type="text" id="reserver-first-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
                     </div>
                 </div>
                 <div class="form-group-inline">
                     <div class="form-group">
                         <label for="reserver-last-kana">せい</label>
-                        <input type="text" id="reserver-last-kana" placeholder="Placeholder">
+                        <input type="text" id="reserver-last-kana" placeholder="ひらがなを入力してください。">
                     </div>
                     <div class="form-group">
-                        <label for="reserver-first-kana">めい</label>
-                        <input type="text" id="reserver-first-kana" placeholder="Placeholder">
+                        <label for="reserver-first-kana"  style="width: 85px;">めい</label>
+                        <input type="text" id="reserver-first-kana" placeholder="ひらがなを入力してください。">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="reserver-email">メールアドレス</label>
-                    <input type="email" id="reserver-email" placeholder="Placeholder">
+                    <input type="email" id="reserver-email" placeholder="メールアドレスを入力してください。">
                 </div>
                 <div class="form-group">
                     <label for="reserver-phone">電話番号</label>
-                    <input type="tel" id="reserver-phone" placeholder="Placeholder">
+                    <input type="tel" id="reserver-phone" placeholder="電話番号を入力してください。(半角数字)">
                 </div>
             </div>
             <p id="caution">
