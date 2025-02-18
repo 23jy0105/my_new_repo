@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約フォームエラー</title>
     <link rel="stylesheet" type="text/css" href="./css/err.css">
+    <link rel="stylesheet" type="text/css" href="./css/search.css">
     <style>
         .header{
             background-color: #333;
@@ -88,16 +89,17 @@
         <div class="container">
             <nav class="nav">
                 <ul class="nav-menu-left" id="nav-menu-left">
-                    <li><a href="./uwReserve_01_01.html">千景</a></li>
+                    <li><a href="./uwReserve_01_01.html"  style="font-size: 26px; font-weight: bold; margin-left: 50px;">千景</a></li>
                 </ul>
                 <ul class="nav-menu-right" id="nav-menu-right">
-                    <li><a href="./uwReserve_05.html">宿泊予約</a></li>
+                    <li><a href="./uwReserve_05.html"  style="font-weight: bold; margin-right: 50px;">宿泊予約</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
-        <h1>ご予約確認</h1>
+        <div style="margin: 20px 40px;">
+        <h1>宿泊予約</h1>
         <div class="form-container">
             <div class="form-select-top">
                 <div class="form-row">
@@ -130,7 +132,7 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <button type="button" id="search-button" onclick="location.href='./uwReserve_06.html'">検索</button>
+                <button type="button" id="search-button" class="button" onclick="location.href='./uwReserve_06.html'">検索</button>
 
             </div>
             <div class="form-select-bottom">
@@ -154,8 +156,10 @@
                 </div>
             </div>
         </div>
+        <br>
         <h2>検索結果：0件</h2>
         <p id="errmessage">空室が見つかりませんでした</p>
+    </div>
     </main>
     <script>
         const dateNotSpecified = document.getElementById('date-not-specified');
