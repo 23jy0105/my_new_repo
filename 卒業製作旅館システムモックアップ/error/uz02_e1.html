@@ -38,33 +38,29 @@
             padding: 15px;
             font-size: 1.2em;
         }
+        a{
+            font-size: 1.5em;
+            color: red;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>題名:</h2>
-        <a>新年のご挨拶</a>
+        <input type="text" id="plan-name" name="plan-name">
         
         <h2>内容:</h2>
-        <a>謹んで新年のご挨拶を申し上げます。
-
-            日頃よりご愛顧いただいておりますお客さまへスタッフ一同心より感謝申し上げます。
-           また、昨年は新しいお客様と出逢えた一年でもございました。
-           
-           2025年も進化を続けながら、多くの皆さまに和らぎの時間をお届け出来ますよう努めてまいります。
-           皆様にとって幸多き年になりますよう、心よりお祈り申し上げます。
-
-           千景</a>
-        
+        <textarea id="summary" name="summary"></textarea>
     </div>
     
     <div class="side-container">
         
         <h2>画像ファイル</h2>
-
+        <input type="file">
+        <a>未入力の箇所があります</a>
         
-        <button onclick="location.href='uz02_s1_2.html'">戻る</button>
-        <button type="submit" onclick="location.href='uz02_s1_6.html'">確定</button>
+        <button onclick="location.href='../html/uz02_2.html'">戻る</button>
+        <button type="submit" onclick="location.href='../html/uz02_6.html'">登録</button>
     </div>
 </body>
 </html>
