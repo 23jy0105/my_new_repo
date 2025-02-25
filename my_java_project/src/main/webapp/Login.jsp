@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ご予約確認ページ</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/Login.css">
 </head>
 <body class="background">
     <header class="header">
@@ -33,22 +34,29 @@
         </div>
     </header>
     <main>
+    	
         <div class="center-body">
         <div class="container-block" style="margin-top: 20px;">
         <h1 style="margin-top: 20px;">ご予約確認</h1>
         <h3>該当する予約番号とパスワードを入力してください。</h3>
         <div style="padding: 10px;">
+        <p id="loginFailure"><%String failureMessage = (String)request.getAttribute("loginFailure"); %>
+    	<% if (failureMessage != null) {%>
+    	<%=failureMessage %>
+		<%} %>
+        <form action="Login" method="post">
             <label>予約番号:</label>
         <input type="text" id="input-box"name="reservation-number" value="">
         </div>
         
-
+		
         <label>パスワード:</label>
-        <input type="text" id="input-box" name="password" value="" style="width: 278px;">
+        <input type="password" id="input-box" name="password" value="" style="width: 278px;">
         <br>
         <br>
-        <button class="button" onclick="location.href='./ur02_3.html'" style="width: 200px;">確認</button>
+         <input class="button" type="submit" value="ログイン">
         <br>
+        </form>
         <div style="padding-top: 80px; text-align: left;">
         <a href="./err/ur02_2_E1.html">予約番号またはパスワードをお忘れの方></a>
     </div>
