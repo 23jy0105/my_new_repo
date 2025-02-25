@@ -8,35 +8,7 @@
     <title>ご予約確認ページ</title>
     <link rel="stylesheet" href="./css/styles.css" >
     <link rel="stylesheet" href="./css/modal.css">
-    <style>
-        main{
-            font-size:1.3em;
-            
-
-
-        }
-        
-        .item {
-            width: 30%;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-        }
-        .item h2 {
-            color: #4CAF50;
-        }
-        .item p {
-            font-size: 1.1em;
-            color: #555;
-        }
-        #map{
-            height:500px;width:500px;
-            align-items: center;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/res_check.css">
 </head>
 <body class="background">
     <header class="header">
