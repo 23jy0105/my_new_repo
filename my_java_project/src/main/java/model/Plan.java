@@ -5,116 +5,64 @@ import java.sql.Timestamp;
 
 public class Plan implements Serializable{
 
-	private String planNo;
-	private String planName;
-	private String roomTypeNo;
-	private String planImage;
-	private String planOverview;
-	private String planDescription;
+	private String name;
+	private String tyoeName;
+	private String image;
+	private String overview;
+	private String explanation;
 	private int fee;
 	private Timestamp startTime;
 	private Timestamp endTime;
-	private String mealNo;
-	
-	public Plan() {
-		
-	}
-
-	public Plan(String planNo, String planName, String roomTypeNo, String planImage, String planOverview,
-			String planDescription, int fee, Timestamp startTime, Timestamp endTime, String mealNo) {
+	private int totalRoomCount;
+	private int accommodationCount;
+	private int reserveRoomNum;
+	public Plan(String name, String tyoeName, String image, String overview, String explanation, int fee,
+			Timestamp startTime, Timestamp endTime, int totalRoomCount, int accommodationCount, int reserveRoomNum) {
 		super();
-		this.planNo = planNo;
-		this.planName = planName;
-		this.roomTypeNo = roomTypeNo;
-		this.planImage = planImage;
-		this.planOverview = planOverview;
-		this.planDescription = planDescription;
+		this.name = name;
+		this.tyoeName = tyoeName;
+		this.image = image;
+		this.overview = overview;
+		this.explanation = explanation;
 		this.fee = fee;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.mealNo = mealNo;
+		this.totalRoomCount = totalRoomCount;
+		this.accommodationCount = accommodationCount;
+		this.reserveRoomNum = reserveRoomNum;
 	}
-
-	public String getPlanNo() {
-		return planNo;
+	public String getName() {
+		return name;
 	}
-
-	public void setPlanNo(String planNo) {
-		this.planNo = planNo;
+	public String getTyoeName() {
+		return tyoeName;
 	}
-
-	public String getPlanName() {
-		return planName;
+	public String getImage() {
+		return image;
 	}
-
-	public void setPlanName(String planName) {
-		this.planName = planName;
+	public String getOverview() {
+		return overview;
 	}
-
-	public String getRoomTypeNo() {
-		return roomTypeNo;
+	public String getExplanation() {
+		return explanation;
 	}
-
-	public void setRoomTypeNo(String roomTypeNo) {
-		this.roomTypeNo = roomTypeNo;
-	}
-
-	public String getPlanImage() {
-		return planImage;
-	}
-
-	public void setPlanImage(String planImage) {
-		this.planImage = planImage;
-	}
-
-	public String getPlanOverview() {
-		return planOverview;
-	}
-
-	public void setPlanOverview(String planOverview) {
-		this.planOverview = planOverview;
-	}
-
-	public String getPlanDescription() {
-		return planDescription;
-	}
-
-	public void setPlanDescription(String planDescription) {
-		this.planDescription = planDescription;
-	}
-
 	public int getFee() {
 		return fee;
 	}
-
-	public void setFee(int fee) {
-		this.fee = fee;
-	}
-
 	public Timestamp getStartTime() {
 		return startTime;
 	}
-
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
-
 	public Timestamp getEndTime() {
 		return endTime;
 	}
-
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
+	public int getTotalRoomCount() {
+		return totalRoomCount;
 	}
-
-	public String getMealNo() {
-		return mealNo;
+	public int getAccommodationCount() {
+		return accommodationCount;
 	}
-
-	public void setMealNo(String mealNo) {
-		this.mealNo = mealNo;
-	}
-	
-	
+	public int getReserveRoomNum() {
+		return reserveRoomNum;
+	}	
 	
 }

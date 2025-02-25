@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Top")
-public class Top extends HttpServlet{
+/**
+ * Servlet implementation class Spa
+ */
+@WebServlet("/Spa")
+public class Spa extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		RequestDispatcher rd = request.getRequestDispatcher("topmain.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("spa.jsp");
 		rd.forward(request, response);
 	}
 };
