@@ -1,0 +1,16 @@
+
+        h1 {
+            width: 100%;
+            margin-top: 0px;
+        }
+        .access{
+            text-align: center;
+        }
+        .img img{
+            width: 50%;
+            height:50%;
+        }
+        .access p{
+            padding: 20px;
+            font-size: 1.3em;
+        }
