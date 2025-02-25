@@ -13,6 +13,14 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="Z:/卒製/my_new_repo/my_java_project/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.47.jar"/>
+=======
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.47.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
