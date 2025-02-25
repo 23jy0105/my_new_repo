@@ -22,7 +22,7 @@ public class Plan implements Serializable{
 
 	public Plan(String planNo, String planName, String roomTypeNo, String planImage, String planOverview,
 			String planDescription, int fee, Timestamp startTime, Timestamp endTime, String mealNo) {
-		super();
+		
 		this.planNo = planNo;
 		this.planName = planName;
 		this.roomTypeNo = roomTypeNo;
