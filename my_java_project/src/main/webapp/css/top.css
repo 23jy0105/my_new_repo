@@ -1,0 +1,49 @@
+main {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.container1 {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.item {
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin: 0 5px;
+    min-height: 400px;
+}
+
+.item h2 {
+    color: #414141;
+    font-size: 120%;
+    font-weight: bold;
+    border-left: 4px solid #7c7c7c;
+    text-align: left;
+    padding-left: 10px;
+    margin-left: 20px;
+}
+
+.item p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+#map {
+    height: 500px;
+    width: 500px;
+    align-items: center;
+}

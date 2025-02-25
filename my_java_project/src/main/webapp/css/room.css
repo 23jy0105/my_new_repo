@@ -1,0 +1,29 @@
+        h1 {
+            text-align: center;
+            width: 100%;
+        }
+        .container1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+
+        }
+        .item {
+            width:80%;
+            padding: 20px;
+            margin-top: 20px;
+            margin-left: 10%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .item h2 {
+            color: #414141;
+        }
+        .item p {
+            font-size: 1.1em;
+            color: #555;
+        }
