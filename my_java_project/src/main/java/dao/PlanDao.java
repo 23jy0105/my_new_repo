@@ -61,6 +61,28 @@ public class PlanDao {
 		return ar;
 	}
 	
+	public Meal findMeal(String no) {
+		Meal ml = new Meal(); 
+		String sql = "select * from Meal where meal_number = "+no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				
+				 ml.setMealNo(rs.getString("meal_number")); 
+				 ml.setMealName(rs.getString("meal_name")); 
+				 ml.setAllergen(rs.getString("allergen")); 
+				 ml.setMealImage(rs.getString("meal_image")); 
+
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ml;
+	}
+	
 	public ArrayList<Plan> findAllPlan() {
 		ArrayList<Plan> ar = new ArrayList<>();
 		String sql = "select * from Plan";
@@ -88,6 +110,34 @@ public class PlanDao {
 			e.printStackTrace();
 		}
 		return ar;
+	}
+	
+	public Plan findPlan(String no) {
+		Plan p = new Plan();
+		String sql = "select * from Plan where plan_number = "+no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 p.setPlanNo(rs.getString("plan_number")); 
+				 p.setPlanName(rs.getString("plan_name")); 
+				 p.setRoomTypeNo(rs.getString("room_type_number")); 
+				 p.setMealNo(rs.getString("meal_number"));
+				 p.setFee(rs.getInt("plan_fee"));
+				 p.setPlanImage(rs.getString("plan_image"));
+				 p.setPlanOverview(rs.getString("plan_overview"));
+				 p.setPlanDescription(rs.getString("plan_description"));
+				 p.setStartTime(rs.getTimestamp("plan_start_date"));
+				 p.setEndTime(rs.getTimestamp("plan_end_date"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return p;
+	
+	
 	}
 	
 //	public Meal findMealById(int id) { 

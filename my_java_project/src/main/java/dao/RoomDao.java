@@ -110,6 +110,56 @@ public class RoomDao {
 		return ar;
 	}
 	
+	public ArrayList<Room> findEmptyRoom(String type) {
+		ArrayList<Room> ar = new ArrayList<>();
+		String sql = "select * from room where room_state = 0 AND room_type_number = "+type;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				Room r = new Room(); 
+				 r.setRoomNo(rs.getString("room_number")); 
+				 r.setTypeNo(rs.getString("room_type_number")); 
+				 r.setRoomState(rs.getString("room_state")); 
+				 r.setRoomKey(rs.getString("entering_room_key")); 
+				 r.setKeyUpdateTime(rs.getTimestamp("key_update_time"));
+				 r.setEnterRoomTime(rs.getTimestamp("entering_room_time"));
+				 r.setSiteManagementKey(rs.getString("site_management_key")); 
+
+				 ar.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
+	public boolean setRoomState(String num) {
+		String sql = "select * from room where room_state = 0 AND room_number = "+num;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			if(rs.getFetchSize()==0) {
+				return false;
+			}else {
+				try {
+					sql ="UPDATE room SET room_state = 1 where room_number ="+num;
+					state =con.prepareStatement(sql);
+					state.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+				
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 
