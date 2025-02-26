@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宿泊プラン登録</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .form-container {
+            width: 60%;
+        }
+        .side-container {
+            width: 35%;
+        }
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input, textarea, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+        textarea {
+            height: 150px;
+        }
+        button {
+            width: 48%;
+            display: inline-block;
+            padding: 15px;
+            font-size: 1.2em;
+        }
+        a{
+            font-size: 1.5em;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>題名:</h2>
+        <input type="text" id="plan-name" name="plan-name">
+        
+        <h2>内容:</h2>
+        <textarea id="summary" name="summary"></textarea>
+    </div>
+    
+    <div class="side-container">
+        
+        <h2>画像ファイル</h2>
+        <input type="file">
+        <a>未入力の箇所があります</a>
+        
+        <div>
+        <button onclick="location.href='../html/uz02_2.html'">戻る</button>
+        <button type="submit" onclick="location.href='../html/uz02_6.html'">登録</button>
+    </div>
+    </div>
+</body>
+</html>

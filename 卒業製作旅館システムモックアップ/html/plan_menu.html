@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宿泊プラン一覧</title>
+    <link href="../css/style2.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .plan-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .plan-container img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        .plan-info {
+            flex-grow: 1;
+        }
+        .plan-info p {
+            margin: 5px 0;
+        }
+        .detail-button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button>追加</button>
+        <h2>プラン一覧</h2>
+        <button>トップに戻る</button>
+    </div>
+    
+    <div class="plan-container">
+        <img src="../image/sample.png" alt="プラン画像">
+        <div class="plan-info">
+            <h3>プラン名</h3>
+            <p>このプランの説明が入ります。</p>
+        </div>
+        <button class="detail-button">詳細</button>
+    </div>
+
+    <div class="plan-container">
+        <img src="../image/sample.png" alt="プラン画像">
+        <div class="plan-info">
+            <h3>プラン名</h3>
+            <p>このプランの説明が入ります。</p>
+        </div>
+        <button class="detail-button">詳細</button>
+    </div>
+
+    <div class="plan-container">
+        <img src="../image/sample.png" alt="プラン画像">
+        <div class="plan-info">
+            <h3>プラン名</h3>
+            <p>このプランの説明が入ります。</p>
+        </div>
+        <button class="detail-button">詳細</button>
+    </div>
+    
+</body>
+</html>
