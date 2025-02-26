@@ -23,7 +23,7 @@ public class Reservation {
 	private String password;
 	private String mealTime;
 	
-	Reservation(){
+	public Reservation(){
 		
 	}
 
