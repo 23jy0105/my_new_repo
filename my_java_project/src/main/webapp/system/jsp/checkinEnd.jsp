@@ -29,50 +29,19 @@
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<img class="logo" src="../image/Untitled design.png" width="100"
-		height="100">
-
-
-	<%
-		if(Objects.isNull(result.getReservationNo())){
-			%>
-	<div id="company_name">
-		<p>ご予約を確認できませんでした。</p>
-		<p>フロントにご確認ください。</p>
-		<p><%= result.getReservationNo() %></p>
-
-	</div>
-	<%
-		}else{
-			%>
-	<div class="div1">
-		<h1 class="info"><%= result.getLodgmentStartDate() %>予約</h1>
-		<h1 class="info"><%= result.getCustomerName() %>様</h1>
-		<h1 class="info"><%= plan.getPlanName() %></h1>
-		<h1 class="info"><%= result.getLodgmentDays() %>泊<%= result.getLodgmentDays()+1 %>日</h1>
-		<h1 class="info"><%= mealstr%></h1>
-
-	</div>
-	<div class="div1">
-		<h1>食事時間を選択してください</h1>
-		<a class="dish">2024/12/20 夕食</a><select name="dinner"
-			id="dinner-select">
-			<option value="17:30">17:30</option>
-			<option value="18:00">18:00</option>
-			<option value="18:30">18:30</option>
-		</select> <br> <a class="dish">2024/12/21 朝食</a><select name="braekfast"
-			id="braekfast-select" style="margin-bottom: 20px;">
-			<option value="17:30">7:00</option>
-			<option value="18:00">7:30</option>
-			<option value="18:30">8:00</option>
-		</select>
-		<button class="button" onclick="location.href='./uc01_4.html'">決定</button>
-	</div>
-
-
-	<%}%>
-
-
-
+    <img class="logo" src="../image/Untitled design.png" width="100" height="100">
+    <div class="div1">
+    <h1 class="info">2024/12/20～21予約</h1>
+    <h1 class="info">電子太郎様</h1>
+    <h1 class="info">素泊まりプラン</h1>
+    <h1 class="info">1泊2日</h1>
+</div>
+    <div class="div1">
+    
+    
+    <h1>部屋番号は<u>101</u>です。</h1>
+    <br>
+    <h1>ごゆっくりお過ごしください。</h1>
+    </div>
 </body>
 </html>
