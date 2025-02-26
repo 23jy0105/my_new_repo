@@ -101,6 +101,30 @@ public class ReservationDao {
 		return ar;
 	}
 	
+	public ArrayList<LodgmentInformation> findLodgment(String no) {
+		ArrayList<LodgmentInformation> ar = new ArrayList<>();
+		String sql = "select * from lodgment_infomation where reservation_number = "+no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 LodgmentInformation l = new LodgmentInformation(); 
+				 l.setReservationNo(rs.getString("reservation_number"));
+				 l.setLodgmentNo(rs.getString("lodgment_number"));
+				 l.setLodgmentCount(rs.getInt("lodgment_count"));
+				 l.setRoomNo(rs.getString("room_number"));
+				 l.setCheckOutTime(rs.getTimestamp("check_out_rime"));
+				 
+				 ar.add(l);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
 	public Reservation findReservation(String input) {
 		Reservation r = new Reservation();
 		String sql = "select * from Reservation where reservation_number = "+input;
