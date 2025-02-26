@@ -8,21 +8,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import dao.PlanDao;
+import model.Plan;
+import java.sql.Date;
 @WebServlet("/Search")
 public class Search extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		String keyword = request.getParameter("keyword");
-		if(keyword != null) {
-			PlanDao dao = new PlanDao();
-			ArrayList<Plan> plans = dao.searchPlan();
-			request.setAttribute("plans",plans);
-			
-		}
+		/*		int day = 0; 
+				int people = 0;
+				Date date = null;
+				try {
+				    day = Integer.parseInt(request.getParameter("day"));
+				    people = Integer.parseInt(request.getParameter("people"));
+				} catch (NumberFormatException e) {
+				    // エラー処理（例: ユーザーにエラーメッセージを表示する）
+				}
+				String dateStr = request.getParameter("date");
+				try {
+				    date = Date.valueOf(dateStr);
+				} catch (IllegalArgumentException e) {
+				    // エラー処理（例: ユーザーにエラーメッセージを表示する）
+				}*/
+		PlanDao dao = new PlanDao();
+		ArrayList<Plan> plans = dao
+		dao.connectionClose();
+		request.setAttribute("plans",plans);
 		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 		rd.forward(request, response);
 	}
-};
+}

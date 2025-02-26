@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ page import="model.Plan" %>
+	<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <html lang="ja">
@@ -125,7 +127,7 @@
             }
             
             // 遷移先のURL（例えば `search-results.jsp` に遷移）
-            location.href = `search.jsp${queryParams}`;
+            location.href = `Search${queryParams}`;
         });
          });
         

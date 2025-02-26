@@ -1,29 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="model.Plan,java.util.ArrayList" %>
-
 <%
-    String day = request.getParameter("day");
-    String people = request.getParameter("people");
-    String roomcount = request.getParameter("roomcount");
-    String date = request.getParameter("date");
-    String sort = request.getParameter("sort");
-    ArrayList<Plan> plans = (ArrayList<Plan>)session.getAttribute("planlist");
+    ArrayList<Plan> plans = (ArrayList<Plan>) request.getAttribute("plans");
 %>
-
 <h2>検索結果</h2>
 <div class="result">
 	<div class="result-item">
 		<%
-		for(Plan p:plans){
-			out.println("<div class=\"result-image\">");
-			out.println("<img src=\""+p.getPlanImage()+"\"width=\"100px\"height=\"100px\"alt=\"プラン画像\"></div>");
-			out.println("<div class=\"result-details\">");
-			out.println("<h2>"+p.getPlanName()+"</h2>");
-			out.println("<h3>概要</h3>");
-			out.println("<p>料金"+p.getPlanFee()+"</p>");
-			out.println("<p>";p.getPlanOverview()+"</p></div>");
-			out.println("<div class=\"result-buttons\"><button class=\"details-button\">詳細</button><button id=\"reserve-button\">予約</button></div>");
+		if (plans != null && !plans.isEmpty()) {
+			for(Plan p:plans){
+				out.println("<div class=\"result-image\">");
+				out.println("<img src=\""+p.getPlanImage()+"\"width=\"100px\"height=\"100px\"alt=\"プラン画像\"></div>");
+				out.println("<div class=\"result-details\">");
+				out.println("<h2>"+p.getPlanName()+"</h2>");
+				out.println("<h3>概要</h3>");
+				out.println("<p>料金"+p.getPlanFee()+"</p>");
+				out.println("<p>"+p.getPlanOverview()+"</p></div>");
+				out.println("<div class=\"result-buttons\"><button class=\"details-button\">詳細</button><button id=\"reserve-button\">予約</button></div>");
+			}
+		}else{
+			out.println("<p>検索結果はありません。</p>");
 		}
 		%>
 	</div>
@@ -90,7 +86,7 @@
             document.getElementById("current-month").textContent = `${currentYear}年 ${currentMonth + 1}月`;
             container.appendChild(createCalendar(currentYear, currentMonth));
         }
-        document.querySelectorAll("#reserve-button").forEach(button => {button.addEventListener("click", () => {
+        document.querySelectorAll(".reserve-button").forEach(button => {button.addEventListener("click", () => {
             document.getElementById("calendar-container").style.display = "block";
             updateCalendar();
         });
