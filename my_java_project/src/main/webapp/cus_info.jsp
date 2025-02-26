@@ -1,14 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="model.Reservation"%>
+<%@page import="model.LodgmentInformation" %>
+<%@page import="dao.ReservationDao"%>
+<%@page import="dao.PlanDao"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.ArrayList" %>
+
+<%Reservation reserve = (Reservation)session.getAttribute("reserve"); %>
+   <% PlanDao dao2  = new PlanDao(); %>
+   <% ReservationDao dao  = new ReservationDao(); %>
+<% 	int lodgCount=0;
+	ArrayList<LodgmentInformation> list = dao.findLodgment(reserve.getReservationNo());
+	for(LodgmentInformation lodg:list){
+		lodgCount =+ lodg.getLodgmentCount();
+	}
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ご予約確認ページ</title>
     <link rel="stylesheet" href="./css/styles.css" >
     <link rel="stylesheet" href="./css/modal.css">
-    <link rel="stylesheet" href="./css/res_check.css">
+    <style>
+        main{
+            font-size:1.3em;
+            
+
+
+        }
+        
+        .item {
+            width: 30%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .item h2 {
+            color: #4CAF50;
+        }
+        .item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        #map{
+            height:500px;width:500px;
+            align-items: center;
+        }
+    </style>
 </head>
 <body class="background">
     <header class="header">
@@ -47,11 +96,19 @@
         </div>
         <div style="padding: 10px; float: left;  text-align: left;">
             <label>予約人数:</label>
-            <strong>2</strong>
+            <strong><%=lodgCount %></strong>
             <br>
             <label>宿泊予定日:</label>
-            <strong>2024/12/20~2024/12/21</strong>
-            
+            <label><%=reserve.getLodgmentStartDate() %></label>
+            <string><%Calendar calendar = Calendar.getInstance();
+            calendar.setTime(reserve.getLodgmentStartDate()); 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();%>
+        	~
+            <%calendar.add(Calendar.DAY_OF_MONTH,reserve.getLodgmentDays());
+            Date d1 = calendar.getTime();%>
+            <%=sdf.format(d1) %></string>
+            <% %>
         </div>
         <button class="button"  id="cancel-button" style="width: 200px; vertical-align: -200%; margin-left: 100px;">詳細</button>
         <br>
@@ -177,6 +234,7 @@
 
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            
         });
     });
 </script>
