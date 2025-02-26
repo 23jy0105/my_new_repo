@@ -15,6 +15,13 @@ public class Search extends HttpServlet{
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		String keyword = request.getParameter("keyword");
+		if(keyword != null) {
+			PlanDao dao = new PlanDao();
+			ArrayList<Plan> plans = dao.searchPlan();
+			request.setAttribute("plans",plans);
+			
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 		rd.forward(request, response);
 	}

@@ -89,6 +89,39 @@ public class PlanDao {
 		}
 		return ar;
 	}
+	public ArrayList<Plan> searchPlan() {
+		ArrayList<Plan> ar = new ArrayList<>();
+		String sql = "SELECT plan_number,plan_name,plan_fee,plan_image,plan_overview,plan_description,date\r\n"
+				+ "FROM plan inner join room_type ON plan.room_type_number=room_type.room_type_number \r\n"
+				+ "INNER JOIN room_remaining_count ON plan.room_type_number=room_remaining_count.room_type_number\r\n"
+				+ "WHERE'2025-02-25 00:00:00' >= plan_start_date AND '2025-02-25 00:00:00' <= plan_end_date #プラン有効期限\r\n"
+				+ "AND DATE between'2025-02-25 00:00:00' AND '2025-02-26 00:00:00' #日付確認\r\n"
+				+ "AND 2 <= max_accommodation_count #人数\r\n"
+				+ "GROUP BY date, plan_number, plan_name, plan_fee, plan_image, \r\n"
+				+ "         plan_overview, plan_description\r\n"
+				+ "HAVING SUM(total_room_count - reserved_room_number) >= 1#残数";
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				Plan p = new Plan(); 
+				 p.setPlanNo(rs.getString("plan_number")); 
+				 p.setPlanName(rs.getString("plan_name")); 
+				 p.setFee(rs.getInt("plan_fee"));
+				 p.setPlanImage(rs.getString("plan_image"));
+				 p.setPlanOverview(rs.getString("plan_overview"));
+				 p.setPlanDescription(rs.getString("plan_description"));
+				 p.setDate(rs.getDate("date"));
+
+				 ar.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
 	
 //	public Meal findMealById(int id) { 
 //		 Meal ml = new Meal(); 

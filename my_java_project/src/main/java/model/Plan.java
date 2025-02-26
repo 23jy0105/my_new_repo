@@ -15,13 +15,14 @@ public class Plan implements Serializable{
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private String mealNo;
+	private Date date;
 	
 	public Plan() {
 		
 	}
 
 	public Plan(String planNo, String planName, String roomTypeNo, String planImage, String planOverview,
-			String planDescription, int fee, Timestamp startTime, Timestamp endTime, String mealNo) {
+			String planDescription, int fee, Timestamp startTime, Timestamp endTime, String mealNo, Date date) {
 		
 		this.planNo = planNo;
 		this.planName = planName;
@@ -33,6 +34,7 @@ public class Plan implements Serializable{
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.mealNo = mealNo;
+		this.date =date;
 	}
 
 	public String getPlanNo() {
@@ -115,6 +117,13 @@ public class Plan implements Serializable{
 		this.mealNo = mealNo;
 	}
 	
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 	
 }

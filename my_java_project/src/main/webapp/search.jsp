@@ -125,7 +125,7 @@
             }
             
             // 遷移先のURL（例えば `search-results.jsp` に遷移）
-            location.href = `search-results.jsp${queryParams}`;
+            location.href = `search.jsp${queryParams}`;
         });
          });
         
