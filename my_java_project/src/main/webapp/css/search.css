@@ -136,7 +136,7 @@ th, td {
 .modal {
     display: none; /* 最初は非表示 */
     position: fixed;
-    z-index: 1; /* 前面に表示 */
+    z-index: 9999; /* 高いz-indexを設定 */
     left: 0;
     top: 0;
     width: 100%;

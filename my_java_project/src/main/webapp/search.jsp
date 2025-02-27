@@ -28,6 +28,7 @@
         <div style="margin: 20px 40px;">
         <h1>宿泊予約</h1>
         <div class="form-container">
+        <form method="get" action="./SearchResult">
             <div class="form-select-top">
                 <div class="form-row">
                     <label for="stay-days">宿泊日数</label>
@@ -59,7 +60,7 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <button type="button" id="search-button" class="button">検索</button>
+                <button type="submit" id="search-button" class="button">検索</button>
 
             </div>
             <div class="form-select-bottom">
@@ -83,53 +84,203 @@
                 </div>
             </div>
 
-
+</form>
 
 
         </div></div>
-    </main>
-    <script>
-        const dateNotSpecified = document.getElementById('date-not-specified');
-        const dateSpecified = document.getElementById('date-specified');
-        const datePicker = document.getElementById('date-picker');
-        const dateStart = document.getElementById('stay-start');
-        const search = document.getElementById('search-button');
 
-        dateNotSpecified.addEventListener('change', () => {
+<%
+    ArrayList<Plan> plans = (ArrayList<Plan>) request.getAttribute("plans");
+%>
+<h2>検索結果</h2>
+<div class="result">
+    <%
+    if (plans != null && !plans.isEmpty()) {
+        for(Plan p : plans){
+            %>
+            <div class="result-item">
+                <div class="result-image">
+                    <img src="<%= p.getPlanImage() %>" width="100px" height="100px" alt="プラン画像">
+                </div>
+                <div class="result-details">
+                    <h2><%= p.getPlanName() %></h2>
+                    <h3>概要</h3>
+                    <p>料金 <%= p.getFee() %></p>
+                    <p><%= p.getPlanOverview() %></p>
+                </div>
+                <div class="detail-button">
+                    <button class="details-button" data-name="<%= p.getPlanName() %>" data-fee="<%= p.getFee() %>" data-description="<%= p.getPlanDescription().replaceAll("\"", "&quot;").replaceAll("\n", " ") %>">詳細</button>
+                    <button class="reserve-button">予約</button>
+                </div>
+            </div>
+            <%
+        }
+    } else {
+        out.println("<p>検索結果はありません。</p>");
+    }
+    %>
+</div>
+    <div id="myModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        
+    </div>
+</div>
+<div id="calendar-container">
+    <div class="nav-buttons">
+        <button id="prev">◀ 前の月</button>
+        <h2 id="current-month"></h2>
+        <button id="next">次の月 ▶</button>
+    </div>
+    <div id="calendar"></div>
+    <button id="close-calendar">閉じる</button>        
+</div>
+</main>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("myModal");
+    const detailsButtons = document.querySelectorAll(".details-button");
+
+    // 詳細ボタンがクリックされたときの処理
+    detailsButtons.forEach(button => {
+    	button.addEventListener("click", function() {
+    	    let planName = button.getAttribute("data-name");
+    	    let fee = button.getAttribute("data-fee") ; 
+    	    let description = button.getAttribute("data-description");
+
+    	    console.log("Plan Name:", planName);
+    	    console.log("Fee:", fee);
+    	    console.log("Description:", description);
+
+    	    const modalContent = modal.querySelector(".modal-content");
+    	    modalContent.innerHTML = 
+    	        "<span class=\"close\">&times;</span>"
+    	        +"<h2>"+planName+"</h2>"
+    	        +"<p>料金："+fee+"</p>"
+    	        +"<p>詳細："+description+"</p>"
+    	    ;
+            modal.style.display = "block";
+
+            // ここで新しく追加された close ボタンを取得してイベントを設定
+            modal.querySelector(".close").addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+        });
+    });
+
+    // モーダル外をクリックした場合にモーダルを閉じる
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // カレンダーの操作（予約ボタン）
+    const reserveButtons = document.querySelectorAll(".reserve-button");
+    reserveButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            document.getElementById("calendar-container").style.display = "block";
+        });
+    });
+
+    // カレンダーの閉じるボタン
+    document.getElementById("close-calendar").addEventListener("click", function() {
+        document.getElementById("calendar-container").style.display = "none";
+    });
+
+    // 以前・次の月に遷移
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+
+    function createCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+        const calendar = document.createElement("table");
+        calendar.innerHTML = "<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>";
+
+        let row = document.createElement("tr");
+        for (let i = 0; i < firstDay; i++) {
+            row.appendChild(document.createElement("td"));
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("td");
+            const link = document.createElement("a");
+            link.href = "#";
+            link.textContent = day;
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                const selectedDate = `${year}-${month + 1}-${day}`;
+                window.location.href = `un02_1.html?date=${selectedDate}`;
+            });
+
+            cell.appendChild(link);
+            row.appendChild(cell);
+
+            if ((firstDay + day) % 7 === 0) {
+                calendar.appendChild(row);
+                row = document.createElement("tr");
+            }
+        }
+
+        if (row.children.length > 0) {
+            calendar.appendChild(row);
+        }
+
+        return calendar;
+    }
+
+    function updateCalendar() {
+        document.getElementById("current-month").textContent = currentYear+"年"+(currentMonth + 1)+"月";
+        document.getElementById("calendar").innerHTML = "";
+        document.getElementById("calendar").appendChild(createCalendar(currentYear, currentMonth));
+    }
+
+    document.getElementById("prev").addEventListener("click", function() {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        updateCalendar();
+    });
+
+    document.getElementById("next").addEventListener("click", function() {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        updateCalendar();
+    });
+
+    updateCalendar();
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const dateNotSpecified = document.getElementById('date-not-specified');
+    const dateSpecified = document.getElementById('date-specified');
+    const datePicker = document.getElementById('date-picker');
+    const dateStart = document.getElementById('stay-start');
+
+    // "日付未定" が選択されたとき
+    dateNotSpecified.addEventListener('change', () => {
+        if (dateNotSpecified.checked) {
             datePicker.disabled = true;
             datePicker.style.visibility = "hidden";
             dateStart.style.visibility = "hidden";
-        });
+        }
+    });
 
-        dateSpecified.addEventListener('change', () => {
+    // "日付を指定する" が選択されたとき
+    dateSpecified.addEventListener('change', () => {
+        if (dateSpecified.checked) {
             datePicker.disabled = false;
             datePicker.style.visibility = "visible";
             dateStart.style.visibility = "visible";
-        });
+        }
+    });
+});
+</script>
 
-        search.addEventListener('click',function(event){
-        	event.preventDefault();
-        	const day = document.getElementById('stay-days').value;
-        	const people = document.getElementById('people-count').value;
-        	const roomcount = document.getElementById('room-count').value;
-            const date = datePicker.value;  // 宿泊開始日
-            const sortOption = document.getElementById('sort-options').value; // 並び順
-            
-            // クエリパラメータを作成
-            let queryParams = `?day=${day}&people=${people}&roomcount=${roomcount}`;
-            
-            if (dateSpecified.checked && date) {
-                queryParams += `&date=${date}`;
-            }
-            
-            if (sortOption !== "default") {
-                queryParams += `&sort=${sortOption}`;
-            }
-            
-            // 遷移先のURL（例えば `search-results.jsp` に遷移）
-            location.href = `Search${queryParams}`;
-        });
-         });
-        
-    </script>
-<%@ include file="searchResult.jsp"%>
+</body>
+</html>

@@ -91,15 +91,37 @@ public class PlanDao {
 	}
 	public ArrayList<Plan> searchPlan() {
 		ArrayList<Plan> ar = new ArrayList<>();
-		String sql = "SELECT plan_number,plan_name,plan_fee,plan_image,plan_overview,plan_description,date\r\n"
-				+ "FROM plan inner join room_type ON plan.room_type_number=room_type.room_type_number \r\n"
-				+ "INNER JOIN room_remaining_count ON plan.room_type_number=room_remaining_count.room_type_number\r\n"
-				+ "WHERE'2025-02-25 00:00:00' >= plan_start_date AND '2025-02-25 00:00:00' <= plan_end_date #プラン有効期限\r\n"
-				+ "AND DATE between'2025-02-25 00:00:00' AND '2025-02-26 00:00:00' #日付確認\r\n"
-				+ "AND 2 <= max_accommodation_count #人数\r\n"
-				+ "GROUP BY date, plan_number, plan_name, plan_fee, plan_image, \r\n"
-				+ "         plan_overview, plan_description\r\n"
-				+ "HAVING SUM(total_room_count - reserved_room_number) >= 1#残数";
+		String sql = "SELECT \r\n"
+				+ "    p.plan_number, \r\n"
+				+ "    p.plan_name, \r\n"
+				+ "    p.plan_fee, \r\n"
+				+ "    p.plan_image, \r\n"
+				+ "    p.plan_overview, \r\n"
+				+ "    p.plan_description, \r\n"
+				+ "    p.room_type_number\r\n"
+				+ "FROM plan AS p\r\n"
+				+ "INNER JOIN room_type AS r ON p.room_type_number = r.room_type_number\r\n"
+				+ "LEFT JOIN (\r\n"
+				+ "    -- 2/25 の予約済み部屋数を集計\r\n"
+				+ "    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked\r\n"
+				+ "    FROM room_remaining_count\r\n"
+				+ "    WHERE DATE BETWEEN '2025-02-25' AND '2025-02-26'\r\n"
+				+ "    GROUP BY room_type_number, DATE\r\n"
+				+ ") AS res1 ON p.room_type_number = res1.room_type_number AND res1.DATE = '2025-02-25'\r\n"
+				+ "LEFT JOIN (\r\n"
+				+ "    -- 2/26 の予約済み部屋数を集計\r\n"
+				+ "    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked\r\n"
+				+ "    FROM room_remaining_count\r\n"
+				+ "    WHERE DATE BETWEEN '2025-02-25' AND '2025-02-26'\r\n"
+				+ "    GROUP BY room_type_number, DATE\r\n"
+				+ ") AS res2 ON p.room_type_number = res2.room_type_number AND res2.DATE = '2025-02-26'\r\n"
+				+ "WHERE \r\n"
+				+ "    -- プランの有効期限チェック\r\n"
+				+ "    '2025-02-25 00:00:00' >= p.plan_start_date \r\n"
+				+ "    AND '2025-02-25 00:00:00' <= p.plan_end_date \r\n"
+				+ "    AND 2 <= r.max_accommodation_count  \r\n"
+				+ "    AND (r.total_room_count - COALESCE(res1.total_booked, 0)) >= 1\r\n"
+				+ "    AND (r.total_room_count - COALESCE(res2.total_booked, 0)) >= 1";
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -111,7 +133,6 @@ public class PlanDao {
 				 p.setPlanImage(rs.getString("plan_image"));
 				 p.setPlanOverview(rs.getString("plan_overview"));
 				 p.setPlanDescription(rs.getString("plan_description"));
-				 p.setDate(rs.getDate("date"));
 
 				 ar.add(p);
 			}
