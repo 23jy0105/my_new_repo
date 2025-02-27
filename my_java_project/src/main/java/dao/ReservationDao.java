@@ -196,6 +196,71 @@ public class ReservationDao {
 		return r;
 	}
 	
+	public void setMealTime(Reservation r,String time) {
+		String sql = "update reservation set meal_time ="+time+" where reservation_number = "+r.getReservationNo();
+		
+			
+		try {
+			PreparedStatement state;
+			state =con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setCheckinTime(Reservation r) {
+		System.out.println(r.getCheckInTime());
+		String sql = "update reservation set check_in_time = NOW() where reservation_number = "+r.getReservationNo();
+		
+		
+		try {
+			PreparedStatement state;
+			state =con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setLodgment(Reservation r,String room) {
+		try {
+			
+			String sql ="UPDATE lodgment_information SET room_number = "+room+" where reservation_number ="+r.getReservationNo();
+			PreparedStatement state;
+			state =con.prepareStatement(sql);
+			state.executeUpdate();				
+									
+				
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<String> watchTime(Reservation r){
+		int time = Integer.parseInt(r.getMealTime());
+		PlanDao pd = new PlanDao();
+		int meal = Integer.parseInt(pd.findPlan(r.getPlanNo()).getMealNo());
+		ArrayList<String> list = new ArrayList<String>();
+		
+		if(meal==0) {
+			return list;
+		}else if(meal>100) {
+			if(time>=30) {
+				
+			}else if(time>=20) {
+				
+			}else {
+				
+			}
+		}else if(meal<100) {
+			
+		}else {
+			
+		}
+	}
+	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 

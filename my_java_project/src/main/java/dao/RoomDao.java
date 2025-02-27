@@ -112,7 +112,7 @@ public class RoomDao {
 	
 	public ArrayList<Room> findEmptyRoom(String type) {
 		ArrayList<Room> ar = new ArrayList<>();
-		String sql = "select * from room where room_state = 0 AND room_type_number = "+type;
+		String sql = "select * from room where room_state = 0 AND room_type_number = "+type+" order by room_number";
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -136,18 +136,24 @@ public class RoomDao {
 		return ar;
 	}
 	
-	public boolean setRoomState(String num) {
+	public String setRoomState(String num) {
+		System.out.println(num);
 		String sql = "select * from room where room_state = 0 AND room_number = "+num;
+		
 		try {
+			System.out.println("ok");
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
-			if(rs.getFetchSize()==0) {
-				return false;
+			if(!rs.next()) {
+				System.out.println("ng");
+				return "0";
 			}else {
 				try {
+					System.out.println("ok");
 					sql ="UPDATE room SET room_state = 1 where room_number ="+num;
 					state =con.prepareStatement(sql);
 					state.executeUpdate();
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -157,7 +163,7 @@ public class RoomDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return true;
+		return num;
 	}
 	
 //	public Room findRoomById(int id) { 
