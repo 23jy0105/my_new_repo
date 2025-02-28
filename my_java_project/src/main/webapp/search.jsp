@@ -206,27 +206,49 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement("td");
             const link = document.createElement("a");
-            link.href = "#";
+            link.href = "#"+"`"+year+"-"+(month+1)+"-"+day+"`";
             link.textContent = day;
             link.addEventListener("click", function(event) {
-                event.preventDefault();
+                event.preventDefault();  // クリック時にページ遷移を防ぐ
+
                 const stayDays = document.getElementById("stay-days").value;
                 const people = document.getElementById("people-count").value;
                 const room = document.getElementById("room-count").value;
-                const selectedDate = `${year}-${month + 1}-${day}`;
-                fetch("Reserve1", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `stayDays=${stayDays}&people=${people}&room=${room}&date=${selectedDate}`
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data); // サーバーからのレスポンスをコンソールに表示
-                    window.location.href = "reserve1.jsp"; // 結果ページへ遷移
-                })
-                .catch(error => console.error("エラー:", error));
+                const selectedDate ="`"+year+"-"+(month+1)+"-"+day+"`";
+
+                // フォームを作成してPOSTリクエストを送信
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "Reserve1"; // Reserve1 サーブレットに遷移
+
+                // フォームにパラメータを追加
+                const inputStayDays = document.createElement("input");
+                inputStayDays.type = "hidden";
+                inputStayDays.name = "stayDays";
+                inputStayDays.value = stayDays;
+                form.appendChild(inputStayDays);
+
+                const inputPeople = document.createElement("input");
+                inputPeople.type = "hidden";
+                inputPeople.name = "people";
+                inputPeople.value = people;
+                form.appendChild(inputPeople);
+
+                const inputRoom = document.createElement("input");
+                inputRoom.type = "hidden";
+                inputRoom.name = "room";
+                inputRoom.value = room;
+                form.appendChild(inputRoom);
+
+                const inputDate = document.createElement("input");
+                inputDate.type = "hidden";
+                inputDate.name = "date";
+                inputDate.value = selectedDate;
+                form.appendChild(inputDate);
+
+                // フォームを送信
+                document.body.appendChild(form);
+                form.submit();
             });
 
             cell.appendChild(link);

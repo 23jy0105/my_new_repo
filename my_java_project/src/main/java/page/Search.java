@@ -14,8 +14,7 @@ public class Search extends HttpServlet{
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		System.out.println("aaa");
 		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 		rd.forward(request, response);
 	}
-};
+}

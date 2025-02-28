@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,36 +101,11 @@
     </div>
 
     <script>
-    // ここで前のページからデータを受け取り、入力内容を表示します。
-    document.getElementById('confirm-last-name').innerText = localStorage.getItem('lastName');  // 修正
-    document.getElementById('confirm-first-name').innerText = localStorage.getItem('firstName');  // 修正
-    document.getElementById('confirm-last-kana').innerText = localStorage.getItem('lastKana');  // 修正
-    document.getElementById('confirm-first-kana').innerText = localStorage.getItem('firstKana');  // 修正
-    document.getElementById('confirm-email').innerText = localStorage.getItem('email');
-    document.getElementById('confirm-postal-code').innerText = localStorage.getItem('postalCode');  // 修正
-    document.getElementById('confirm-prefecture').innerText = localStorage.getItem('prefecture');
-    document.getElementById('confirm-phone').innerText = localStorage.getItem('phone');
-    document.getElementById('confirm-address').innerText = localStorage.getItem('address');
-    document.getElementById('confirm-building').innerText = localStorage.getItem('building');
-    document.getElementById('confirm-people').innerText = localStorage.getItem('peopleCount');
-    document.getElementById('confirm-room').innerText = localStorage.getItem('roomCount');
 
-    // 予約者情報（追加の項目）
-    if (localStorage.getItem('bookInstead') === 'yes') {
-        document.getElementById('confirm-extra-fields').innerHTML = `
-            <p>姓: ${localStorage.getItem('reserverLastName')}</p>  <!-- 修正 -->
-            <p>名: ${localStorage.getItem('reserverFirstName')}</p>  <!-- 修正 -->
-            <p>せい: ${localStorage.getItem('reserverLastKana')}</p>  <!-- 修正 -->
-            <p>めい: ${localStorage.getItem('reserverFirstKana')}</p>  <!-- 修正 -->
-            <p>メールアドレス: ${localStorage.getItem('reserverEmail')}</p>  <!-- 修正 -->
-            <p>電話番号: ${localStorage.getItem('reserverPhone')}</p>  <!-- 修正 -->
-        `;
     }else{
         document.getElementById('confirm-extra-fields').innerHTML = 
         `<p>ご本人様</p>`;
     }
-
-        document.getElementById('confirm-allergy').innerText = localStorage.getItem('allergy');
 
         // 編集ボタンで前のページに戻る
         document.getElementById('edit').addEventListener('click', function() {

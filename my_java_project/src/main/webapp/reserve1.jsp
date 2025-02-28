@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.ReservationInfo" %>
+<% ReservationInfo info =(ReservationInfo) session.getAttribute("info"); 
+	int staydays = info.getStayDays();
+	int people = info.getPeople();
+	int room = info.getRoom();
+    String date = info.getStartDate();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,38 +35,38 @@
     </div>
 
     <div class="form-container">
-        <form id="customer-form" action="./reserve2" method="post">
+        <form id="customer-form" method="post"action="Reserve2">
             <div class="form-group-inline">
                 <div class="form-group">
                     <label for="last-name">姓</label>
-                    <input type="text" id="last-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
+                    <input type="text" id="last-name" name="lastName"  placeholder="漢字、ひらがな、カタカナ、アルファベットを入力してください。">
                 </div>
                 <div class="form-group">
                     <label for="first-name" style="width: 85px;">名</label>
-                    <input type="text" id="first-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
+                    <input type="text" id="first-name" name="firstName" placeholder="漢字、ひらがな、カタカナ、アルファベットを入力してください。">
                 </div>
             </div>
             <div class="form-group-inline">
                 <div class="form-group">
                     <label for="last-kana">せい</label>
-                    <input type="text" id="last-kana" placeholder="ひらがなを入力してください。">
+                    <input type="text" id="last-kana" name="lastKana" placeholder="ひらがな、アルファベットを入力してください。">
                 </div>
                 <div class="form-group">
                     <label for="first-kana" style="width: 85px;">めい</label>
-                    <input type="text" id="first-kana" placeholder="ひらがなを入力してください。">
+                    <input type="text" id="first-kana" name="firstKana" placeholder="ひらがな、アルファベットを入力してください。">
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">メールアドレス</label>
-                <input type="email" id="email" placeholder="メールアドレスを入力してください。">
+                <input type="email" id="email" name="email" placeholder="メールアドレスを入力してください。">
             </div>
             <div class="form-group">
                 <label for="postal-code">郵便番号</label>
-                <input type="text" id="postal-code" placeholder="郵便番号を入力してください。">
+                <input type="text" id="postal-code" name="postalCode" pattern="^\d{3}-\d{4}$|^\d{7}$" placeholder="郵便番号を入力してください。">
             </div>
             <div class="form-group">
                 <label for="prefecture">都道府県</label>
-                <select id="prefecture">
+                <select id="prefecture" name="prefecture">
                     <option value="">選択</option>
                     <option value="hokkaido">北海道</option>
                     <option value="aomori">青森県</option>
@@ -113,15 +119,15 @@
             </div>
             <div class="form-group">
                 <label for="phone">電話番号</label>
-                <input type="tel" id="phone" placeholder="電話番号を入力してください。(半角数字)">
+                <input type="tel" id="phone" name="phone" placeholder="電話番号を入力してください。(半角数字)">
             </div>
             <div class="form-group">
                 <label for="address">住所</label>
-                <input type="text" id="address" placeholder="住所を入力してください。">
+                <input type="text" id="address" name="address" placeholder="住所を入力してください。">
             </div>
             <div class="form-group">
                 <label for="building">建物名</label>
-                <input type="text" id="building" placeholder="">
+                <input type="text" id="building"name="building" placeholder="">
             </div>
             <div class="form-group2">
                 <input type="radio" id="bookInsteadNo" name="bookInstead" value="no" onclick="toggleVisibility(false)" checked>
@@ -245,8 +251,9 @@
             }
             
         }
-        document.getElementById('customer-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+      document.getElementById('customer-form').addEventListener('submit', function(event) {
+    	event.preventDefault();  
+        let valid = true;
         
         // フォームの各フィールドの値を取得
         const lastName = document.getElementById('last-name').value;
@@ -260,6 +267,24 @@
         const address = document.getElementById('address').value;
         const building = document.getElementById('building').value;
         const allergy = document.getElementById('allergy').value;
+        //姓名どちらも
+      if (!lastName.value) {
+            valid = false;
+            lastName.classList.add('err-input');
+
+        }
+      if(!firstName.value){
+			valid = false;
+			firstName.classList.add('err-input');
+          }
+      if(!lastKana.value){
+          	valid = false;
+            lastKana.classList.add('err-input');
+          }
+      if (!firstKana.value) {
+          valid = false;
+          firstKana.classList.add('err-input');
+      }
 
         // 予約者情報（宿泊者本人以外の予約の場合）
         const isBookInsteadYes = document.getElementById('bookInsteadYes').checked;
@@ -278,33 +303,33 @@
             reserverEmail = document.getElementById('reserver-email').value;
             reserverPhone = document.getElementById('reserver-phone').value;
         }
+        const form = document.getElementById('customer-form');
+        const hiddenLastName = document.createElement('input');
+        hiddenLastName.type = 'hidden';
+        hiddenLastName.name = 'lastName';
+        hiddenLastName.value = lastName;
+        form.appendChild(hiddenLastName);
 
-        // フォームのデータをlocalStorageに保存
-        localStorage.setItem('lastName', lastName);
-        localStorage.setItem('firstName', firstName);
-        localStorage.setItem('lastKana', lastKana);
-        localStorage.setItem('firstKana', firstKana);
-        localStorage.setItem('email', email);
-        localStorage.setItem('postalCode', postalCode);
-        localStorage.setItem('prefecture', prefecture);
-        localStorage.setItem('phone', phone);
-        localStorage.setItem('address', address);
-        localStorage.setItem('building', building);
-        localStorage.setItem('allergy', allergy);
+        const hiddenFirstName = document.createElement('input');
+        hiddenFirstName.type = 'hidden';
+        hiddenFirstName.name = 'firstName';
+        hiddenFirstName.value = firstName;
+        form.appendChild(hiddenFirstName);
+		if(valid){
+			this.submit();
+		}else{
+			alert("エラーがあります");
+			}
 
-        // 予約者情報があれば保存
-        if (isBookInsteadYes) {
-            localStorage.setItem('reserverLastName', reserverLastName);
-            localStorage.setItem('reserverFirstName', reserverFirstName);
-            localStorage.setItem('reserverLastKana', reserverLastKana);
-            localStorage.setItem('reserverFirstKana', reserverFirstKana);
-            localStorage.setItem('reserverEmail', reserverEmail);
-            localStorage.setItem('reserverPhone', reserverPhone);
-        }
-
-        // 確認ページにリダイレクト
-        window.location.href = this.action;
-    });
+        });
+        let staydays = <%= staydays%>;
+        let people =<%= people%>;
+        let room =<%= room%>;
+        let date = '<%= date%>';
+        console.log(staydays);
+        console.log(people);
+        console.log(room);
+        console.log(date);
     </script>
 </body>
 </html>
