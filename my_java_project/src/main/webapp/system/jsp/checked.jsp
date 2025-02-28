@@ -1,7 +1,9 @@
 <%@page import="model.Reservation"%>
 <%@page import="model.Plan"%>
 <%@page import="model.Meal"%>
+<%@page import="model.LodgmentInformation"%>
 <%@page import="java.util.Objects"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +14,6 @@ Meal meal = (Meal) session.getAttribute("meal");
 String mealstr = "err";
 String mealno = meal.getMealNo();
 int flag = 1;
-
 if (Objects.nonNull(result.getReservationNo())) {
 	if (Integer.parseInt(mealno) == 000) {
 		mealstr = "エラー";
@@ -94,17 +95,17 @@ if (Objects.nonNull(result.getReservationNo())) {
 				<%}%><br>
 				<button class="button" type="button" onclick="toggleDiv()">決定</button>
 		</div>
-		<div id="toggleDiv2" style="display: none;">
-			<div class="div1">
+		<span id="toggleDiv2" style="display: none;">
+			
 				<h1>食事時間は</h1>
-				<a>夕食 <label id="resultText"></label></a><a> 朝食 <label id="resultText2"></label></a>
+				<a><label id="resultText"></label></a><a><label id="resultText2"></label></a>
 				<h1>となります。よろしいですか？</h1>
 				<button class="button" type="button" onclick="toggleDiv()"
 					style="float: left; padding: 10px 100px; background-color: gray; margin-right: 10px;">戻る</button>
 				<button class="button" type="submit"
 					style="float: left; padding: 10px 100px;">確定</button>
-			</div>
-		</div>
+			
+		</span>
 		</form>
 
 	</div>
@@ -133,11 +134,11 @@ if (Objects.nonNull(result.getReservationNo())) {
 
 	            // 選択肢に応じてテキストを変更
 	            if (selectedValue === "1") {
-	                resultText.innerHTML = "  17:30";
+	                resultText.innerHTML = "夕食   17:30";
 	            } else if (selectedValue === "2") {
-	                resultText.innerHTML = "  18:00";
+	                resultText.innerHTML = "夕食   18:00";
 	            } else if (selectedValue === "3") {
-	                resultText.innerHTML = "  18:30";
+	                resultText.innerHTML = "夕食   18:30";
 	            }
 
 				
@@ -148,16 +149,20 @@ if (Objects.nonNull(result.getReservationNo())) {
 			 var selectedValue2 = select2.value;
 			 
 			 if (selectedValue2 === "10") {
-	                resultText2.innerHTML = "  7:00";
+	                resultText2.innerHTML = "朝食   7:00";
 	            } else if (selectedValue2 === "20") {
-	                resultText2.innerHTML = "  7:30";
+	                resultText2.innerHTML = "朝食   7:30";
 	            } else if (selectedValue2 === "30") {
-	                resultText2.innerHTML = "  8:00";
+	                resultText2.innerHTML = "朝食   8:00";
 	            }
 		 }
 		 document.addEventListener("DOMContentLoaded", function() {
 	            updateText();
-	            updateText2(); // 初期化関数を呼び出
+	            // 初期化関数を呼び出
+	        });
+		 document.addEventListener("DOMContentLoaded", function() {
+	            updateText2();
+	            // 初期化関数を呼び出
 	        });
 	</script>
 
