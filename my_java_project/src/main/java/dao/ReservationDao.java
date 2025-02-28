@@ -63,7 +63,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-				 r.setAllergyCount(rs.getInt("allergy_count"));
+//				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 
@@ -90,6 +90,7 @@ public class ReservationDao {
 				 l.setLodgmentCount(rs.getInt("lodgment_count"));
 				 l.setRoomNo(rs.getString("room_number"));
 				 l.setCheckOutTime(rs.getTimestamp("check_out_rime"));
+				 l.setAllergyCount(rs.getInt("allergy_count"));
 				 
 				 ar.add(l);
 			}
@@ -103,7 +104,7 @@ public class ReservationDao {
 	
 	public ArrayList<LodgmentInformation> findLodgment(String no) {
 		ArrayList<LodgmentInformation> ar = new ArrayList<>();
-		String sql = "select * from lodgment_infomation where reservation_number = "+no;
+		String sql = "select * from lodgment_information where reservation_number = "+no;
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -113,7 +114,8 @@ public class ReservationDao {
 				 l.setLodgmentNo(rs.getString("lodgment_number"));
 				 l.setLodgmentCount(rs.getInt("lodgment_count"));
 				 l.setRoomNo(rs.getString("room_number"));
-				 l.setCheckOutTime(rs.getTimestamp("check_out_rime"));
+				 l.setCheckOutTime(rs.getTimestamp("check_out_time"));
+				 l.setAllergyCount(rs.getInt("allergy_count"));
 				 
 				 ar.add(l);
 			}
@@ -149,7 +151,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-				 r.setAllergyCount(rs.getInt("allergy_count"));
+//				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 			}
@@ -184,7 +186,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-				 r.setAllergyCount(rs.getInt("allergy_count"));
+//				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 			}
@@ -223,10 +225,10 @@ public class ReservationDao {
 		}
 	}
 	
-	public void setLodgment(Reservation r,String room) {
+	public void setLodgment(Reservation r,String room,int num) {
 		try {
 			
-			String sql ="UPDATE lodgment_information SET room_number = "+room+" where reservation_number ="+r.getReservationNo();
+			String sql ="UPDATE lodgment_information SET room_number = "+room+" where lodgment_number = "+num+" AND reservation_number ="+r.getReservationNo();
 			PreparedStatement state;
 			state =con.prepareStatement(sql);
 			state.executeUpdate();				
@@ -238,29 +240,54 @@ public class ReservationDao {
 		}
 	}
 	
-	public ArrayList<String> watchTime(Reservation r){
+	public String watchTimeAM(Reservation r){
+		System.out.println(r.getMealTime()+"timeAM");
 		int time = Integer.parseInt(r.getMealTime());
-		PlanDao pd = new PlanDao();
-		int meal = Integer.parseInt(pd.findPlan(r.getPlanNo()).getMealNo());
-		ArrayList<String> list = new ArrayList<String>();
 		
-		if(meal==0) {
-			return list;
-		}else if(meal>100) {
-			if(time>=30) {
-				
-			}else if(time>=20) {
-				
-			}else {
-				
-			}
-		}else if(meal<100) {
-			
+		time /= 10; 
+		
+		
+		
+		if(time==0) {
+			return "err1";
+		}else if(time==1) {
+			return "7:00";
+		}else if(time==2) {
+			return "7:30";
+		}else if(time==3) {
+			return "8:00";
 		}else {
-			
+			return "err2";
 		}
 	}
 	
+	public String watchTimePM(Reservation r){
+		int time = Integer.parseInt(r.getMealTime());
+		
+		time %= 10;
+		
+		if(time==0) {
+			return "err1";
+		}else if(time==1) {
+			return "17:30";
+		}else if(time==2) {
+			return "18:00";
+		}else if(time==3) {
+			return "18:30";
+		}else {
+			return "err2";
+		}
+	}
+	
+	public ArrayList<Integer> getAllergyCount(Reservation r){
+		ArrayList<LodgmentInformation> ary =findLodgment(r.getReservationNo());
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for(LodgmentInformation l:ary) {
+			list.add(l.getAllergyCount());
+		}
+		return list;
+	}
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 

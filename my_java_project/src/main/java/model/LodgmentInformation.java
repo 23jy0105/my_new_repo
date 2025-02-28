@@ -8,18 +8,20 @@ public class LodgmentInformation {
 	private int lodgmentCount;
 	private String roomNo;
 	private Timestamp checkOutTime;
+	private int allergyCount;
 	
 	public LodgmentInformation() {
 		
 	}
 	
 	public LodgmentInformation(String reservationNo, String lodgmentNo, int lodgmentCount, String roomNo,
-			Timestamp checkOutTime) {
+			Timestamp checkOutTime, int allergyCount) {
 		this.reservationNo = reservationNo;
 		this.lodgmentNo = lodgmentNo;
 		this.lodgmentCount = lodgmentCount;
 		this.roomNo = roomNo;
 		this.checkOutTime = checkOutTime;
+		this.allergyCount = allergyCount;
 	}
 
 	public String getReservationNo() {
@@ -62,6 +64,12 @@ public class LodgmentInformation {
 		this.checkOutTime = checkOutTime;
 	}
 	
-	
+	public int getAllergyCount() {
+		return allergyCount;
+	}
+
+	public void setAllergyCount(int allergyCount) {
+		this.allergyCount = allergyCount;
+	}
 	
 }
