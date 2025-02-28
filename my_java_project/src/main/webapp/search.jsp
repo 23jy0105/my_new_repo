@@ -210,8 +210,23 @@ document.addEventListener("DOMContentLoaded", function() {
             link.textContent = day;
             link.addEventListener("click", function(event) {
                 event.preventDefault();
+                const stayDays = document.getElementById("stay-days").value;
+                const people = document.getElementById("people-count").value;
+                const room = document.getElementById("room-count").value;
                 const selectedDate = `${year}-${month + 1}-${day}`;
-                window.location.href = `un02_1.html?date=${selectedDate}`;
+                fetch("Reserve1", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `stayDays=${stayDays}&people=${people}&room=${room}&date=${selectedDate}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data); // サーバーからのレスポンスをコンソールに表示
+                    window.location.href = "reserve1.jsp"; // 結果ページへ遷移
+                })
+                .catch(error => console.error("エラー:", error));
             });
 
             cell.appendChild(link);
