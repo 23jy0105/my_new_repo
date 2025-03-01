@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.LodgmentRoom;
 import model.Room;
 import model.RoomRemainingCount;
 import model.RoomType;
@@ -166,6 +167,30 @@ public class RoomDao {
 		return num;
 	}
 	
+	public ArrayList<LodgmentRoom> getLodgmentRoom(){
+		String sql = "select r.room_number,reservation_number,room_state,lodgment_number,lodgment_count from room r outer join left lodgment_information l on r.room_number = l.room_number order by room_number";
+		ArrayList<LodgmentRoom> ar = new ArrayList<LodgmentRoom>();
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				LodgmentRoom r = new LodgmentRoom(); 
+				 r.setRoomNo(rs.getString("room_number")); 
+				 r.setLodgmentNo(rs.getString("lodgment_number"));
+				 r.setState(rs.getString("room_state"));
+				 r.setReservationNo(rs.getString("reservation_number"));
+				 r.setLodgmrnyCount(rs.getInt("lodgment_count"));
+
+				 ar.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 

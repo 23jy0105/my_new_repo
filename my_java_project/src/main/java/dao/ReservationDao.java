@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import model.LodgmentInformation;
 import model.Reservation;
@@ -244,9 +245,10 @@ public class ReservationDao {
 		System.out.println(r.getMealTime()+"timeAM");
 		int time = Integer.parseInt(r.getMealTime());
 		
+		if(Objects.isNull(time)) {
+			return "なし";
+		}	
 		time /= 10; 
-		
-		
 		
 		if(time==0) {
 			return "err1";
@@ -264,6 +266,9 @@ public class ReservationDao {
 	public String watchTimePM(Reservation r){
 		int time = Integer.parseInt(r.getMealTime());
 		
+		if(Objects.isNull(time)) {
+			return "なし";
+		}
 		time %= 10;
 		
 		if(time==0) {
