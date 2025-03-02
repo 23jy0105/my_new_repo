@@ -104,4 +104,9 @@ ArrayList<LodgmentInformation> lodgment = (ArrayList<LodgmentInformation>) sessi
 		<h1>ごゆっくりお過ごしください。</h1>
 	</div>
 </body>
+<script>
+		setTimeout(function() {
+			window.location.href = "checkin.jsp"; // 10秒後に遷移
+		}, 10000);
+	</script>
 </html>

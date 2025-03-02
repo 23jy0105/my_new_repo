@@ -44,6 +44,19 @@
         .empty {
             background-color: #D3D3D3;
         }
+        
+        .cleaning
+        {
+			background-color: rgb(255, 128, 0);
+		}
+		.cleaned
+		{
+			background-color: rgb(0, 128, 255);
+		}
+		.notcleaned
+		{
+			background-color: rgb(255, 128, 128);
+		}
         .top-button {
             float: right;
             background-color: #ccc;

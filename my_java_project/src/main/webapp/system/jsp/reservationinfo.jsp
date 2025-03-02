@@ -1,5 +1,5 @@
 <%@page import="model.Reservation"%>
-<%@page import="model.LodgmentRoom"%>
+<%@page import="model.Plan"%>
 <%@page import="java.util.Objects"%>
 <%@page import= "java.text.ParseException"%>
 <%@page import= "java.text.SimpleDateFormat"%>
@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-Reservation r = (Reservation) session.getAttribute("reserve");
+Reservation r = (Reservation) session.getAttribute("result");
 
 Date date = r.getLodgmentStartDate();
 System.out.println("元の日付: " + currentDate);
@@ -143,40 +143,103 @@ h1 {
 </style>
 <body>
     <div class="container">
-        <button class="back-button" onclick="location.href='../../GetLodgment'">戻る</button>
-        <h1>宿泊情報</h1>
+        <button class="back-button" onclick="location.href='sarchreservation'">戻る</button>
+        <h1>予約情報</h1>
         <div class="info">
             <p><strong>予約番号：</strong><%= r.getReservationNo() %></p>
             <p><strong>ステータス：</strong><span class="status" id="output"></span></p>
+            <p><strong>予約プラン：</strong><%= request.getAttribute("planname") %></p>
             <p><strong>宿泊期間：</strong><%= date %>~<%= endDate %></p>
             <p><strong>氏名：</strong><%= r.getCustomerName() %>(<%= r.getCustomerNameKana() %>)</p>
-            <p><strong>宿泊人数：</strong><%= request.getAttribute("lodgroom").getLodgmentCount() %></p>
-            <p><strong>食事時間:</strong>朝食<%= request.getAttribute("am") %>夕食<%=request.getAttribute("pm") %></p>
-            <p><strong>アレルギー：</strong><% if(Objects.nonNull(request.getAttribute("count"))){out.print(request.getAttribute("count")+"人")}else{なし} %></p>
+            <p><strong>電話番号：</strong><%= r.getPhoneNumber() %></p>
+            <p><strong>郵便番号:</strong><%=r.getPostalCode() %></p>
+            <p><strong>住所：</strong><%= r.getAddress()%></p>
         </div>
-        <!--<button class="cancel-button">予約をキャンセルする</button>-->
+        
+        <%if("0".equals(r.getReservationState())||"3".equals(r.getReservationState())){
+        	
+        	%><button class="cancel-button">予約をキャンセルする</button><%
+        } %>
+        
+    </div>
+    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="output2"></h1>
+            <h3>この操作により、この予約は<span id="output3"></span>に変更されます。</h3>
+            <button class="back-button" style="margin: 0px 30px;" onclick="closeModal()">戻る</button>
+            <button class="cancel-button" onclick="location.href='ReservationCancel?state=<%=Integer.parseInt(r.getReservationState())%>'">キャンセルする</button>
+            
+        </div>
     </div>
 </body>
 <script>
         function updateDisplay() {
-            const output = document.getElementById("output");
-			const value = <%=Integer.parseInt(request.getAttribute("lodgroom").getState())%>;
+        	const output = document.getElementById("output");
+        	const output2 = document.getElementById("output2");
+        	const output3 = document.getElementById("output3");
+			const value = <%=Integer.parseInt(r.getReservationState())%>;
+
             switch (value) {
+                case 0:
+                    output.innerHTML = "予約済み";
+                    output.style.color = "green";
+                    output2.innerHTML = "予約をキャンセルしますか?";
+                    output3.innerHTML = "キャンセル(未払い)";
+                    output3.style.color = "color: #d9534f";
+                    break;
                 case 1:
                     output.innerHTML = "チェックイン済み";
-                    output.style.color = "green";
+                    output.style.color = "orange";
                     break;
                 case 2:
                     output.innerHTML = "チェックアウト済み";
-                    output.style.color = "red";
+                    output.style.color = "rgb(0, 174, 255)";
                     break;
-                
+                case 3:
+                    output.innerHTML = "キャンセル(未払い)";
+                    output.style.color = "color: #d9534f";
+                    output2.innerHTML = "支払いを取り消しますか?"
+                    output3.innerHTML = "キャンセル(支払済み)";
+                    output3.style.color = "rgb(116, 116, 116)";
+                    break;
+                case 4:
+                    output.innerHTML = "キャンセル(支払済み)";
+                    output.style.color = "rgb(116, 116, 116)";
+                    break;
                 default:
                     output.innerHTML = "不明";
                     output.style.color = "black";
                     output.style.backgroundColor = "gray";
                     break;
             }
+        }
+
+
+        const modal = document.getElementById("myModal");
+        const closeButton = document.getElementsByClassName("close")[0];
+        const detailsButtons = document.querySelectorAll("#cancel-button");
+
+        detailsButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                modal.style.display = "block";
+            });
+        });
+
+        // 閉じるボタンをクリックしたときにモーダルを閉じる
+        closeButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // モーダル外の部分をクリックするとモーダルを閉じる
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+        function closeModal(){
+            modal.style.display = "none";
         }
     </script>
 </html>

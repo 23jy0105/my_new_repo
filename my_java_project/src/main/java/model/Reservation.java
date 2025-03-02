@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Reservation {
 	private String reservationNo;
@@ -195,6 +196,29 @@ public class Reservation {
 		this.mealTime = mealTime;
 	}
 	
-	
+	public int getReservationState() {
+		
+		if(Objects.nonNull(checkInTime)&&Objects.nonNull(paymentTime)) {
+			return 2;
+		}else if(Objects.nonNull(cancelDate)&&Objects.nonNull(paymentTime)) {
+			return 4;
+		}else if(Objects.nonNull(cancelDate)&&Objects.isNull(paymentTime)) {
+			return 3;
+		}else if(Objects.nonNull(checkInTime)&&Objects.isNull(paymentTime)) {
+			return 1;
+		}else if(Objects.isNull(checkInTime)&&Objects.isNull(paymentTime)) {
+			return 0;
+		}else {
+			return -1;
+		}
+		/*
+		 0:予約済み
+		 1:チェックイン済み
+		 2:支払済み
+		 3:キャンセル未払い
+		 4:キャンセル支払い済み
+		 -1:エラー
+		  */
+	}
 
 }

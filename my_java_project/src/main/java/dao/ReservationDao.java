@@ -78,6 +78,44 @@ public class ReservationDao {
 		return ar;
 	}
 	
+	
+	public ArrayList<Reservation> findReservationbyPhone(String input) {
+		ArrayList<Reservation> ar = new ArrayList<>();
+		String sql = "select * from Reservation where phone_number = "+input;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 Reservation r = new Reservation(); 
+				 
+				 r.setReservationNo(rs.getString("reservation_number"));
+				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentDays(rs.getInt("lodgment_days"));
+				 r.setPaymentTime(rs.getTimestamp("payment_time"));
+				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
+				 r.setReservationDate(rs.getTimestamp("reservation_date"));
+				 r.setPlanNo(rs.getString("plan_number"));
+				 r.setCancelDate(rs.getTimestamp("cancel_date"));
+				 r.setCheckInTime(rs.getTimestamp("check_in_time"));
+				 r.setCustomerName(rs.getString("customer_name"));
+				 r.setCustomerNameKana(rs.getString("customer_name_kana"));
+				 r.setEmailAddress(rs.getString("email_address"));
+				 r.setPhoneNumber(rs.getString("phone_number"));
+				 r.setAddress(rs.getString("address"));
+				 r.setPostalCode(rs.getString("postal_code"));
+				 r.setPassword(rs.getString("password"));
+				 r.setMealTime(rs.getString("meal_time")); 
+
+				 ar.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
 	public ArrayList<LodgmentInformation> findAllLodgment() {
 		ArrayList<LodgmentInformation> ar = new ArrayList<>();
 		String sql = "select * from lodgment_infomation";
@@ -293,6 +331,11 @@ public class ReservationDao {
 		}
 		return list;
 	}
+	
+	public boolean setReservationState(String state) {
+		
+	}
+	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 
