@@ -2,7 +2,9 @@ package page;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,8 +30,11 @@ public class SearchResult extends HttpServlet {
 
 		 int day = Integer.parseInt(request.getParameter("stay-days"));
    	     int people = Integer.parseInt(request.getParameter("people-count"));
-
+   	     int room = Integer.parseInt(request.getParameter("room-count"));
 	     Date date = null;
+	     Calendar calendar = Calendar.getInstance();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     String nowDate = sdf.format(calendar.getTime());
 	     String dateStr = request.getParameter("date-picker");
 				
 		 if (dateStr != null && !dateStr.isEmpty()) {
@@ -39,21 +44,33 @@ public class SearchResult extends HttpServlet {
 				 System.out.println("エラー２: 日付変換に失敗");
 			}
 		}
-		PlanDao dao = new PlanDao();
-		ArrayList<Plan> plans = dao.searchPlan(day,people,date);
-				Set<String> seenKeys = new HashSet<>();    
-				ArrayList<Plan> uniquePlans = new ArrayList<>();
-				if (plans != null) {
-			for (Plan plan : plans) {
-				       if (!seenKeys.contains(plan.getPlanNo())) {  // 重複しない場合
-				           seenKeys.add(plan.getPlanNo());  // 重複を防ぐ
-				           uniquePlans.add(plan);  // uniqueなplanを追加
-					   }
+			PlanDao dao = new PlanDao();
+			ArrayList<Plan> plans = null;
+
+			// 日付が指定されている場合と指定されていない場合の処理
+			if (date != null) {
+				plans = dao.searchPlan(day, people, room, date, nowDate);
+			} else {
+				plans = dao.searchPlan(day, people, room, nowDate);
+			}
+
+			// 重複を取り除くための処理
+			Set<String> seenKeys = new HashSet<>();
+			ArrayList<Plan> uniquePlans = new ArrayList<>();
+			if (plans != null) {
+				for (Plan plan : plans) {
+					if (!seenKeys.contains(plan.getPlanNo())) {  // 重複しない場合
+						seenKeys.add(plan.getPlanNo());  // 重複を防ぐ
+						uniquePlans.add(plan);  // uniqueなplanを追加
 					}
 				}
-		request.setAttribute("plans", plans);
-		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
-		rd.forward(request, response);
+			}
 
+			// リクエストにユニークなプランを設定
+			request.setAttribute("plans", uniquePlans);
+
+			// JSPにフォワード
+			RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
+			rd.forward(request, response);
+		}
 	}
-}

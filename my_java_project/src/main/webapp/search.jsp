@@ -110,7 +110,7 @@
                 </div>
                 <div class="detail-button">
                     <button class="details-button" data-name="<%= p.getPlanName() %>" data-fee="<%= p.getFee() %>" data-description="<%= p.getPlanDescription().replaceAll("\"", "&quot;").replaceAll("\n", " ") %>">詳細</button>
-                    <button class="reserve-button">予約</button>
+                    <button class="reserve-button"data-plan="<%=p.getPlanNo()%>">予約</button>
                 </div>
             </div>
             <%
@@ -180,6 +180,17 @@ document.addEventListener("DOMContentLoaded", function() {
     reserveButtons.forEach(button => {
         button.addEventListener("click", () => {
             document.getElementById("calendar-container").style.display = "block";
+            let planNum = button.getAttribute("data-plan");
+            let hiddenInput = document.getElementById("planNumInput");
+            if (!hiddenInput) {
+                // もしhiddenフィールドがまだ存在しない場合は作成する
+                hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.id = "planNumInput"; // idを指定
+                hiddenInput.name = "planNum"; // フォームでの名前
+                document.body.appendChild(hiddenInput);
+            }
+            hiddenInput.value = planNum;
         });
     });
 
@@ -215,6 +226,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 const people = document.getElementById("people-count").value;
                 const room = document.getElementById("room-count").value;
                 const selectedDate ="`"+year+"-"+(month+1)+"-"+day+"`";
+                const planNum =document.getElementById("planNumInput").value;
+				
 
                 // フォームを作成してPOSTリクエストを送信
                 const form = document.createElement("form");
@@ -245,6 +258,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 inputDate.name = "date";
                 inputDate.value = selectedDate;
                 form.appendChild(inputDate);
+
+                const inputPlanNum = document.createElement("input");
+                inputPlanNum.type = "hidden";
+                inputPlanNum.name = "planNum";
+                inputPlanNum.value = planNum;
+                form.appendChild(inputPlanNum); 
 
                 // フォームを送信
                 document.body.appendChild(form);

@@ -5,16 +5,18 @@ public class ReservationInfo implements java.io.Serializable{
 	private int people;
 	private int room;
 	private String startDate;
+	private String planNum;
 	
 	public ReservationInfo() {
 		
 	}
 
-	public ReservationInfo(int stayDays, int people, int room, String startDate) {
+	public ReservationInfo(int stayDays, int people, int room, String startDate,String planNum) {
 		this.stayDays = stayDays;
 		this.people = people;
 		this.room = room;
 		this.startDate = startDate;
+		this.planNum = planNum;
 	}
 
 	public int getStayDays() {
@@ -49,5 +51,12 @@ public class ReservationInfo implements java.io.Serializable{
 		this.startDate = startDate;
 	}
 	
+	public String getPlanNum() {
+		return planNum;
+	}
+	public void setPlanNum(String planNum) {
+		this.planNum = planNum;
+		
+	}
 	
 }

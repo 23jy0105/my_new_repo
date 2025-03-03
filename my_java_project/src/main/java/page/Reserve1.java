@@ -25,15 +25,18 @@ public class Reserve1 extends HttpServlet {
 					int people=0;
 					int room =0;
 					String date ="";
+					String planNum ="";
 					stayDays = Integer.parseInt(request.getParameter("stayDays"));
 					people = Integer.parseInt(request.getParameter("people"));
 					room = Integer.parseInt(request.getParameter("room"));
 					date = request.getParameter("date");
+					planNum =request.getParameter("planNum");
 					ReservationInfo info =new ReservationInfo();
 								info.setStayDays(stayDays);
 								info.setPeople(people);
 								info.setRoom(room);
 								info.setStartDate(date);
+								info.setPlanNum(planNum);
 								HttpSession session = request.getSession();
 								session.setAttribute("info",info);
 								RequestDispatcher rd = request.getRequestDispatcher("reserve1.jsp");

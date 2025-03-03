@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.ArrayList" %>
+    <%ArrayList<String> info = (ArrayList<String>)session.getAttribute("info"); %>
+    <%ArrauList<Plan> plan =(ArrayList<Plan>)session.getAttribute("plan");%>
     
 <!DOCTYPE html>
 <html>
@@ -32,66 +35,66 @@
         <form action="Reserve3" method="post">
             <div class="form-group">
                 <label>姓</label>
-                <p id="confirm-last-name"></p>
+                <p id="confirm-last-name"><%=info.get(0) %></p>
             </div>
             <div class="form-group">
                 <label>名</label>
-                <p id="confirm-first-name"></p>
+                <p id="confirm-first-name"><%=info.get(1) %></p>
             </div>
             <div class="form-group">
                 <label>せい</label>
-                <p id="confirm-last-kana"></p>
+                <p id="confirm-last-kana"><%=info.get(2) %></p>
             </div>
             <div class="form-group">
                 <label>めい</label>
-                <p id="confirm-first-kana"></p>
+                <p id="confirm-first-kana"><%=info.get(3) %></p>
             </div>
             <div class="form-group">
                 <label>メールアドレス</label>
-                <p id="confirm-email"></p>
+                <p id="confirm-email"><%=info.get(4) %></p>
             </div>
             <div class="form-group">
                 <label>郵便番号</label>
-                <p id="confirm-postal-code"></p>
+                <p id="confirm-postal-code"><%=info.get(5) %></p>
             </div>
             <div class="form-group">
                 <label>都道府県</label>
-                <p id="confirm-prefecture"></p>
+                <p id="confirm-prefecture"><%=info.get(6) %></p>
             </div>
             <div class="form-group">
                 <label>電話番号</label>
-                <p id="confirm-phone"></p>
+                <p id="confirm-phone"><%=info.get(7) %></p>
             </div>
             <div class="form-group">
                 <label>住所</label>
-                <p id="confirm-address"></p>
+                <p id="confirm-address"><%=info.get(8) %></p>
             </div>
             <div class="form-group">
                 <label>建物名</label>
-                <p id="confirm-building"></p>
+                <p id="confirm-building"><%=info.get(9) %></p>
             </div>
 
             <div class="form-group">
                 <label>予約者情報</label>
-                <div id="confirm-extra-fields"></div>
+                <div id="confirm-extra-fields"><%=info.get(10) %></div>
             </div>
             <div  class="form-group">
                 <label>人数</label>
-                <div id="confirm-people"></div>
+                <div id="confirm-people"><%=info.get(11) %></div>
             </div>
             <div class="form-group">
                 <label>部屋数</label>
-                <div id="confirm-room"></div>
+                <div id="confirm-room"><%=info.get(12) %></div>
             </div>
             <div class="form-group">
                 <label>アレルギー人数</label>
-                <div id="confirm-allergy"></div>
+                <div id="confirm-allergy"><%=info.get(13) %></div>
             </div>
             <div class="fee-group">
                 <h2>プラン名</h2>
-                <p>基本プラン</p>
+                <p><%=plan.getPlanName() %></p>
                 <h2>料金</h2>
-                <p>19,896円</p>
+                <p><%=plan.getPlanFee() %>円</p>
             </div>
             <div class="button-container">
                 <button type="button" id="edit">修正する</button>

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.PlanDao;
+import model.Plan;
+
 @WebServlet("/Reserve2")
 public class Reserve2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -28,12 +31,10 @@ public class Reserve2 extends HttpServlet {
         String address = request.getParameter("address");
         String building = request.getParameter("building");
         String allergy = request.getParameter("allergy");
-		/*        String reserverLastName = request.getParameter("reserverLastName");
-		String reserverFirstName = request.getParameter("reserverFirstName");
-		String reserverLastKana = request.getParameter("reserverLastKana");
-		String reserverFirstKana = request.getParameter("reserverFirstKana");
-		String reserverEmail = request.getParameter("reserverEmail");
-		String reserverPhone = request.getParameter("reserverPhone");*/
+        String people = request.getParameter("people");
+        String room = request.getParameter("room");
+        String planNum = request.getParameter("planNum");
+        String date = request.getParameter("date");
         ArrayList<String> info = new ArrayList<>();
         info.add(lastName);
         info.add(firstName);
@@ -46,14 +47,15 @@ public class Reserve2 extends HttpServlet {
         info.add(address);
         info.add(building);
         info.add(allergy);
-		/*        info.add(reserverLastName);
-		info.add(reserverFirstName);
-		info.add(reserverLastKana);
-		info.add(reserverFirstKana);
-		info.add(reserverEmail);
-		info.add(reserverPhone);*/
+        info.add(people);
+        info.add(room);
+        info.add(date);
 		HttpSession session = request.getSession();
 		session.setAttribute("info",info);
+		PlanDao dao = new PlanDao();
+		ArrayList<Plan> plan = null;
+		plan = dao.searchPlan(planNum);
+		session.setAttribute("plan",plan);
         RequestDispatcher rd = request.getRequestDispatcher("reserve2.jsp");
         rd.forward(request, response);
     }

@@ -2,10 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.ReservationInfo" %>
 <% ReservationInfo info =(ReservationInfo) session.getAttribute("info"); 
-	int staydays = info.getStayDays();
-	int people = info.getPeople();
-	int room = info.getRoom();
+if (info != null) {
+    int staydays = info.getStayDays();
+    int people = info.getPeople();
+    int room = info.getRoom();
+    String planNum = info.getPlanNum();
     String date = info.getStartDate();
+} 
 %>
 <!DOCTYPE html>
 <html>
@@ -208,6 +211,11 @@
         const address = document.getElementById('address').value;
         const building = document.getElementById('building').value;
         const allergy = document.getElementById('allergy').value;
+        const staydays = staydays;
+        const people = people;
+        const room = room;
+        const planNum = planNum;
+        const date = date;
         //姓名どちらも
 /*       if (!lastName.value) {
             valid = false;
@@ -234,14 +242,6 @@
 			}
 
         });
-        let staydays = <%= staydays%>;
-        let people =<%= people%>;
-        let room =<%= room%>;
-        let date = '<%= date%>';
-        console.log(staydays);
-        console.log(people);
-        console.log(room);
-        console.log(date);
     </script>
 </body>
 </html>
