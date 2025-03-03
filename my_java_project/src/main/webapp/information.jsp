@@ -1,13 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Announcement" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="javax.servlet.http.HttpSession"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご予約確認ページ</title>
+    <title>インフォメーション</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/Login.css">
+    <link rel="stylesheet" href="./css/information.css">
 </head>
 <body class="background">
     <header class="header">
@@ -33,41 +37,45 @@
             </nav>
         </div>
     </header>
-    <main>
-    	
-        <div class="center-body">
-        <div class="container-block" style="margin-top: 20px;">
-        <h1 style="margin-top: 20px;">ご予約確認</h1>
-        <h3>該当する予約番号とパスワードを入力してください。</h3>
-        <div style="padding: 10px;">
-        <p id="loginFailure"><%String failureMessage = (String)request.getAttribute("loginFailure"); %>
-    	<% if (failureMessage != null) {%>
-    	<%=failureMessage %>
-		<%} %>
-        <form action="Login" method="post">
-            <label>予約番号:</label>
-        <input type="text" id="input-box"name="reservation-number" value="">
+    <div class="center-body" style="display: inline-block; margin: 0 3%;">
+        <br>
+        <h1>お知らせ</h1>
+
+        <div class="container1">
+            <%
+                ArrayList<Announcement> announcements = (ArrayList<Announcement>) request.getAttribute("announcements");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                if (announcements != null && !announcements.isEmpty()) {
+                    for (Announcement a : announcements) {
+            %>
+            <div class="item">
+                <p>
+                    <% if (a.getAnnouncementImage() != null && !a.getAnnouncementImage().isEmpty()) { %>
+                        <img src="<%= a.getAnnouncementImage() %>" width="200px" height="200px">
+                    <% } else { %>
+                        <img src="./img/no-image.png" width="200px" height="200px">
+                    <% } %>
+                </p>
+                <h2><%= a.getTitle() %></h2>
+                <%request.getSession();
+        		session.setAttribute("a", a); %>
+                <p>更新日 <%= dateFormat.format(a.getDate()) %></p>
+                <p><a href="informationDetail.jsp">詳細</a></p>
+            </div>
+            <%
+                    }
+                } else {
+            %>
+            <p>お知らせはありません。</p>
+            <%
+                }
+            %>
         </div>
-        
-		
-        <label>パスワード:</label>
-        <input type="password" id="input-box" name="password" value="" style="width: 278px;">
-        <br>
-        <br>
-         <input class="button" type="submit" value="ログイン">
-        <br>
-        </form>
-        <div style="padding-top: 80px; text-align: left;">
-        <a href="./mail_re_send.jsp">予約番号またはパスワードをお忘れの方></a>
     </div>
-    </div>
-</div>
-    
-    </main>
+
     <footer>
         <div class="foot">
             <div style="grid-column: 2/3; margin-top: 30px;">
-
                 <h2><u>千景</u></h2>
                 <br>
                 <p>JR小田原駅から箱根登山線乗り換え<br>小涌谷駅から徒歩10分</p><br>

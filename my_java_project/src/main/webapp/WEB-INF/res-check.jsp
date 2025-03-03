@@ -7,7 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ご予約確認ページ</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/Login.css">
+    <style>
+        main{
+            font-size:1.3em;
+            text-align: center;
+
+
+        }
+       
+        .item {
+            width: 30%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .item h2 {
+            color: #4CAF50;
+        }
+        .item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        #map{
+            height:500px;width:500px;
+            align-items: center;
+        }
+    </style>
 </head>
 <body class="background">
     <header class="header">
@@ -20,45 +48,38 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="topmain.jsp">ホーム</a></li>
-                    <li><a href="Search">宿泊予約</a></li>
-                    <li><a href="room.jsp">客室</a></li>
-                    <li><a href="Meal.jsp">お食事</a></li>
-                    <li><a href="spa.jsp">温泉</a></li>
-                    <li><a href="access.jsp">アクセス</a></li>
-                    <li><a href="QAndA.jsp">Q&A</a></li>
-                    <li><a href="Information">お知らせ</a></li>
-                    <li><a href="Login.jsp">ご予約確認</a></li>
+                    <li><a href="./index.html">ホーム</a></li>
+                    <li><a href="./un01_1.html">宿泊予約</a></li>
+                    <li><a href="./room.html">客室</a></li>
+                    <li><a href="./meal.html">お食事</a></li>
+                    <li><a href="./spa.html">温泉</a></li>
+                    <li><a href="./access.html">アクセス</a></li>
+                    <li><a href="./Q&A.html">Q&A</a></li>
+                    <li><a href="./infomation.html">お知らせ</a></li>
+                    <li><a href="./ur02_1.html">ご予約確認</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
-    	
         <div class="center-body">
         <div class="container-block" style="margin-top: 20px;">
         <h1 style="margin-top: 20px;">ご予約確認</h1>
         <h3>該当する予約番号とパスワードを入力してください。</h3>
         <div style="padding: 10px;">
-        <p id="loginFailure"><%String failureMessage = (String)request.getAttribute("loginFailure"); %>
-    	<% if (failureMessage != null) {%>
-    	<%=failureMessage %>
-		<%} %>
-        <form action="Login" method="post">
             <label>予約番号:</label>
         <input type="text" id="input-box"name="reservation-number" value="">
         </div>
         
-		
+
         <label>パスワード:</label>
-        <input type="password" id="input-box" name="password" value="" style="width: 278px;">
+        <input type="text" id="input-box" name="password" value="" style="width: 278px;">
         <br>
         <br>
-         <input class="button" type="submit" value="ログイン">
+        <button class="button" onclick="location.href='./ur02_3.html'" style="width: 200px;">確認</button>
         <br>
-        </form>
         <div style="padding-top: 80px; text-align: left;">
-        <a href="./mail_re_send.jsp">予約番号またはパスワードをお忘れの方></a>
+        <a href="./err/ur02_2_E1.html">予約番号またはパスワードをお忘れの方></a>
     </div>
     </div>
 </div>

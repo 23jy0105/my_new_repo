@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 	                request.setAttribute("userid", res.getString("reservation_number"));
 
 	                // ログイン成功画面に遷移する
-	                path = "res-check.jsp";
+	                path = "cus_info.jsp";
 	            } else {
 	                // ログイン失敗の文言を追加する
 	                request.setAttribute("loginFailure", "ログインに失敗しました");
