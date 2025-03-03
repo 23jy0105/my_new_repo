@@ -89,6 +89,31 @@ public class PlanDao {
 		}
 		return ar;
 	}
+	
+	public Plan findPlanByPlanNo(String No) {
+		Plan p = new Plan();
+		String sql = "select * from Plan where plan_number = "+No;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 p.setPlanNo(rs.getString("plan_number")); 
+				 p.setPlanName(rs.getString("plan_name")); 
+				 p.setRoomTypeNo(rs.getString("room_type_number")); 
+				 p.setMealNo(rs.getString("meal_number"));
+				 p.setFee(rs.getInt("plan_fee"));
+				 p.setPlanImage(rs.getString("plan_image"));
+				 p.setPlanOverview(rs.getString("plan_overview"));
+				 p.setPlanDescription(rs.getString("plan_description"));
+				 p.setStartTime(rs.getTimestamp("plan_start_date"));
+				 p.setEndTime(rs.getTimestamp("plan_end_date"));
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return p;
+	}
 	public ArrayList<Plan> searchPlan() {
 		ArrayList<Plan> ar = new ArrayList<>();
 		String sql = "SELECT \r\n"
@@ -143,6 +168,8 @@ public class PlanDao {
 		}
 		return ar;
 	}
+
+	
 	
 //	public Meal findMealById(int id) { 
 //		 Meal ml = new Meal(); 

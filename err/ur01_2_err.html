@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約キャンセル</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        
+        
+        h2 {
+            font-size: 50px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            
+        }
+        
+        .modal-body {
+            margin-top: 10px;
+        }
+        .container1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">千景</h1>
+            <nav class="nav">
+                <button class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="./uwReserve_01_01.html">ホーム</a></li>
+                    <li><a href="./uwReserve_05.html">宿泊予約</a></li>
+                    <li><a href="./uwReserve_24.html">客室</a></li>
+                    <li><a href="./uwReserve_29.html">お食事</a></li>
+                    <li><a href="./uwReserve_28.html">温泉</a></li>
+                    <li><a href="./uwReserve_27.html">アクセス</a></li>
+                    <li><a href="./uwReserve_30.html">Q&A</a></li>
+                    <li><a href="./uwReserve_25.html">お知らせ</a></li>
+                    <li><a href="./uwReserve_34.html">ご予約確認</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="center-body" style="margin-top: 70px;">
+        <h2>この予約はキャンセル済みです。</h2>
+        <p></p>
+    </div>
+    <br>
+    <div class="button-container">
+        <button class="button" onclick="location.href='./../index.html'">トップに戻る</button>
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById("cancelModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("cancelModal").style.display = "none";
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    });
+    </script>
+</body>
+</html>
