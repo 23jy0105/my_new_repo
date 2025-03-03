@@ -225,6 +225,33 @@ public class ReservationDao {
 		}
 	}
 	
+	public void setCancelDate(Reservation r) {
+		System.out.println(r.getCancelDate());
+		String sql = "update reservation set cancel_date = NOW() where reservation_number = "+r.getReservationNo();
+		
+		
+		try {
+			PreparedStatement state;
+			state =con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPaymentTime(Reservation r) {
+		System.out.println(r.getPaymentTime());
+		String sql = "update reservation set payment_time = NOW() where reservation_number = "+r.getReservationNo();
+		
+		
+		try {
+			PreparedStatement state;
+			state =con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public void setLodgment(Reservation r,String room,int num) {
 		try {
 			

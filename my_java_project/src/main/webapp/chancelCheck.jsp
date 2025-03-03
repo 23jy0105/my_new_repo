@@ -7,53 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約キャンセル</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h2 {
-            font-size: 50px;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-            
-        }
-        .top-button {
-            background-color: #ccc;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: not-allowed;
-        }
-        .modal-body {
-            margin-top: 10px;
-        }
-        .container1 {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-            height: 100vh;
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-        }
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 2px;
-        }
-    </style>
+ 	<link rel="stylesheet" href="./css/cancelCheck.css">
 </head>
 <body>
     <header class="header">
@@ -81,9 +35,10 @@
     </header>
     <div class="container">
         <h2>予約をキャンセルしました</h2>
+        <h2>メールをご確認ください</h2>
     </div>
     <div class="button-container">
-        <button class="top-button">トップに戻る</button>
+        <button class="top-button" onclick="location.href='./Login.jsp'">ログインに戻る</button>
     </div>
     <script>
         function openModal() {

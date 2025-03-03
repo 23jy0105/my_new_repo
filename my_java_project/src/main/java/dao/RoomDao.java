@@ -4,8 +4,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import model.Reservation;
 import model.Room;
 import model.RoomRemainingCount;
 import model.RoomType;
@@ -135,7 +138,6 @@ public class RoomDao {
 		}
 		return ar;
 	}
-	
 	public String setRoomState(String num) {
 		System.out.println(num);
 		String sql = "select * from room where room_state = 0 AND room_number = "+num;
@@ -164,6 +166,34 @@ public class RoomDao {
 			e.printStackTrace();
 		}
 		return num;
+	}
+	
+	public void setRoomCountNumber(boolean bool,Reservation r) {
+		
+		String num = null;
+		
+		if(bool) {
+			num = "+"+String.valueOf(r.getTotalReservationRoom());
+		}else {
+			num = "-"+String.valueOf(r.getTotalReservationRoom());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(r.getLodgmentStartDate());
+		PlanDao pd = new PlanDao();
+		cal.add(Calendar.DATE,1);
+		String roomtype = pd.findPlan(r.getPlanNo()).getRoomTypeNo();
+		System.out.println(r.getLodgmentStartDate()+sdf.format(cal.getTime()));
+		String sql ="UPDATE room_remaining_count SET reserved_room_number = reserved_room_number "+num+" where date between '"+r.getLodgmentStartDate()+"' and '"+sdf.format(cal.getTime())+"' and room_type_number = "+roomtype;
+		try {
+			System.out.println("ok");
+			PreparedStatement state = con.prepareStatement(sql);
+			state =con.prepareStatement(sql);
+			state.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 //	public Room findRoomById(int id) { 

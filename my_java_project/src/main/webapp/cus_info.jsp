@@ -7,11 +7,33 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
+<%@page import="java.util.Objects"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList" %>
+<%@page import="com.google.zxing.BarcodeFormat"%>
+<%@page import="com.google.zxing.EncodeHintType"%>
+<%@page import="com.google.zxing.WriterException"%>
+<%@page import="com.google.zxing.MultiFormatWriter"%>
+<%@page import="com.google.zxing.client.j2se.MatrixToImageWriter"%>
+<%@page import="com.google.zxing.common.BitMatrix"%>
+<%@page import="com.google.zxing.qrcode.QRCodeWriter" %>
+<%@page import="com.google.zxing.qrcode.decoder.ErrorCorrectionLevel"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="java.io.File"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.concurrent.ConcurrentHashMap"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="javax.servlet.RequestDispatcher"%>
+<%@page import="javax.servlet.ServletException" %>
+<%@page import="javax.servlet.annotation.WebServlet" %>
+<%@page import="javax.servlet.http.HttpServlet" %>
+<%@page import="javax.servlet.http.HttpServletRequest" %>
+<%@page import="javax.servlet.http.HttpServletResponse" %>
+<%@page import="java.io.OutputStream" %>
 
 <%Reservation reserve = (Reservation)session.getAttribute("reserve"); %>
+<%//BitMatrix bitMatrix = (BitMatrix)request.getAttribute("qrcode");%> 
    <% PlanDao dao2  = new PlanDao(); %>
    <% ReservationDao dao  = new ReservationDao(); %>
 <% 	int lodgCount=0;
@@ -19,6 +41,7 @@
 	for(LodgmentInformation lodg:list){
 		lodgCount =+ lodg.getLodgmentCount();
 	}
+
 %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -29,34 +52,7 @@
     <title>ご予約確認ページ</title>
     <link rel="stylesheet" href="./css/styles.css" >
     <link rel="stylesheet" href="./css/modal.css">
-    <style>
-        main{
-            font-size:1.3em;
-            
-
-
-        }
-        
-        .item {
-            width: 30%;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-        }
-        .item h2 {
-            color: #4CAF50;
-        }
-        .item p {
-            font-size: 1.1em;
-            color: #555;
-        }
-        #map{
-            height:500px;width:500px;
-            align-items: center;
-        }
+	<link rel="stylesheet" href="./css/cus_info"
     </style>
 </head>
 <body class="background">
@@ -120,30 +116,37 @@
     <div class="container-block" style="vertical-align: top; margin-top: 0;">
         <p>チェックイン用QRコード</p>
         <br>
-        <img src="./img/qrcode.png" alt="qrcode" height="250px">
+        <img src="./GenerateQRServlet?data=<%=reserve.getReservationNo() %>" alt="qr">
+        <%//QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        //BitMatrix bitMatrix = qrCodeWriter.encode(reserve.getReservationNo(), BarcodeFormat.QR_CODE, 300, 300);
+        //OutputStream outputStream = response.getOutputStream();
+        //MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
+        //outputStream.close();%>
     </div>
     <div class="container-block" style="margin-top: 0; padding: 30px 50px;">
         <h2 style="margin-bottom: 20px; text-align: left;">お客様情報</h2>
         <div style="text-align: left;">
             <div style="float: left;">
             <label>姓:</label>
-            <strong style="margin-right: 100px;">田中</strong>
+            <%String[] sei=reserve.getCustomerName().split(" ");
+            String[] mei=reserve.getCustomerNameKana().split(" ");%>
+            <strong style="margin-right: 100px;"><%=sei[0] %></strong>
             <br>
             <label>せい:</label>
-            <strong style="margin-right: 100px;">たなか</strong>
+            <strong style="margin-right: 100px;"><%=mei[0] %></strong>
             </div>
             <div>
             <label>名:</label>
-            <strong>太郎</strong>
+            <strong><%=sei[1] %></strong>
             <br>
             <label>めい:</label>
-            <strong>たろう</strong>
+            <strong><%=mei[1] %></strong>
         </div>
         <br>
         <label>登録メールアドレス:</label>
-        <strong>tanaka123@gmail.com</strong>
+        <strong><%=reserve.getEmailAddress() %></strong>
         </div>
-        <button class="button" onclick="location.href='./ur01_1.html'"  style="width: 300px; margin-top: 50px;">予約をキャンセルする</button>
+        <button class="button"  style="width: 300px; margin-top: 50px;" onclick="location.href='./Reserve_cancel.jsp'">予約をキャンセルする</button>
 </div>
     </div>
     <div id="myModal" class="modal">

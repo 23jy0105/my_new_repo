@@ -32,7 +32,14 @@ public class Login extends HttpServlet {
 	    String path = "";
 	    reserve = dao.findReservationbyPass(userId,password);
 	   
-	        
+	    //QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        //try {
+            //BitMatrix bitMatrix = qrCodeWriter.encode(userId, BarcodeFormat.QR_CODE, 300, 300);
+            //response.setContentType("image/png");
+            //request.setAttribute("qrcode",bitMatrix);
+        //} catch (WriterException e) {
+            //e.printStackTrace();
+        //}
 	            	HttpSession session = request.getSession();
 	            	session.setAttribute("reserve", reserve);
 	            	

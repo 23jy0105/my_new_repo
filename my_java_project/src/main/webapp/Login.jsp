@@ -20,15 +20,15 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="./index.html">ホーム</a></li>
-                    <li><a href="./un01_1.html">宿泊予約</a></li>
+                    <li><a href="./toppageheader">ホーム</a></li>
+                    <li><a href="./search.jsp">宿泊予約</a></li>
                     <li><a href="./room.html">客室</a></li>
-                    <li><a href="./meal.html">お食事</a></li>
+                    <li><a href="./Meal.jsp">お食事</a></li>
                     <li><a href="./spa.html">温泉</a></li>
                     <li><a href="./access.html">アクセス</a></li>
-                    <li><a href="./Q&A.html">Q&A</a></li>
+                    <li><a href="QAndA.jsp">Q&A</a></li>
                     <li><a href="./infomation.html">お知らせ</a></li>
-                    <li><a href="./ur02_1.html">ご予約確認</a></li>
+                    <li><a href="./Login.jsp">ご予約確認</a></li>
                 </ul>
             </nav>
         </div>

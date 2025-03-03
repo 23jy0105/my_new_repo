@@ -2,6 +2,7 @@ package page;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,7 @@ public class ReserveCancel extends HttpServlet {
 		ReservationDao reserveDao = new ReservationDao();
 		reserveDao.setCancelDate(reserve);
 		roomDao.setRoomCountNumber(false,reserve);
-		RequestDispatcher dispatcher=request.getDispatcher("cancelCheck.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("cancelCheck.jsp");
 		dispatcher.forward(request.response);
 		
 	}
