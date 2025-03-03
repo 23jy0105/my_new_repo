@@ -62,6 +62,28 @@ public class AnnouncementDao {
 		return ar;
 	}
 	
+	public Announcement findAnnouncement(String no) {
+		Announcement a = new Announcement();
+		String sql = "select * from announcement where announcement_number = " + no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+
+				a.setAnnouncementNo(rs.getString("announcement_number"));
+				a.setBody(rs.getString("body"));
+				a.setTitle(rs.getString("title"));
+				a.setAnnouncementImage(rs.getString("announcement_image"));
+				a.setDate(rs.getDate("date"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return a;
+	}
 	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 

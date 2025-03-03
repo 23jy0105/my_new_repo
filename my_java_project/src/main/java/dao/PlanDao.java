@@ -169,8 +169,145 @@ public class PlanDao {
 		return ar;
 	}
 
+	public Plan findPlan(String no) {
+		Plan p = new Plan();
+		String sql = "select * from Plan where plan_number = " + no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+				p.setPlanNo(rs.getString("plan_number"));
+				p.setPlanName(rs.getString("plan_name"));
+				p.setRoomTypeNo(rs.getString("room_type_number"));
+				p.setMealNo(rs.getString("meal_number"));
+				p.setFee(rs.getInt("plan_fee"));
+				p.setPlanImage(rs.getString("plan_image"));
+				p.setPlanOverview(rs.getString("plan_overview"));
+				p.setPlanDescription(rs.getString("plan_description"));
+				p.setStartTime(rs.getTimestamp("plan_start_date"));
+				p.setEndTime(rs.getTimestamp("plan_end_date"));
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return p;
+
+	}
+
+	public void setPlan(Plan p) {
+
+		String sql = "update plan set plan_name = " + p.getPlanName() + ",room_type_number = " + p.getRoomTypeNo()
+				+ ",meal_number = " + p.getMealNo() + ",plan_fee = " + p.getFee() + ",plan_overview = "
+				+ p.getPlanOverview() + ",plan_description = " + p.getPlanDescription() + ",plan_end_date = "
+				+ p.getEndTime() + ",plan_start_date =" + p.getStartTime() + " where plan_number = " + p.getPlanNo();
+
+		try {
+			PreparedStatement state;
+			state = con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setMeal(Meal m) {
+
+		String sql = "update plan set meal_name = "+m.getMealName()+",allergen = "+m.getAllergen(); 
+
+		try {
+			PreparedStatement state;
+			state = con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getemptynumberPlan() {
+		String sql = "select MAX(plan_number) from Plan";
+		String no = null;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+				no = (rs.getString("plan_number"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return no;
+	}
 	
-	
+	public String getemptynumberMeal() {
+		String sql = "select MAX(meal_number) from Meal";
+		String no = null;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+				no = (rs.getString("meal_number"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return no;
+	}
+
+	public void deletePlan(String no) {
+
+		String sql = "delete from plan where plan_number = " + no;
+
+		try {
+			PreparedStatement state;
+			state = con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteMeal(String no) {
+
+		String sql = "delete from meal where meal_number = " + no;
+
+		try {
+			PreparedStatement state;
+			state = con.prepareStatement(sql);
+			state.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Meal findMeal(String no) {
+		Meal ml = new Meal();
+		String sql = "select * from Meal where meal_number = " + no;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+
+				ml.setMealNo(rs.getString("meal_number"));
+				ml.setMealName(rs.getString("meal_name"));
+				ml.setAllergen(rs.getString("allergen"));
+				ml.setMealImage(rs.getString("meal_image"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ml;
+	}
 //	public Meal findMealById(int id) { 
 //		 Meal ml = new Meal(); 
 //		 String sql = "select * from Meal where NO = ?"; 
