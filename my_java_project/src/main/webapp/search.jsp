@@ -16,10 +16,10 @@
         <div class="container">
             <nav class="nav">
                 <ul class="nav-menu-left" id="nav-menu-left">
-                    <li><a href="./index.html" style="font-size: 26px; font-weight: bold; margin-left: 50px;">千景</a></li>
+                    <li><a href="Top" style="font-size: 26px; font-weight: bold; margin-left: 50px;">千景</a></li>
                 </ul>
                 <ul class="nav-menu-right" id="nav-menu-right">
-                    <li><a href="./un01_1.html" style="font-weight: bold; margin-right: 50px;">宿泊予約</a></li>
+                    <li><a href="../Search.java" style="font-weight: bold; margin-right: 50px;">宿泊予約</a></li>
                 </ul>
             </nav>
         </div>

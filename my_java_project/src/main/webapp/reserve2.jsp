@@ -29,7 +29,7 @@
     </div>
     <div class="form-container">
         <h2>入力確認</h2>
-        <form action="./Reserve3" method="post">
+        <form action="Reserve3" method="post">
             <div class="form-group">
                 <label>姓</label>
                 <p id="confirm-last-name"></p>

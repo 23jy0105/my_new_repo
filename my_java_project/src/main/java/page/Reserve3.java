@@ -1,6 +1,8 @@
 package page;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,29 +15,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Reserve3")
 public class Reserve3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Reserve3() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("firstName");
+        String lastKana = request.getParameter("lastKana");
+        String firstKana = request.getParameter("firstKana");
+        String email = request.getParameter("email");
+        String postalCode = request.getParameter("postalCode");
+        String prefecture = request.getParameter("prefecture");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String building = request.getParameter("building");
+        String people = request.getParameter("people");
+        String room = request.getParameter("room");
+        String allergy = request.getParameter("allergy");
+        String planNumber = request.getParameter("planNumber");
+		
+        
+		RequestDispatcher rd = request.getRequestDispatcher("reserve3.jsp");
+		rd.forward(request, response);
+}
 
 }

@@ -24,26 +24,23 @@ public class SearchResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8"); 	
-							try {
-								   int day = Integer.parseInt(request.getParameter("stay-days"));
-								   int people = Integer.parseInt(request.getParameter("people-count"));
-								} catch (NumberFormatException e) {
-								    System.out.println("日付と人数にエラーが発生しました。");
-								}
-							
-							Date date = null;
-							String dateStr = request.getParameter("date-picker");
+		response.setContentType("text/html; charset=UTF-8"); 		
+
+		 int day = Integer.parseInt(request.getParameter("stay-days"));
+   	     int people = Integer.parseInt(request.getParameter("people-count"));
+
+	     Date date = null;
+	     String dateStr = request.getParameter("date-picker");
 				
-							if (dateStr != null && !dateStr.isEmpty()) {
-							    try {
-							        date = Date.valueOf(dateStr);
-							    } catch (IllegalArgumentException e) {
-							        System.out.println("エラー２: 日付変換に失敗");
-							    }
-							}
+		 if (dateStr != null && !dateStr.isEmpty()) {
+			try {
+				date = Date.valueOf(dateStr);
+			} catch (IllegalArgumentException e) {
+				 System.out.println("エラー２: 日付変換に失敗");
+			}
+		}
 		PlanDao dao = new PlanDao();
-		ArrayList<Plan> plans = dao.searchPlan();
+		ArrayList<Plan> plans = dao.searchPlan(day,people,date);
 				Set<String> seenKeys = new HashSet<>();    
 				ArrayList<Plan> uniquePlans = new ArrayList<>();
 				if (plans != null) {

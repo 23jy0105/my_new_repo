@@ -22,7 +22,7 @@
             </button>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="topmain.jsp">ホーム</a></li>
-                <li><a href="un01_1.jsp">宿泊予約</a></li>
+                <li><a href="Search.java">宿泊予約</a></li>
                 <li><a href="room.jsp">客室</a></li>
                 <li><a href="meal.jsp">お食事</a></li>
                 <li><a href="spa.jsp">温泉</a></li>

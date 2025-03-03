@@ -117,56 +117,6 @@
                     <option value="okinawa">沖縄県</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="phone">電話番号</label>
-                <input type="tel" id="phone" name="phone" placeholder="電話番号を入力してください。(半角数字)">
-            </div>
-            <div class="form-group">
-                <label for="address">住所</label>
-                <input type="text" id="address" name="address" placeholder="住所を入力してください。">
-            </div>
-            <div class="form-group">
-                <label for="building">建物名</label>
-                <input type="text" id="building"name="building" placeholder="">
-            </div>
-            <div class="form-group2">
-                <input type="radio" id="bookInsteadNo" name="bookInstead" value="no" onclick="toggleVisibility(false)" checked>
-                <label for="bookInsteadNo">宿泊者本人の予約</label>
-                <br>
-                <input type="radio" id="bookInsteadYes" name="bookInstead" value="yes" onclick="toggleVisibility(true)">
-                <label for="bookInsteadYes">宿泊者本人以外の予約はこちらをチェック</label>
-            </div>
-            <div id="extra-fields" class="hidden">
-                <h3>予約者情報</h3>
-                <div class="form-group-inline">
-                    <div class="form-group">
-                        <label for="reserver-last-name">姓</label>
-                        <input type="text" id="reserver-last-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
-                    </div>
-                    <div class="form-group">
-                        <label for="reserver-first-name"  style="width: 85px;">名</label>
-                        <input type="text" id="reserver-first-name" placeholder="漢字、ひらがな、カタカナ、英語を入力してください。">
-                    </div>
-                </div>
-                <div class="form-group-inline">
-                    <div class="form-group">
-                        <label for="reserver-last-kana">せい</label>
-                        <input type="text" id="reserver-last-kana" placeholder="ひらがなを入力してください。">
-                    </div>
-                    <div class="form-group">
-                        <label for="reserver-first-kana"  style="width: 85px;">めい</label>
-                        <input type="text" id="reserver-first-kana" placeholder="ひらがなを入力してください。">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="reserver-email">メールアドレス</label>
-                    <input type="email" id="reserver-email" placeholder="メールアドレスを入力してください。">
-                </div>
-                <div class="form-group">
-                    <label for="reserver-phone">電話番号</label>
-                    <input type="tel" id="reserver-phone" placeholder="電話番号を入力してください。(半角数字)">
-                </div>
-            </div>
             <p id="caution">
                 ＊食事は以下のアレルギー品目を含みます<br>
                 卵・乳・小麦・そば・落花生(ピーナッツ)・えび・かに・くるみ
@@ -241,16 +191,7 @@
             submitButton.style.display = "block";
         }
     });
-        function toggleVisibility(showExtra) {
-            const extraFields = document.getElementById('extra-fields');
-            const personalFields = document.getElementById('personal-fields');
-            if (showExtra) {
-                extraFields.classList.remove('hidden');
-            } else {
-                extraFields.classList.add('hidden');
-            }
-            
-        }
+    
       document.getElementById('customer-form').addEventListener('submit', function(event) {
     	event.preventDefault();  
         let valid = true;
@@ -268,7 +209,7 @@
         const building = document.getElementById('building').value;
         const allergy = document.getElementById('allergy').value;
         //姓名どちらも
-      if (!lastName.value) {
+/*       if (!lastName.value) {
             valid = false;
             lastName.classList.add('err-input');
 
@@ -285,36 +226,7 @@
           valid = false;
           firstKana.classList.add('err-input');
       }
-
-        // 予約者情報（宿泊者本人以外の予約の場合）
-        const isBookInsteadYes = document.getElementById('bookInsteadYes').checked;
-        let reserverLastName = '';
-        let reserverFirstName = '';
-        let reserverLastKana = '';
-        let reserverFirstKana = '';
-        let reserverEmail = '';
-        let reserverPhone = '';
-        
-        if (isBookInsteadYes) {
-            reserverLastName = document.getElementById('reserver-last-name').value;
-            reserverFirstName = document.getElementById('reserver-first-name').value;
-            reserverLastKana = document.getElementById('reserver-last-kana').value;
-            reserverFirstKana = document.getElementById('reserver-first-kana').value;
-            reserverEmail = document.getElementById('reserver-email').value;
-            reserverPhone = document.getElementById('reserver-phone').value;
-        }
-        const form = document.getElementById('customer-form');
-        const hiddenLastName = document.createElement('input');
-        hiddenLastName.type = 'hidden';
-        hiddenLastName.name = 'lastName';
-        hiddenLastName.value = lastName;
-        form.appendChild(hiddenLastName);
-
-        const hiddenFirstName = document.createElement('input');
-        hiddenFirstName.type = 'hidden';
-        hiddenFirstName.name = 'firstName';
-        hiddenFirstName.value = firstName;
-        form.appendChild(hiddenFirstName);
+ */
 		if(valid){
 			this.submit();
 		}else{
