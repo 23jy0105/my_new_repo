@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Plan implements Serializable{
 
@@ -115,6 +116,17 @@ public class Plan implements Serializable{
 		this.mealNo = mealNo;
 	}
 	
-	
-	
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plan plan = (Plan) o;
+        return Objects.equals(planNo, plan.planNo); // planNoが同じなら同一とみなす
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(planNo); // planNoを基にハッシュコードを生成
+    }
 }

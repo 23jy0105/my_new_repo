@@ -24,9 +24,9 @@ public class GetLodgment extends HttpServlet {
     	
     	ArrayList<LodgmentRoom> room = new ArrayList<LodgmentRoom>();
     	
-    	room.add(new LodgmentRoom("101","1","202502210001","0",2));
-    	room.add(new LodgmentRoom("102","2","202502210001","1",3));
-    	room.add(new LodgmentRoom("103","0","","0",0));
+//    	room.add(new LodgmentRoom("101","1","202502210001","0",2));
+//    	room.add(new LodgmentRoom("102","2","202502210001","1",3));
+//    	room.add(new LodgmentRoom("103","0","","0",0));
         
     	HttpSession session = request.getSession();
 		

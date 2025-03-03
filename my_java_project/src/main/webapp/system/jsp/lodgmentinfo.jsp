@@ -8,10 +8,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-Reservation r = (Reservation) session.getAttribute("reserve");
-
+Reservation r = (Reservation) request.getAttribute("reserve");
+LodgmentRoom lodg = (LodgmentRoom)request.getAttribute("lodgroom");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 Date date = r.getLodgmentStartDate();
-System.out.println("元の日付: " + currentDate);
 
 // Date → Calendar に変換
 Calendar calendar = Calendar.getInstance();
@@ -22,13 +22,17 @@ calendar.add(Calendar.DATE,r.getLodgmentDays());
 
 // Calendar → Date に変換
 Date modifiedDate = calendar.getTime();
-
+System.out.print(calendar.getTime());
+System.out.print(modifiedDate);
 // SimpleDateFormat で yyyy-MM-dd にフォーマット
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-String formattedDateStr = sdf.format(modifiedDate);
 
+String formattedDateStr = sdf.format(modifiedDate);
+System.out.print(formattedDateStr);
 // フォーマットされた文字列を Date に変換
 Date endDate = sdf.parse(formattedDateStr);
+
+
+System.out.print(Integer.parseInt(lodg.getState())+"state");
 %>
 <!DOCTYPE html>
 <html>
@@ -143,16 +147,16 @@ h1 {
 </style>
 <body>
     <div class="container">
-        <button class="back-button" onclick="location.href='../../GetLodgment'">戻る</button>
+        <button class="back-button" onclick="location.href='GetLodgment'">戻る</button>
         <h1>宿泊情報</h1>
         <div class="info">
             <p><strong>予約番号：</strong><%= r.getReservationNo() %></p>
             <p><strong>ステータス：</strong><span class="status" id="output"></span></p>
-            <p><strong>宿泊期間：</strong><%= date %>~<%= endDate %></p>
+            <p><strong>宿泊期間：</strong><%= date %>~<%= formattedDateStr %></p>
             <p><strong>氏名：</strong><%= r.getCustomerName() %>(<%= r.getCustomerNameKana() %>)</p>
-            <p><strong>宿泊人数：</strong><%= request.getAttribute("lodgroom").getLodgmentCount() %></p>
-            <p><strong>食事時間:</strong>朝食<%= request.getAttribute("am") %>夕食<%=request.getAttribute("pm") %></p>
-            <p><strong>アレルギー：</strong><% if(Objects.nonNull(request.getAttribute("count"))){out.print(request.getAttribute("count")+"人")}else{なし} %></p>
+            <p><strong>宿泊人数：</strong><%= lodg.getLodgmentCount() %></p>
+            <p><strong>食事時間:</strong>朝食<%= (String)request.getAttribute("am") %>夕食<%=(String)request.getAttribute("pm") %></p>
+            <p><strong>アレルギー：</strong><% if(Objects.nonNull(request.getAttribute("count"))){out.print(request.getAttribute("count")+"人");}else{out.print("なし");} %></p>
         </div>
         <!--<button class="cancel-button">予約をキャンセルする</button>-->
     </div>
@@ -160,7 +164,8 @@ h1 {
 <script>
         function updateDisplay() {
             const output = document.getElementById("output");
-			const value = <%=Integer.parseInt(request.getAttribute("lodgroom").getState())%>;
+			const value = <%=Integer.parseInt(lodg.getState())%>;
+
             switch (value) {
                 case 1:
                     output.innerHTML = "チェックイン済み";
@@ -178,5 +183,6 @@ h1 {
                     break;
             }
         }
+        window.onload = updateDisplay;
     </script>
 </html>

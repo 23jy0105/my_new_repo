@@ -1,7 +1,6 @@
 package page;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -26,11 +25,11 @@ public class MailSend extends HttpServlet {
 
 //	private final String from = "21jygrxx@jynet.jec.ac.jp";	// システムの送信元メールアドレス
 //	private final String host = "10.64.144.xx";				// メールサーバのIPアドレス（@161）
-////	private final String from = "21jygrxx@jynet2.jec.ac.jp"; // システムの送信元メールアドレス
-////	private final String host = "10.42.129.3";					// メールサーバのIPアドレス（@1252）
-////	private final String host = "localhost";
+//	private final String from = "21jygrxx@jynet2.jec.ac.jp"; // システムの送信元メールアドレス
+//	private final String host = "10.42.129.3";					// メールサーバのIPアドレス（@1252）
+//	private final String host = "localhost";
 
-	private final String from = "23jy0105@jec.ac.jp";
+	private final String from = "23jy0129@jec.ac.jp";
 	private final String host = "10.64.144.9";
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -39,9 +38,10 @@ public class MailSend extends HttpServlet {
 
 		String to = request.getParameter("to");
 		String subject = request.getParameter("subject");
+		
 		String body = "こんにちわ、" + to + "様\n";
 		body += request.getParameter("body");
-		body += "\r\n21jyxxxxより";
+		body += "\r\n23jy0129より";
 		
 		// メール送信
 		this.send(from, to, subject, body);
@@ -74,21 +74,7 @@ public class MailSend extends HttpServlet {
 	}
 	
 	private void disp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		out.println("<!DOCTYPE html>");
-		out.println("<html lang=ja>");
-		out.println("<head>");
-		out.println("<meta charset=\"UTF-8\" >");
-		out.println("<title>送信確認</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("    <h1>メール送信</h1>");
-		out.println("    <p>メールを送りました。 ご確認ください。</p>");
-		out.println("    <a href=\"MailForm.jsp\">メール入力に戻る</a>");
-		out.println("</body>");
-		out.println("</html>");
+		
 	}
 }
+

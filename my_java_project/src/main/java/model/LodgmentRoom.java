@@ -1,21 +1,25 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class LodgmentRoom {
 	private String roomNo;
 	private String state;
 	private String reservationNo;
 	private String lodgmentNo;
-	private int lodgmrnyCount;
+	private int lodgmentCount;
+	private Timestamp checkOutTime;
 	public LodgmentRoom() {
 		super();
 	}
-	public LodgmentRoom(String roomNo, String state, String reservationNo, String lodgmentNo,int lodgmentCount) {
+	public LodgmentRoom(String roomNo, String state, String reservationNo, String lodgmentNo,int lodgmentCount,Timestamp checkOutTime) {
 		super();
 		this.roomNo = roomNo;
 		this.state = state;
 		this.reservationNo = reservationNo;
 		this.lodgmentNo = lodgmentNo;
-		this.lodgmrnyCount = lodgmentCount;
+		this.lodgmentCount = lodgmentCount;
+		this.checkOutTime = checkOutTime;
 	}
 	public String getRoomNo() {
 		return roomNo;
@@ -41,11 +45,17 @@ public class LodgmentRoom {
 	public void setLodgmentNo(String lodgmentNo) {
 		this.lodgmentNo = lodgmentNo;
 	}
-	public int getLodgmrnyCount() {
-		return lodgmrnyCount;
+	public int getLodgmentCount() {
+		return lodgmentCount;
 	}
-	public void setLodgmrnyCount(int lodgmrnyCount) {
-		this.lodgmrnyCount = lodgmrnyCount;
+	public void setLodgmentCount(int lodgmentCount) {
+		this.lodgmentCount = lodgmentCount;
+	}
+	public Timestamp getCheckOutTime() {
+		return checkOutTime;
+	}
+	public void setCheckOutTime(Timestamp checkOutTime) {
+		this.checkOutTime = checkOutTime;
 	}
 	
 }

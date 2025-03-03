@@ -40,69 +40,71 @@ ArrayList<LodgmentRoom> list = (ArrayList<LodgmentRoom>) session.getAttribute("r
 		<span style="color: green;">緑：チェックイン</span> <span style="color: red;">赤：チェックアウト済み</span>
 		<span style="color: gray;">灰：空室</span>
 	</div>
-	<button class="top-button" onclick="location.href='toppage.html'">トップに戻る</button>
-
+	<button class="top-button" onclick="location.href='toppage.jsp'">トップに戻る</button>
+<form method="get" action="../../LodgmentInfo">
 	<div class="room-container">
 		<div class="floor-title">1階</div>
 		<div class="rooms">
-			<a href="../../LodgmentInfo" data-no="0"><div
+		
+			<button type="submit" value="0" name="no"><div
 					class="<%=colorChange(Integer.parseInt(list.get(0).getState()))%>">
 					<strong style="font-size: 24px">101</strong><br><%= list.get(0).getReservationNo() %>
-				</div></a> <a href="LodgmentInfo" data-no="1"><div class="<%=colorChange(Integer.parseInt(list.get(1).getState())) %>">
+				</div></button> <button type="submit" name="no" value="1" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(1).getState())) %>">
 					<strong style="font-size: 24px">102</strong><br><%= list.get(1).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="2"><div class="<%=colorChange(Integer.parseInt(list.get(2).getState())) %>">
+				</div></button> <button type="submit" name="no" value="2" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(2).getState())) %>">
 					<strong style="font-size: 24px">103</strong><br><%= list.get(2).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="3"><div class="<%=colorChange(Integer.parseInt(list.get(3).getState())) %>">
+				</div></button> <button type="submit" name="no" value="3" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(3).getState())) %>">
 					<strong style="font-size: 24px">105</strong><br><%= list.get(3).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="4"><div class="<%=colorChange(Integer.parseInt(list.get(4).getState())) %>">
+				</div></button> <button type="submit" name="no" value="4" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(4).getState())) %>">
 					<strong style="font-size: 24px">106</strong><br><%= list.get(4).getReservationNo() %>
-				</div></a>
+				</div></button>
 		</div>
 		<div class="rooms">
-			<a href="../../LodgmentInfo" data-no="5"><div class="<%=colorChange(Integer.parseInt(list.get(5).getState())) %>">
+			<button type="submit" value="5" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(5).getState())) %>">
 					<strong style="font-size: 24px">107</strong><br><%= list.get(5).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="6"><div class="<%=colorChange(Integer.parseInt(list.get(6).getState())) %>">
+				</div></button> <button type="submit" name="no" value="6"><div class="<%=colorChange(Integer.parseInt(list.get(6).getState())) %>">
 					<strong style="font-size: 24px">108</strong><br><%= list.get(6).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="7"><div class="<%=colorChange(Integer.parseInt(list.get(7).getState())) %>">
+				</div></button> <button type="submit" name="no" value="7"><div class="<%=colorChange(Integer.parseInt(list.get(7).getState())) %>">
 					<strong style="font-size: 24px">110</strong><br><%= list.get(7).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="8"><div class="<%=colorChange(Integer.parseInt(list.get(8).getState())) %>">
+				</div></button> <button type="submit" name="no" value="8" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(8).getState())) %>">
 					<strong style="font-size: 24px">111</strong><br><%= list.get(8).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="9"><div class="<%=colorChange(Integer.parseInt(list.get(9).getState())) %>">
+				</div></button> <button type="submit" name="no" value="9" name="no"><div class="<%=colorChange(Integer.parseInt(list.get(9).getState())) %>">
 					<strong style="font-size: 24px">112</strong><br><%= list.get(9).getReservationNo() %>
-				</div></a>
+				</div></button>
 		</div>
 	</div>
 
 	<div class="room-container">
 		<div class="floor-title">2階</div>
 		<div class="rooms">
-			<a href="../../LodgmentInfo" data-no="10"><div class="<%=colorChange(Integer.parseInt(list.get(10).getState())) %>">
+			<button type="submit" name="no" value="10"><div class="<%=colorChange(Integer.parseInt(list.get(10).getState())) %>">
 					<strong style="font-size: 24px">201</strong><br><%= list.get(10).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="11"><div class="<%=colorChange(Integer.parseInt(list.get(11).getState())) %>">
+				</div></button> <button type="submit" name="no" value="11"><div class="<%=colorChange(Integer.parseInt(list.get(11).getState())) %>">
 					<strong style="font-size: 24px">202</strong><br><%= list.get(11).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="12"><div class="<%=colorChange(Integer.parseInt(list.get(12).getState())) %>">
+				</div></button> <button type="submit" name="no" value="12"><div class="<%=colorChange(Integer.parseInt(list.get(12).getState())) %>">
 					<strong style="font-size: 24px">203</strong><br><%= list.get(12).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="13"><div class="<%=colorChange(Integer.parseInt(list.get(13).getState())) %>">
+				</div></button> <button type="submit" name="no" value="13"><div class="<%=colorChange(Integer.parseInt(list.get(13).getState())) %>">
 					<strong style="font-size: 24px">205</strong><br><%= list.get(13).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="14"><div class="<%=colorChange(Integer.parseInt(list.get(14).getState())) %>">
+				</div></button> <button type="submit" name="no" value="14"><div class="<%=colorChange(Integer.parseInt(list.get(14).getState())) %>">
 					<strong style="font-size: 24px">206</strong><br><%= list.get(14).getReservationNo() %>
-				</div></a>
+				</div></button>
 		</div>
 		<div class="rooms">
-			<a href="../../LodgmentInfo" data-no="15"><div class="<%=colorChange(Integer.parseInt(list.get(15).getState())) %>">
+			<button type="submit" name="no" value="15"><div class="<%=colorChange(Integer.parseInt(list.get(15).getState())) %>">
 					<strong style="font-size: 24px">207</strong><br><%= list.get(15).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="16"><div class="<%=colorChange(Integer.parseInt(list.get(16).getState())) %>">
+				</div></button> <button type="submit" name="no" value="16"><div class="<%=colorChange(Integer.parseInt(list.get(16).getState())) %>">
 					<strong style="font-size: 24px">208</strong><br><%= list.get(16).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="17"><div class="<%=colorChange(Integer.parseInt(list.get(17).getState())) %>">
+				</div></button> <button type="submit" name="no" value="17"><div class="<%=colorChange(Integer.parseInt(list.get(17).getState())) %>">
 					<strong style="font-size: 24px">210</strong><br><%= list.get(17).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="18"><div class="<%=colorChange(Integer.parseInt(list.get(18).getState())) %>">
+				</div></button> <button type="submit" name="no" value="18"><div class="<%=colorChange(Integer.parseInt(list.get(18).getState())) %>">
 					<strong style="font-size: 24px">211</strong><br><%= list.get(18).getReservationNo() %>
-				</div></a> <a href="../../LodgmentInfo" data-no="19"><div class="<%=colorChange(Integer.parseInt(list.get(19).getState())) %>">
+				</div></button> <button type="submit" name="no" value="19"><div class="<%=colorChange(Integer.parseInt(list.get(19).getState())) %>">
 					<strong style="font-size: 24px">212</strong><br><%= list.get(19).getReservationNo() %>
-				</div></a>
+				</div></button>
 
 		</div>
 	</div>
+	</form>
 </body>
 
 <script>
