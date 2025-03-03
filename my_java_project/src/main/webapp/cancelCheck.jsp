@@ -39,7 +39,7 @@
     </div>
     <br>
     <div class="button-container">
-        <button class="button" onclick="location.href='topmain'">トップに戻る</button>
+        <button class="button" onclick="location.href='topmain.jsp'">トップに戻る</button>
     </div>
     <script>
         function openModal() {

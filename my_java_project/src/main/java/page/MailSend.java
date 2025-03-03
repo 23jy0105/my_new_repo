@@ -1,6 +1,7 @@
 package page;
 
 import java.io.IOException;
+
 import java.util.Date;
 import java.util.Properties;
 
@@ -75,5 +76,5 @@ public class MailSend extends HttpServlet {
 	
 	private void disp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	}
-}
+=======
+

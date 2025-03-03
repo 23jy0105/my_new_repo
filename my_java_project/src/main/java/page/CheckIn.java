@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ReservationDao;
 import dao.RoomDao;
+import model.LodgmentInformation;
 import model.Meal;
 import model.Plan;
 import model.Reservation;
@@ -41,6 +42,7 @@ public class CheckIn extends HttpServlet {
 		time = Timestamp.valueOf(formatted);
 		RoomDao roomdao = new RoomDao();
 		ReservationDao rd = new ReservationDao();
+//		LodgmentInformation lodg = new LodgmentInformation();
 		Reservation r = (Reservation) session.getAttribute("reserve");
 		Plan plan = (Plan) session.getAttribute("plan");
 		Meal meal = (Meal) session.getAttribute("meal");
@@ -64,7 +66,7 @@ public class CheckIn extends HttpServlet {
 
 		System.out.println("sumIS" + sum);
 
-		System.out.println("breakfastIS" + (String) session.getAttribute("dinner"));
+		System.out.println("breakfastIS" + (String) session.getAttribute("breakfast"));
 		System.out.println("mealIS" + meal.getMealNo());
 		if (Objects.isNull(mealno)) {
 			System.out.println("mealISNULL");
@@ -76,7 +78,8 @@ public class CheckIn extends HttpServlet {
 		//planからroom_typeが一致するroomを全件昇順取得
 
 		System.out.println(r.getTotalReservationRoom());
-
+		
+		System.out.println(mealno+"mealno<<");
 		for (int i = 0; i < r.getTotalReservationRoom(); i++) {
 			String roomno = room.get(i).getRoomNo();
 			roomdao.setRoomState(room.get(i).getRoomNo());
@@ -84,7 +87,7 @@ public class CheckIn extends HttpServlet {
 			rd.setCheckinTime(r);
 			rd.setMealTime(r, mealno);
 
-			rd.setLodgment(r, roomno);
+			rd.setLodgment(r, roomno,i);
 
 			inroom.add(roomno);
 			System.out.println(roomno + "!!");
@@ -94,10 +97,14 @@ public class CheckIn extends HttpServlet {
 		//取得したroomの中の手前からreservationのtotal_lodgment_room数分選択、room_numberをsetRoomStateに送信
 		//trueが返ってこなかった場合例外処理trueが返ってきたらreservationにcheck_in_time、あればmeal_timeをセット
 		//予約番号からlodgmentinformetionを検索、room_numberをinsert
-
+		
+		
+		r.setMealTime(mealno);
+		
 		System.out.println(inroom);
-
+		session.setAttribute("reserve", r);
 		session.setAttribute("inroom", inroom);
+		session.setAttribute("lodgment", rd.findLodgment(r.getReservationNo()));
 
 		//		RequestDispatcher d = request.getRequestDispatcher();
 		//		d.forward(request, response);

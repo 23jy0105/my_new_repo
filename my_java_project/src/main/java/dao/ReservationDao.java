@@ -150,6 +150,7 @@ public class ReservationDao {
 		}
 		return r;
 	}
+
 	public ArrayList<LodgmentInformation> findAllLodgment() {
 		ArrayList<LodgmentInformation> ar = new ArrayList<>();
 		String sql = "select * from lodgment_infomation";
@@ -376,7 +377,6 @@ public class ReservationDao {
 		}
 		return list;
 	}
-	
 	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 

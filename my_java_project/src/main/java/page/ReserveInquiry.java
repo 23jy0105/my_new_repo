@@ -34,8 +34,8 @@ public class ReserveInquiry extends HttpServlet {
 		Plan plan = new Plan();
 		Meal meal = new Meal();
 		
-		System.out.println(r.getReservationNo()+"<<");
-		
+		System.out.println(r.getReservationNo()+"<<<");
+		System.out.println(rd.findLodgment(r.getReservationNo())+"testooooooooooooo");
 		plan = pd.findPlan(r.getPlanNo());
 		if(Objects.nonNull(plan.getPlanNo())) {
 			System.out.println(r.getPlanNo()+"planNO");
@@ -44,6 +44,10 @@ public class ReserveInquiry extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		
+		
+		
+		session.setAttribute("lodgment", rd.findLodgment(r.getReservationNo()));
+		session.setAttribute("allergy", rd.getAllergyCount(r));
 		session.setAttribute("reserve", r);
 		session.setAttribute("plan", plan);
 		session.setAttribute("meal", meal);
