@@ -1,0 +1,30 @@
+@charset "UTF-8";
+		h2 {
+            font-size: 50px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            
+        }
+        
+        .modal-body {
+            margin-top: 10px;
+        }
+        .container1 {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }

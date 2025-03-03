@@ -1,0 +1,40 @@
+@charset "UTF-8";
+		.container1 {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .modal-body {
+            margin-top: 10px;
+        }
+        .close-btn {
+            cursor: pointer;
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+		h1 {
+            text-align: center;
+            width: 100%;
+        }
+        .announceImg{
+            text-align: center;
+            margin-top: 0px;
+            max-width: 100%; /* 画像の横幅を調整 */
+            height: auto; /* 縦横比を維持 */
+            object-fit: cover; /* 画像のバランスを調整 */
+        }
+        main {
+        max-width: 800px;
+        margin: 0px auto;
+        padding: 20px;
+        line-height: 1.8;
+        font-size: 16px;
+    	}
