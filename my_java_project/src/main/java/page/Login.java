@@ -1,7 +1,6 @@
 package page;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,10 +50,12 @@ public class Login extends HttpServlet {
 	            	session.setAttribute("reserve", reserve);
 	            	session.setAttribute("plan", plan);
 	            	System.out.println(planNo);
-	            	if(Objects.isNull(reserve.getReservationNo())) {
-	            		path = "Login.jsp";
+	            	System.out.println(userId);
+	            	System.out.println(reserve.getReservationNo());
+	            	if(userId.equals(reserve.getReservationNo())) {
+	            		path = "cus_info.jsp";
 	            	}else {
-	            		 path = "cus_info.jsp";
+	            		 path = "Login.jsp";
 	            	}
 
 	                // ログイン失敗の文言を追加する

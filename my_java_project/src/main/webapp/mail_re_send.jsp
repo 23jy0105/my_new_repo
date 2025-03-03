@@ -39,15 +39,15 @@
         <h3>登録メールアドレスと宿泊予定日を入力してください。</h3>
         <div style="padding: 10px;">
             <label>登録メールアドレス:</label>
-        <input type="text" id="input-box"name="reservation-number" value="" style="width: 250px;">
+        <input type="text" id="input-box"name="mail" value="" style="width: 250px;">
         </div>
         
 
         <label>宿泊予定日:</label>
-        <input type="date" id="input-box" name="password" value="" style="width: 200px; height: 30px; font-size: large;">
+        <input type="date" id="input-box" name="reservationstartdate" value="" style="width: 200px; height: 30px; font-size: large;">
         <br>
         <br>
-        <button class="button" onclick="location.href='./ur02_E1_4.html'" style="width: 200px;">再送信</button>
+        <button class="button" onclick="location.href='Mail_re_send'" style="width: 200px;">再送信</button>
         <br>
         <div style="padding-top: 80px; text-align: left;">
         

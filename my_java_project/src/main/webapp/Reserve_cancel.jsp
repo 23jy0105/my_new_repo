@@ -12,7 +12,7 @@
     <title>予約キャンセル</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/modal.css">
-    <link rel="stylesheet" href="./css/Reservw_cancel.css">
+    <link rel="stylesheet" href="./css/reserve_cancel.css">
     <%Reservation reserve = (Reservation)session.getAttribute("reserve"); %>
     
 </head>
