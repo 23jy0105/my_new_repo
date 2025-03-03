@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 @WebServlet("/Search")
 public class Search extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -18,4 +17,4 @@ public class Search extends HttpServlet{
 		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 		rd.forward(request, response);
 	}
-};
+}

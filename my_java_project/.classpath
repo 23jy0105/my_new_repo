@@ -18,7 +18,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Z:/卒製/my_new_repo/my_java_project/src/main/webapp/WEB-INF/lib/core-3.3.0.jar"/>
-	<classpathentry kind="lib" path="Z:/卒製/my_new_repo/my_java_project/src/main/webapp/WEB-INF/lib/javase-3.3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

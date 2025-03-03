@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import model.LodgmentInformation;
 import model.Reservation;
@@ -64,6 +65,44 @@ public class ReservationDao {
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
 //				 r.setAllergyCount(rs.getInt("allergy_count"));
+				 r.setPassword(rs.getString("password"));
+				 r.setMealTime(rs.getString("meal_time")); 
+
+				 ar.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
+	
+	public ArrayList<Reservation> findReservationbyPhone(String input) {
+		ArrayList<Reservation> ar = new ArrayList<>();
+		String sql = "select * from Reservation where phone_number = "+input;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 Reservation r = new Reservation(); 
+				 
+				 r.setReservationNo(rs.getString("reservation_number"));
+				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentDays(rs.getInt("lodgment_days"));
+				 r.setPaymentTime(rs.getTimestamp("payment_time"));
+				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
+				 r.setReservationDate(rs.getTimestamp("reservation_date"));
+				 r.setPlanNo(rs.getString("plan_number"));
+				 r.setCancelDate(rs.getTimestamp("cancel_date"));
+				 r.setCheckInTime(rs.getTimestamp("check_in_time"));
+				 r.setCustomerName(rs.getString("customer_name"));
+				 r.setCustomerNameKana(rs.getString("customer_name_kana"));
+				 r.setEmailAddress(rs.getString("email_address"));
+				 r.setPhoneNumber(rs.getString("phone_number"));
+				 r.setAddress(rs.getString("address"));
+				 r.setPostalCode(rs.getString("postal_code"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 
@@ -225,33 +264,6 @@ public class ReservationDao {
 		}
 	}
 	
-	public void setCancelDate(Reservation r) {
-		System.out.println(r.getCancelDate());
-		String sql = "update reservation set cancel_date = NOW() where reservation_number = "+r.getReservationNo();
-		
-		
-		try {
-			PreparedStatement state;
-			state =con.prepareStatement(sql);
-			state.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setPaymentTime(Reservation r) {
-		System.out.println(r.getPaymentTime());
-		String sql = "update reservation set payment_time = NOW() where reservation_number = "+r.getReservationNo();
-		
-		
-		try {
-			PreparedStatement state;
-			state =con.prepareStatement(sql);
-			state.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	public void setLodgment(Reservation r,String room,int num) {
 		try {
 			
@@ -271,9 +283,10 @@ public class ReservationDao {
 		System.out.println(r.getMealTime()+"timeAM");
 		int time = Integer.parseInt(r.getMealTime());
 		
+		if(Objects.isNull(time)) {
+			return "なし";
+		}	
 		time /= 10; 
-		
-		
 		
 		if(time==0) {
 			return "err1";
@@ -291,6 +304,9 @@ public class ReservationDao {
 	public String watchTimePM(Reservation r){
 		int time = Integer.parseInt(r.getMealTime());
 		
+		if(Objects.isNull(time)) {
+			return "なし";
+		}
 		time %= 10;
 		
 		if(time==0) {
@@ -315,6 +331,8 @@ public class ReservationDao {
 		}
 		return list;
 	}
+	
+	
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 

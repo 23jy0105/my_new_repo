@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.PlanDao;
 import dao.ReservationDao;
+import model.Plan;
 import model.Reservation;
 
 @WebServlet("/Login")
@@ -22,16 +24,19 @@ public class Login extends HttpServlet {
 		    request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReservationDao dao = new ReservationDao();
+		ReservationDao dao1 = new ReservationDao();
+		PlanDao dao2 = new PlanDao();
 		Reservation reserve = new Reservation();
-	    // ユーザーから送信されたユーザーIDとパスワードを取得する。
+		Plan plan = new Plan();
+		
 	    String userId = request.getParameter("reservation-number");
 	    String password = request.getParameter("password");
-
-	    // ログイン認証後に遷移する先を格納する
+	    
+	    
 	    String path = "";
-	    reserve = dao.findReservationbyPass(userId,password);
-	   
+	    reserve = dao1.findReservationbyPass(userId,password);
+	    String planNo=reserve.getPlanNo();
+	    plan = dao2.findPlanByPlanNo(planNo);
 	    //QRCodeWriter qrCodeWriter = new QRCodeWriter();
         //try {
             //BitMatrix bitMatrix = qrCodeWriter.encode(userId, BarcodeFormat.QR_CODE, 300, 300);
@@ -40,9 +45,12 @@ public class Login extends HttpServlet {
         //} catch (WriterException e) {
             //e.printStackTrace();
         //}
+	    
+	    
 	            	HttpSession session = request.getSession();
 	            	session.setAttribute("reserve", reserve);
-	            	
+	            	session.setAttribute("plan", plan);
+	            	System.out.println(planNo);
 	            	if(Objects.isNull(reserve.getReservationNo())) {
 	            		path = "Login.jsp";
 	            	}else {
@@ -61,4 +69,3 @@ public class Login extends HttpServlet {
 	}
 
 }
-

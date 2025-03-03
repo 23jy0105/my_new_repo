@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ご予約確認ページ</title>
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/Login.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/re_pass.css">
 </head>
 <body class="background">
     <header class="header">
@@ -20,7 +20,6 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="topmain.jsp">ホーム</a></li>
                     <li><a href="Search">宿泊予約</a></li>
                     <li><a href="room.jsp">客室</a></li>
                     <li><a href="Meal.jsp">お食事</a></li>
@@ -34,35 +33,27 @@
         </div>
     </header>
     <main>
-    	
         <div class="center-body">
         <div class="container-block" style="margin-top: 20px;">
-        <h1 style="margin-top: 20px;">ご予約確認</h1>
-        <h3>該当する予約番号とパスワードを入力してください。</h3>
+        <h1 style="margin-top: 20px;">ご予約メール再送信</h1>
+        <h3>登録メールアドレスと宿泊予定日を入力してください。</h3>
         <div style="padding: 10px;">
-        <p id="loginFailure"><%String failureMessage = (String)request.getAttribute("loginFailure"); %>
-    	<% if (failureMessage != null) {%>
-    	<%=failureMessage %>
-		<%} %>
-        <form action="Login" method="post">
-            <label>予約番号:</label>
-        <input type="text" id="input-box"name="reservation-number" value="">
+            <label>登録メールアドレス:</label>
+        <input type="text" id="input-box"name="reservation-number" value="" style="width: 250px;">
         </div>
         
-		
-        <label>パスワード:</label>
-        <input type="password" id="input-box" name="password" value="" style="width: 278px;">
+
+        <label>宿泊予定日:</label>
+        <input type="date" id="input-box" name="password" value="" style="width: 200px; height: 30px; font-size: large;">
         <br>
         <br>
-         <input class="button" type="submit" value="ログイン">
+        <button class="button" onclick="location.href='./ur02_E1_4.html'" style="width: 200px;">再送信</button>
         <br>
-        </form>
         <div style="padding-top: 80px; text-align: left;">
-        <a href="./mail_re_send.jsp">予約番号またはパスワードをお忘れの方></a>
+        
     </div>
     </div>
-</div>
-    
+    </div>
     </main>
     <footer>
         <div class="foot">

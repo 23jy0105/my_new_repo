@@ -23,8 +23,9 @@ public class ReserveCancel extends HttpServlet {
 		ReservationDao reserveDao = new ReservationDao();
 		reserveDao.setCancelDate(reserve);
 		roomDao.setRoomCountNumber(false,reserve);
+		session.removeAttribute(null);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("cancelCheck.jsp");
-		dispatcher.forward(request.response);
+		dispatcher.forward(request,response);
 		
 	}
 }

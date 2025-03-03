@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="model.Reservation"%>
 <%@page import="model.LodgmentInformation" %>
+<%@page import="model.Plan" %>
 <%@page import="dao.ReservationDao"%>
 <%@page import="dao.PlanDao"%>
 <%@page import="java.time.LocalDate"%>
@@ -31,7 +32,7 @@
 <%@page import="javax.servlet.http.HttpServletRequest" %>
 <%@page import="javax.servlet.http.HttpServletResponse" %>
 <%@page import="java.io.OutputStream" %>
-
+<%Plan plan = (Plan)session.getAttribute("plan"); %>
 <%Reservation reserve = (Reservation)session.getAttribute("reserve"); %>
 <%//BitMatrix bitMatrix = (BitMatrix)request.getAttribute("qrcode");%> 
    <% PlanDao dao2  = new PlanDao(); %>
@@ -88,7 +89,7 @@
         <img src="./img/DXroom.png" alt="plan-img" height="200px" id="blur">
         </figure>
         <div>
-        <h3 style=" text-align: left;">＜2食付き＞秋の味覚堪能コース</h3>
+        <h3 style=" text-align: left;"><%=plan.getPlanName() %></h3>
         </div>
         <div style="padding: 10px; float: left;  text-align: left;">
             <label>予約人数:</label>
@@ -153,18 +154,8 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>プラン詳細</h2>
-            <p>料金 ￥19,800～</p>
-            <p>このプランでは、心を込めて丁寧にお作りした朝食と夕食をご用意しております。
-                地元の新鮮な食材を使用したお料理は、一品一品が季節を感じさせ、五感を楽しませる内容となっております。朝食は和定食、夕食は、季節の食材をふんだんに使用した会席料理をご提供いたします。落ち着いた雰囲気の中で、ごゆっくりとお楽しみください。
-                
-                また、お部屋は和室と洋室の2タイプからお選びいただけます。
-                
-                和室：畳の香りが心地よい、落ち着いた空間。ゆったりとした時間を過ごしたい方におすすめです。
-                洋室：モダンで快適なベッドを完備したお部屋。くつろぎと快適さを求める方に最適です。
-                どちらのお部屋タイプも、清潔感あふれる広々とした空間をご用意しており、旅の疲れを癒やすのにぴったりです。
-                四季折々の風景を楽しみながら、ゆったりとしたひとときをお過ごしください。
-                
-                特別なひとときを、心を込めたお料理と快適なお部屋でおもてなしいたします。</p>
+            <p><%=plan.getFee()%></p>
+            <p><%=plan.getPlanDescription()%></p>
             
         </div>
     </div>

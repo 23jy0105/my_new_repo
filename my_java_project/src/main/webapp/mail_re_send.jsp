@@ -20,15 +20,14 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#home">ホーム</a></li>
-                    <li><a href="./uwReserve_05.html">宿泊予約</a></li>
-                    <li><a href="./uwReserve_24.html">客室</a></li>
-                    <li><a href="#meal">お食事</a></li>
-                    <li><a href="#spa">温泉</a></li>
-                    <li><a href="#access">アクセス</a></li>
-                    <li><a href="#Q&A">Q&A</a></li>
-                    <li><a href="#info">お知らせ</a></li>
-                    <li><a href="#reservation_check">ご予約確認</a></li>
+                    <li><a href="Search">宿泊予約</a></li>
+                    <li><a href="room.jsp">客室</a></li>
+                    <li><a href="Meal.jsp">お食事</a></li>
+                    <li><a href="spa.jsp">温泉</a></li>
+                    <li><a href="access.jsp">アクセス</a></li>
+                    <li><a href="QAndA.jsp">Q&A</a></li>
+                    <li><a href="Information">お知らせ</a></li>
+                    <li><a href="Login.jsp">ご予約確認</a></li>
                 </ul>
             </nav>
         </div>

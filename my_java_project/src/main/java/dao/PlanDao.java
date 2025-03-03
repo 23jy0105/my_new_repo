@@ -61,28 +61,6 @@ public class PlanDao {
 		return ar;
 	}
 	
-	public Meal findMeal(String no) {
-		Meal ml = new Meal(); 
-		String sql = "select * from Meal where meal_number = "+no;
-		try {
-			PreparedStatement state = con.prepareStatement(sql);
-			ResultSet rs = state.executeQuery();
-			while(rs.next()) { 
-				
-				 ml.setMealNo(rs.getString("meal_number")); 
-				 ml.setMealName(rs.getString("meal_name")); 
-				 ml.setAllergen(rs.getString("allergen")); 
-				 ml.setMealImage(rs.getString("meal_image")); 
-
-			}
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return ml;
-	}
-	
 	public ArrayList<Plan> findAllPlan() {
 		ArrayList<Plan> ar = new ArrayList<>();
 		String sql = "select * from Plan";
@@ -112,9 +90,9 @@ public class PlanDao {
 		return ar;
 	}
 	
-	public Plan findPlan(String no) {
+	public Plan findPlanByPlanNo(String No) {
 		Plan p = new Plan();
-		String sql = "select * from Plan where plan_number = "+no;
+		String sql = "select * from Plan where plan_number = "+No;
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -130,15 +108,68 @@ public class PlanDao {
 				 p.setStartTime(rs.getTimestamp("plan_start_date"));
 				 p.setEndTime(rs.getTimestamp("plan_end_date"));
 			}
-			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return p;
-	
-	
 	}
+	public ArrayList<Plan> searchPlan() {
+		ArrayList<Plan> ar = new ArrayList<>();
+		String sql = "SELECT \r\n"
+				+ "    p.plan_number, \r\n"
+				+ "    p.plan_name, \r\n"
+				+ "    p.plan_fee, \r\n"
+				+ "    p.plan_image, \r\n"
+				+ "    p.plan_overview, \r\n"
+				+ "    p.plan_description, \r\n"
+				+ "    p.room_type_number\r\n"
+				+ "FROM plan AS p\r\n"
+				+ "INNER JOIN room_type AS r ON p.room_type_number = r.room_type_number\r\n"
+				+ "LEFT JOIN (\r\n"
+				+ "    -- 2/25 の予約済み部屋数を集計\r\n"
+				+ "    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked\r\n"
+				+ "    FROM room_remaining_count\r\n"
+				+ "    WHERE DATE BETWEEN '2025-02-25' AND '2025-02-26'\r\n"
+				+ "    GROUP BY room_type_number, DATE\r\n"
+				+ ") AS res1 ON p.room_type_number = res1.room_type_number AND res1.DATE = '2025-02-25'\r\n"
+				+ "LEFT JOIN (\r\n"
+				+ "    -- 2/26 の予約済み部屋数を集計\r\n"
+				+ "    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked\r\n"
+				+ "    FROM room_remaining_count\r\n"
+				+ "    WHERE DATE BETWEEN '2025-02-25' AND '2025-02-26'\r\n"
+				+ "    GROUP BY room_type_number, DATE\r\n"
+				+ ") AS res2 ON p.room_type_number = res2.room_type_number AND res2.DATE = '2025-02-26'\r\n"
+				+ "WHERE \r\n"
+				+ "    -- プランの有効期限チェック\r\n"
+				+ "    '2025-02-25 00:00:00' >= p.plan_start_date \r\n"
+				+ "    AND '2025-02-25 00:00:00' <= p.plan_end_date \r\n"
+				+ "    AND 2 <= r.max_accommodation_count  \r\n"
+				+ "    AND (r.total_room_count - COALESCE(res1.total_booked, 0)) >= 1\r\n"
+				+ "    AND (r.total_room_count - COALESCE(res2.total_booked, 0)) >= 1";
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				Plan p = new Plan(); 
+				 p.setPlanNo(rs.getString("plan_number")); 
+				 p.setPlanName(rs.getString("plan_name")); 
+				 p.setFee(rs.getInt("plan_fee"));
+				 p.setPlanImage(rs.getString("plan_image"));
+				 p.setPlanOverview(rs.getString("plan_overview"));
+				 p.setPlanDescription(rs.getString("plan_description"));
+
+				 ar.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	
 	
 //	public Meal findMealById(int id) { 
 //		 Meal ml = new Meal(); 
