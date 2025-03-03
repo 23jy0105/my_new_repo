@@ -11,7 +11,6 @@
 Reservation r = (Reservation) session.getAttribute("result");
 
 Date date = r.getLodgmentStartDate();
-System.out.println("元の日付: " + currentDate);
 
 // Date → Calendar に変換
 Calendar calendar = Calendar.getInstance();
@@ -143,7 +142,7 @@ h1 {
 </style>
 <body>
     <div class="container">
-        <button class="back-button" onclick="location.href='sarchreservation'">戻る</button>
+        <button class="back-button" onclick="location.href='sarchreservation'" type="button">戻る</button>
         <h1>予約情報</h1>
         <div class="info">
             <p><strong>予約番号：</strong><%= r.getReservationNo() %></p>
@@ -158,7 +157,7 @@ h1 {
         
         <%if("0".equals(r.getReservationState())||"3".equals(r.getReservationState())){
         	
-        	%><button class="cancel-button">予約をキャンセルする</button><%
+        	%><button class="cancel-button" type="button">予約をキャンセルする</button><%
         } %>
         
     </div>
@@ -168,8 +167,11 @@ h1 {
             <span class="close">&times;</span>
             <h1 id="output2"></h1>
             <h3>この操作により、この予約は<span id="output3"></span>に変更されます。</h3>
-            <button class="back-button" style="margin: 0px 30px;" onclick="closeModal()">戻る</button>
-            <button class="cancel-button" onclick="location.href='ReservationCancel?state=<%=Integer.parseInt(r.getReservationState())%>'">キャンセルする</button>
+            <button class="back-button" style="margin: 0px 30px;" onclick="closeModal()" type="button">戻る</button>
+            <form method="get" post="../../ReservationCancel">
+            <input type="hidden" name="state" value="<%=r.getReservationState()%>">
+            <input type="hidden" name="num" value="<%=r.getReservationNo()%>">
+            <button class="cancel-button" type="submit">キャンセルする</button></form>
             
         </div>
     </div>
@@ -179,7 +181,7 @@ h1 {
         	const output = document.getElementById("output");
         	const output2 = document.getElementById("output2");
         	const output3 = document.getElementById("output3");
-			const value = <%=Integer.parseInt(r.getReservationState())%>;
+			const value = <%=r.getReservationState()%>;
 
             switch (value) {
                 case 0:
