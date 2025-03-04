@@ -46,6 +46,7 @@ public class ReserveCancel extends HttpServlet {
 		reserveDao.setCancelDate(reserve);
 		roomDao.setRoomCountNumber(false,reserve);
 		session.removeAttribute(null);
+		
 		String to = reserve.getEmailAddress();
 		String subject = request.getParameter("キャンセルお手続きが完了しました");
 		String planNo=reserve.getPlanNo();
