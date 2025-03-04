@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
             
     
+=======
+        
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
     <wb-module deploy-name="customerSite">
+<<<<<<< HEAD
                         
         
+=======
+                
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                         
         
+=======
+                
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
         <property name="context-root" value="customerSite"/>
+<<<<<<< HEAD
                         
         
+=======
+                
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
         <property name="java-output-path" value="/customerSite/build/classes"/>
+<<<<<<< HEAD
                     
     
+=======
+            
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
     </wb-module>
+<<<<<<< HEAD
         
 
+=======
+    
+>>>>>>> branch 'main' of http://git@github.com/23jy0105/my_new_repo.git
 </project-modules>

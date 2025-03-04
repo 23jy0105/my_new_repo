@@ -5,7 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    ArrayList<Reservation> list = request.getAttribute("sarched");
+    
+    ArrayList<Reservation> list = new ArrayList<Reservation>();
+    if(Objects.nonNull(session.getAttribute("sarched"))){
+    	list = (ArrayList<Reservation>)session.getAttribute("sarched");
+    }
     %>
 <%!
 public String setId(int num){
@@ -34,22 +38,22 @@ public String setId(int num){
 <body>
     <div class="header">
         <h2>予約情報確認</h2>
-        <button class="button" onclick="location.href='./toppage.html'">トップに戻る</button>
+        <button class="button" onclick="location.href='./toppage.jsp'">トップに戻る</button>
     </div>
     
-    <form method="post" post="../../SarchReservation">
+    <form method="post" action="../../SarchReservation">
     <div class="search-container">
         <label for="reservation-number">予約番号:</label>
         <input type="text" id="reservation-number" name="reservation-number">
-        <input type ="hide" value ="reserve" name="type">
+        <input type ="hidden" value ="reserve" name="type">
         <button class="b-button" type="submit">検索</button>
     </div>
     </form>
-    <form method="post" post="../../SarchReservation">
+    <form method="post" action="../../SarchReservation">
     <div class="search-container">
         <label for="reservation-number-2">電話番号:</label>
         <input type="text" id="reservation-number-2" name="phone-number">
-        <input type ="hide" value ="phone" name="type">
+        <input type ="hidden" value ="phone" name="type">
         <button class="b-button" type="submit">検索</button>
     </div>
     </form>
@@ -63,19 +67,21 @@ public String setId(int num){
             <th>ステータス</th>
             <th>/</th>
         </tr>
-        <%int i = 0; for(Reservation r:list){%>
+        <%int i = 0;
+        if(Objects.nonNull(list)){
+        for(Reservation r:list){%>
         <tr>
         	<td><%=i %>.</td>
             <td><%=r.getReservationNo() %></td>
             <td><%=r.getCustomerName() %></td>
             <td><%=r.getPhoneNumber() %></td>
             <td><%=r.getLodgmentStartDate() %></td>
-            <td id="<%=getId(r.getReservationState())%>"></td>
+            <td id="<%=setId(r.getReservationState())%>"></td>
             <td><button class="button" onclick="location.href='../../ReservationInfo?no=<%=r.getReservationNo()%>'">詳細</button></td>
         </tr>
-        <%}if(list.size()==0&&"1".equals(request.getAttribute("flag"))){
+        <%}if(list.size()==0&&"1".equals(session.getAttribute("flag"))){
         	%><h1 style="color: red;">一致する予約が見つかりません</h1><%
-        }%>
+        }}%>
     </table>
 </body>
 <script>

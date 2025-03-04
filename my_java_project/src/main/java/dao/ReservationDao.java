@@ -378,6 +378,39 @@ public class ReservationDao {
 		return list;
 	}
 	
+	public boolean setReservationState(String state,Reservation r) {
+		String sql = "select payment_time,cancel_date from reservation where reservation_numbr = "+r.getReservationNo();
+		boolean bool = false;
+		try {
+			PreparedStatement state2 = con.prepareStatement(sql);
+			ResultSet rs = state2.executeQuery();
+			while(rs.next()) { 
+				 if(Objects.isNull(rs.getString("payment_time"))&&state.equals("0")) {
+					 sql ="UPDATE reservation SET cansel_date = NOW() where reservation_number = "+r.getReservationNo();
+					 state2 = con.prepareStatement(sql);
+					 state2.executeQuery();
+					 bool =  true;
+				 }else if(Objects.nonNull(rs.getString("cancel_date"))&&state.equals("3")&&Objects.isNull(rs.getString("payment_time"))){
+					 sql ="UPDATE reservation SET payment_time = NOW() where reservation_number = "+r.getReservationNo();
+					 state2 = con.prepareStatement(sql);
+					 state2.executeQuery();
+
+					 bool = true;
+				 }else {
+
+					 bool = false;
+				 }
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return bool;
+	}
+	
+//git@github.com/23jy0105/my_new_repo.git
 //	public Room findRoomById(int id) { 
 //		 Room ml = new Room(); 
 //		 String sql = "select * from Room where NO = ?"; 

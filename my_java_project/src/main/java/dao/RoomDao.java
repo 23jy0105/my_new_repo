@@ -150,14 +150,13 @@ public class RoomDao {
         Date d1 = calendar.getTime();
         String d2;
         d2=sdf.format(d1) ;
-        System.out.println(d2);
         String s;
         if(b) {
         	s="+";
         }else {
         	s="-";
         }
-        String sql = "update room_remaining_count set reserved_room_number = "+reserve.getTotalReservationRoom()+" WHERE date between '"+reserve.getLodgmentStartDate()+"' AND '"+d2+"'";
+        String sql = "update room_remaining_count set reserved_room_number = reserved_room_number"+s+reserve.getTotalReservationRoom()+" WHERE date between '"+reserve.getLodgmentStartDate()+"' AND '"+d2+"'";
         try {
 			PreparedStatement state = con.prepareStatement(sql);
 			state.executeUpdate();
