@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.ArrayList" %>
+    <%@ page import="model.Plan" %>
     <%ArrayList<String> info = (ArrayList<String>)session.getAttribute("info"); %>
-    <%ArrauList<Plan> plan =(ArrayList<Plan>)session.getAttribute("plan");%>
+    <%ArrayList<Plan> plan =(ArrayList<Plan>)session.getAttribute("plan");%>
     
 <!DOCTYPE html>
 <html>
@@ -73,28 +74,23 @@
                 <label>建物名</label>
                 <p id="confirm-building"><%=info.get(9) %></p>
             </div>
-
-            <div class="form-group">
-                <label>予約者情報</label>
-                <div id="confirm-extra-fields"><%=info.get(10) %></div>
-            </div>
             <div  class="form-group">
                 <label>人数</label>
-                <div id="confirm-people"><%=info.get(11) %></div>
+                <div id="confirm-people"><%=info.get(10) %></div>
             </div>
             <div class="form-group">
                 <label>部屋数</label>
-                <div id="confirm-room"><%=info.get(12) %></div>
+                <div id="confirm-room"><%=info.get(11) %></div>
             </div>
             <div class="form-group">
                 <label>アレルギー人数</label>
-                <div id="confirm-allergy"><%=info.get(13) %></div>
+                <div id="confirm-allergy"><%=info.get(12) %></div>
             </div>
             <div class="fee-group">
                 <h2>プラン名</h2>
-                <p><%=plan.getPlanName() %></p>
+                <p><%=plan.get(0).getPlanName() %></p>
                 <h2>料金</h2>
-                <p><%=plan.getPlanFee() %>円</p>
+                <p><%=plan.get(0).getFee() %>円</p>
             </div>
             <div class="button-container">
                 <button type="button" id="edit">修正する</button>
@@ -104,12 +100,6 @@
     </div>
 
     <script>
-
-    }else{
-        document.getElementById('confirm-extra-fields').innerHTML = 
-        `<p>ご本人様</p>`;
-    }
-
         // 編集ボタンで前のページに戻る
         document.getElementById('edit').addEventListener('click', function() {
             window.history.back();

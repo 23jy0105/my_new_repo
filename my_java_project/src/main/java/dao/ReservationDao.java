@@ -332,6 +332,45 @@ public class ReservationDao {
 		return list;
 	}
 	
+	public void addReservation(Reservation r) {
+		String sql = "INSERT INTO reservation(reservation_number,lodgment_start_date,lodgment_days,total_reservation_room,reservation_date,plan_number,customer_name,customer_name_kana,email_address,phone_number,address,postal_code,PASSWORD)+\r\n"
+				+"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, r.getReservationNo());
+			pstmt.setDate(2,r.getLodgmentStartDate());
+			pstmt.setInt(3,r.getLodgmentDays());
+			pstmt.setInt(4, r.getTotalReservationRoom());
+			pstmt.setTimestamp(5, r.getReservationDate());
+			pstmt.setString(6, r.getPlanNo());
+			pstmt.setString(7, r.getCustomerName());
+			pstmt.setString(8, r.getCustomerNameKana());
+			pstmt.setString(9, r.getEmailAddress());
+			pstmt.setString(10,r.getPhoneNumber());
+			pstmt.setString(11,r.getAddress());
+			pstmt.setString(12,r.getPostalCode());
+			pstmt.setString(13,r.getPassword());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	
+	}
+	
+	public void addLodgmentInfo(String s,String t,String r) {
+		String sql = "INSERT INTO lodgment_information(lodgment_number,lodgment_count,allergy_count) VALUE(?,?,?) ";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,s);
+			pstmt.setString(2,t);
+			pstmt.setString(3,r);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
 //	public boolean setReservationState(String state) {
 		
 

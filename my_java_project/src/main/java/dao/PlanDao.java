@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -91,6 +92,30 @@ public class PlanDao {
 		}
 		return ar;
 	}
+	public Plan findPlanByPlanNo(String No) {
+		Plan p = new Plan();
+		String sql = "select * from Plan where plan_number = "+No;
+		try {
+			PreparedStatement state = con.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) { 
+				 p.setPlanNo(rs.getString("plan_number")); 
+				 p.setPlanName(rs.getString("plan_name")); 
+				 p.setRoomTypeNo(rs.getString("room_type_number")); 
+				 p.setMealNo(rs.getString("meal_number"));
+				 p.setFee(rs.getInt("plan_fee"));
+				 p.setPlanImage(rs.getString("plan_image"));
+				 p.setPlanOverview(rs.getString("plan_overview"));
+				 p.setPlanDescription(rs.getString("plan_description"));
+				 p.setStartTime(rs.getTimestamp("plan_start_date"));
+				 p.setEndTime(rs.getTimestamp("plan_end_date"));
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return p;
+	}
 	
 	public ArrayList<Plan> searchPlan(String planNo){
 		ArrayList<Plan> ar = new ArrayList<>();
@@ -112,84 +137,81 @@ public class PlanDao {
 		return ar;
 	}
 	
-    public ArrayList<Plan> searchPlan(int day, int people, int room, String nowDate) {
-        ArrayList<Plan> ar = new ArrayList<>();
-        
-        // `day` 日分の `LEFT JOIN` を動的に作成
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT ")
-           .append("    p.plan_number, ")
-           .append("    p.plan_name, ")
-           .append("    p.plan_fee, ")
-           .append("    p.plan_image, ")
-           .append("    p.plan_overview, ")
-           .append("    p.plan_description, ")
-           .append("    p.room_type_number ")
-           .append("FROM plan AS p ")
-           .append("INNER JOIN room_type AS r ON p.room_type_number = r.room_type_number ");
+	public ArrayList<Plan> searchPlan(int day, int people, int room, String nowDate) {
+	    ArrayList<Plan> ar = new ArrayList<>();
 
-        // `day` 日分の予約状況を `LEFT JOIN` で取得
-        for (int i = 0; i < day; i++) {
-            sql.append("LEFT JOIN ( ")
-               .append("    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked ")
-               .append("    FROM room_remaining_count ")
-               .append("    WHERE DATE = ? ")
-               .append("    GROUP BY room_type_number, DATE ")
-               .append(") AS res").append(i)
-               .append(" ON p.room_type_number = res").append(i).append(".room_type_number ");
-        }
+	    // `day` 日分の `LEFT JOIN` を動的に作成
+	    StringBuilder sql = new StringBuilder();
+	    sql.append("SELECT ")
+	       .append("    p.plan_number, ")
+	       .append("    p.plan_name, ")
+	       .append("    p.plan_fee, ")
+	       .append("    p.plan_image, ")
+	       .append("    p.plan_overview, ")
+	       .append("    p.plan_description, ")
+	       .append("    p.room_type_number ")
+	       .append("FROM plan AS p ")
+	       .append("INNER JOIN room_type AS r ON p.room_type_number = r.room_type_number ");
 
-        sql.append("WHERE ")
-           .append("    ? >= p.plan_start_date ") // プランの開始日
-           .append("    AND ? <= p.plan_end_date ") // プランの終了日
-           .append("    AND ? <= r.max_accommodation_count ") // 人数制限
-           .append("    AND (r.total_room_count - COALESCE(res0.total_booked, 0)) >= ? "); // 1日目の空室チェック
+	    // `day` 日分の予約状況を `LEFT JOIN` で取得
+	    for (int i = 0; i < day; i++) {
+	        sql.append("LEFT JOIN ( ")
+	           .append("    SELECT room_type_number, DATE, SUM(reserved_room_number) AS total_booked ")
+	           .append("    FROM room_remaining_count ")
+	           .append("    WHERE DATE = ? ")
+	           .append("    GROUP BY room_type_number, DATE ")
+	           .append(") AS res").append(i)
+	           .append(" ON p.room_type_number = res").append(i).append(".room_type_number ");
+	    }
 
-        // `day` 日分の空室チェックを追加
-        for (int i = 1; i < day; i++) {
-            sql.append("AND (r.total_room_count - COALESCE(res").append(i).append(".total_booked, 0)) >= ? ");
-        }
+	    sql.append("WHERE ")
+	       .append("    ? >= p.plan_start_date ") // プランの開始日
+	       .append("    AND ? <= p.plan_end_date ") // プランの終了日
+	       .append("    AND ? <= r.max_accommodation_count ") // 人数制限
+	       .append("    AND (r.total_room_count - COALESCE(res0.total_booked, 0)) >= ? "); // 1日目の空室チェック
 
-        try (PreparedStatement state = con.prepareStatement(sql.toString())) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.getTime();
+	    // `day` 日分の空室チェックを追加
+	    for (int i = 1; i < day; i++) {
+	        sql.append("AND (r.total_room_count - COALESCE(res").append(i).append(".total_booked, 0)) >= ? ");
+	    }
 
-            // `day` 日分の `date` をセット
-            for (int i = 0; i < day; i++) {
-                state.setDate(i + 1, new Date(calendar.getTimeInMillis()));
-                calendar.add(Calendar.DATE, 1);
-            }
+	    try (PreparedStatement state = con.prepareStatement(sql.toString())) {
+	        Calendar calendar = Calendar.getInstance();
+	        // `day` 日分の `date` をセット
+	        for (int i = 0; i < day; i++) {
+	            state.setDate(i + 1, new Date(calendar.getTimeInMillis()));
+	            calendar.add(Calendar.DATE, 1);
+	        }
 
-            // WHERE 句のパラメータをセット
-            int paramIndex = day + 1;
-            state.setString(paramIndex++, nowDate);
-            state.setString(paramIndex++, nowDate);
-            state.setInt(paramIndex++, people);
+	        // WHERE 句のパラメータをセット
+	        int paramIndex = day + 1;
+	        // `nowDate` をDate型に変換して設定する
+	        state.setDate(paramIndex++, Date.valueOf(nowDate)); // `nowDate` がString型の日付なら `Date.valueOf(nowDate)` を使用
+	        state.setDate(paramIndex++, Date.valueOf(nowDate));
+	        state.setInt(paramIndex++, people);
 
-            // `day` 日分の空室数チェックをセット
-            for (int i = 0; i < day; i++) {
-                state.setInt(paramIndex++, room);
-            }
+	        // `day` 日分の空室数チェックをセット
+	        for (int i = 0; i < day; i++) {
+	            state.setInt(paramIndex++, room);
+	        }
 
-            try (ResultSet rs = state.executeQuery()) {
-                while (rs.next()) {
-                    Plan p = new Plan();
-                    p.setPlanNo(rs.getString("plan_number"));
-                    p.setPlanName(rs.getString("plan_name"));
-                    p.setFee(rs.getInt("plan_fee"));
-                    p.setPlanImage(rs.getString("plan_image"));
-                    p.setPlanOverview(rs.getString("plan_overview"));
-                    p.setPlanDescription(rs.getString("plan_description"));
-
-                    ar.add(p);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ar;
-    }
-	public ArrayList<Plan> searchPlan(int day,int people,int room,Date date,String nowDate) {
+	        ResultSet rs = state.executeQuery();
+			       while (rs.next()) {
+			    Plan p = new Plan();
+			    p.setPlanNo(rs.getString("plan_number"));
+			    p.setPlanName(rs.getString("plan_name"));
+			    p.setFee(rs.getInt("plan_fee"));
+			    p.setPlanImage(rs.getString("plan_image"));
+			    p.setPlanOverview(rs.getString("plan_overview"));
+			    p.setPlanDescription(rs.getString("plan_description"));
+			    ar.add(p);
+			}
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return ar;
+	}
+	public ArrayList<Plan> searchPlan(int day,int people,int room,String date,String nowDate) {
 		ArrayList<Plan> ar = new ArrayList<>();
 		String sql = "SELECT \r\n"
 				+ "    p.plan_number, \r\n"
@@ -223,16 +245,17 @@ public class PlanDao {
 				+ "    AND (r.total_room_count - COALESCE(res1.total_booked, 0)) >= ?\r\n"
 				+ "    AND (r.total_room_count - COALESCE(res2.total_booked, 0)) >= ?";
 		
-		try (PreparedStatement state = con.prepareStatement(sql)){
-		        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		        Calendar calendar = Calendar.getInstance();
-		        calendar.setTime(date);
-				calendar.add(Calendar.DATE, day-1);
-				Date nextdate = (Date) calendar.getTime();
-				state.setDate(1,date);
+		PreparedStatement state;
+		try {
+			state = con.prepareStatement(sql);
+			LocalDate sqlLocalDate = LocalDate.parse(date); // String → LocalDate
+			LocalDate nextLocalDate = sqlLocalDate.plusDays(day - 1);
+			Date sqlDate = Date.valueOf(sqlLocalDate);
+			Date nextdate = Date.valueOf(nextLocalDate);
+				state.setDate(1,sqlDate);
 				state.setDate(2,nextdate);
-				state.setDate(3,date);
-				state.setDate(4, date);
+				state.setDate(3,sqlDate);
+				state.setDate(4, sqlDate);
 				state.setDate(5,nextdate);
 				state.setDate(6, nextdate);
 				state.setString(7, nowDate);
@@ -240,7 +263,7 @@ public class PlanDao {
 				state.setInt(9, people);
 				state.setInt(10, room);
 				state.setInt(11, room);
-			try(ResultSet rs = state.executeQuery()){
+			ResultSet rs = state.executeQuery();
 			while(rs.next()) { 
 				Plan p = new Plan(); 
 				 p.setPlanNo(rs.getString("plan_number")); 

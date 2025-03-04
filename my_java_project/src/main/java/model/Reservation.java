@@ -20,7 +20,7 @@ public class Reservation {
 	private String phoneNumber;
 	private String address;
 	private String postalCode;
-//	private int allergyCount;
+	private int allergyCount;
 	private String password;
 	private String mealTime;
 	
@@ -31,7 +31,7 @@ public class Reservation {
 	public Reservation(String reservationNo, Date lodgmentStartDate, int lodgmentDays, Timestamp paymentTime,
 			int totalReservationRoom, Timestamp reservationDate, String planNo, Timestamp cancelDate,
 			Timestamp checkInTime, String customerName, String customerNameKana, String emailAddress,
-			String phoneNumber, String address, String postalCode, String password, String mealTime) {
+			String phoneNumber, String address, String postalCode,int allergyCount, String password, String mealTime) {
 		this.reservationNo = reservationNo;
 		this.lodgmentStartDate = lodgmentStartDate;
 		this.lodgmentDays = lodgmentDays;
@@ -47,7 +47,7 @@ public class Reservation {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.postalCode = postalCode;
-//		this.allergyCount = allergyCount;
+		this.allergyCount = allergyCount;
 		this.password = password;
 		this.mealTime = mealTime;
 	}
@@ -171,14 +171,14 @@ public class Reservation {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-//
-//	public int getAllergyCount() {
-//		return allergyCount;
-//	}
-//
-//	public void setAllergyCount(int allergyCount) {
-//		this.allergyCount = allergyCount;
-//	}
+
+	public int getAllergyCount() {
+		return allergyCount;
+	}
+
+	public void setAllergyCount(int allergyCount) {
+		this.allergyCount = allergyCount;
+	}
 
 	public String getPassword() {
 		return password;

@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.ReservationInfo" %>
-<% ReservationInfo info =(ReservationInfo) session.getAttribute("info"); 
-if (info != null) {
-    int staydays = info.getStayDays();
-    int people = info.getPeople();
-    int room = info.getRoom();
-    String planNum = info.getPlanNum();
-    String date = info.getStartDate();
-} 
-%>
+<% ReservationInfo info =(ReservationInfo) session.getAttribute("info"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,6 +60,10 @@ if (info != null) {
                 <input type="text" id="postal-code" name="postalCode" pattern="^\d{3}-\d{4}$|^\d{7}$" placeholder="郵便番号を入力してください。">
             </div>
             <div class="form-group">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" placeholder="電話番号を入力してください。(半角数字)">
+            </div>
+            <div class="form-group">
                 <label for="prefecture">都道府県</label>
                 <select id="prefecture" name="prefecture">
                     <option value="">選択</option>
@@ -120,6 +116,14 @@ if (info != null) {
                     <option value="okinawa">沖縄県</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="address">住所</label>
+                <input type="text" id="address" placeholder="住所を入力してください。">
+            </div>
+            <div class="form-group">
+                <label for="building">建物名</label>
+                <input type="text" id="building" placeholder="">
+            </div>
             <p id="caution">
                 ＊食事は以下のアレルギー品目を含みます<br>
                 卵・乳・小麦・そば・落花生(ピーナッツ)・えび・かに・くるみ
@@ -146,45 +150,37 @@ if (info != null) {
         </form>
     </div>
     <script>
-    const roomCountContainer = document.getElementById("room-count");
-    if (roomCountContainer) {
-        let roomCount = localStorage.getItem("roomCount") ? parseInt(localStorage.getItem("roomCount"), 10) : 0;
-        const guestCounts = JSON.parse(localStorage.getItem("guestCounts")) || [];
-        roomCountContainer.innerHTML = "";
+    const roomCount = <%=info.getRoom()%>; // Make sure this value is set correctly in your ReservationInfo object
+    
+    const roomCountContainer = document.getElementById('room-count');
+    if (roomCount > 0) {
+        for (let i = 0; i < roomCount; i++) {
+            const roomDiv = document.createElement("div");
+            roomDiv.classList.add("form-group");
+            roomDiv.style.marginBottom = "10px";
 
-        if (roomCount >= 2) {
-            for (let i = 0; i < roomCount; i++) {
-                const roomDiv = document.createElement("div");
-                roomDiv.classList.add("form-group");
-                roomDiv.style.marginBottom = "10px"; // 部屋ごとの間隔を調整
+            const label = document.createElement("label");
+            label.textContent = `部屋${i + 1}の人数`;  // This will dynamically show "部屋1の人数", "部屋2の人数", etc.
 
-                const label = document.createElement("label");
-                label.textContent = `部屋 ${i + 1} の人数`;
+            const select = document.createElement("select");
+            select.name = `room-${i + 1}-guests`;
+            select.id = `room-${i + 1}-guests`;
+            select.style.marginLeft = "10px";
 
-                const select = document.createElement("select");
-                select.name = `room-${i + 1}-guests`;
-                select.id = `room-${i + 1}-guests`;
-                select.style.marginLeft = "10px"; // ラベルとの間隔を調整
-
-                for (let j = 1; j <= 5; j++) {
-                    const option = document.createElement("option");
-                    option.value = j;
-                    option.textContent = j;
-                    if (guestCounts[i] && guestCounts[i] == j) {
-                        option.selected = true;
-                    }
-                    select.appendChild(option);
-                }
-
-                roomDiv.appendChild(label);
-                roomDiv.appendChild(select);
-                roomCountContainer.appendChild(roomDiv);
+            for (let j = 1; j <= 5; j++) {
+                const option = document.createElement("option");
+                option.value = j;
+                option.textContent = j;
+                select.appendChild(option);
             }
-        } else {
-            roomCountContainer.style.display = "none";
-        }
-    }
 
+            roomDiv.appendChild(label);
+            roomDiv.appendChild(select);
+            roomCountContainer.appendChild(roomDiv);
+        }
+    } else {
+        roomCountContainer.style.display = "none";
+    }
     // 入力ボタンの位置調整
     document.addEventListener("DOMContentLoaded", function() {
         const submitButton = document.getElementById("submit");
@@ -195,52 +191,30 @@ if (info != null) {
         }
     });
     
-      document.getElementById('customer-form').addEventListener('submit', function(event) {
-    	event.preventDefault();  
-        let valid = true;
+      document.getElementById('customer-form').addEventListener('submit', function(event) { 
         
         // フォームの各フィールドの値を取得
-        const lastName = document.getElementById('last-name').value;
-        const firstName = document.getElementById('first-name').value;
-        const lastKana = document.getElementById('last-kana').value;
-        const firstKana = document.getElementById('first-kana').value;
+        const lastName = document.getElementById('lastName').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastKana = document.getElementById('lastKana').value;
+        const firstKana = document.getElementById('firstKana').value;
         const email = document.getElementById('email').value;
-        const postalCode = document.getElementById('postal-code').value;
+        const postalCode = document.getElementById('postalCode').value;
         const prefecture = document.getElementById('prefecture').value;
         const phone = document.getElementById('phone').value;
         const address = document.getElementById('address').value;
         const building = document.getElementById('building').value;
         const allergy = document.getElementById('allergy').value;
-        const staydays = staydays;
-        const people = people;
-        const room = room;
-        const planNum = planNum;
-        const date = date;
-        //姓名どちらも
-/*       if (!lastName.value) {
-            valid = false;
-            lastName.classList.add('err-input');
-
-        }
-      if(!firstName.value){
-			valid = false;
-			firstName.classList.add('err-input');
-          }
-      if(!lastKana.value){
-          	valid = false;
-            lastKana.classList.add('err-input');
-          }
-      if (!firstKana.value) {
-          valid = false;
-          firstKana.classList.add('err-input');
-      }
- */
-		if(valid){
-			this.submit();
-		}else{
-			alert("エラーがあります");
-			}
-
+        const staydays = <%=info.getStayDays()%>;
+        const people = <%=info.getPeople()%>;
+        const room = <%=info.getRoom()%>;
+        const planNum = "<%=info.getPlanNum()%>";
+        const date = "<%=info.getStartDate()%>";
+        console.log(room);
+        console.log(staydays);
+        console.log(people);
+        console.log(planNum);
+        console.log(date);
         });
     </script>
 </body>

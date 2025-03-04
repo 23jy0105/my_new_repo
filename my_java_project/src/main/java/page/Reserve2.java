@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.PlanDao;
 import model.Plan;
+import model.ReservationInfo;
 
 @WebServlet("/Reserve2")
 public class Reserve2 extends HttpServlet {
@@ -35,23 +36,22 @@ public class Reserve2 extends HttpServlet {
         String room = request.getParameter("room");
         String planNum = request.getParameter("planNum");
         String date = request.getParameter("date");
-        ArrayList<String> info = new ArrayList<>();
-        info.add(lastName);
-        info.add(firstName);
-        info.add(lastKana);
-        info.add(firstKana);
-        info.add(email);
-        info.add(postalCode);
-        info.add(prefecture);
-        info.add(phone);
-        info.add(address);
-        info.add(building);
-        info.add(allergy);
-        info.add(people);
-        info.add(room);
-        info.add(date);
+        ReservationInfo ri = new ReservationInfo();
 		HttpSession session = request.getSession();
-		session.setAttribute("info",info);
+		ri.setLastName(lastName);
+		ri.setFirstName(firstName);
+		ri.setLastKana(lastKana);
+		ri.setFirstKana(firstKana);
+		ri.setEmail(email);
+		ri.setPostalCode(postalCode);
+		ri.setPrefecture(prefecture);
+		ri.setPhone(phone);
+		ri.setAddress(address);
+		ri.setBuilding(building);
+		ri.setAllergy(allergy);
+		ri.setPeople()
+		
+		session.setAttribute("info",ri);
 		PlanDao dao = new PlanDao();
 		ArrayList<Plan> plan = null;
 		plan = dao.searchPlan(planNum);

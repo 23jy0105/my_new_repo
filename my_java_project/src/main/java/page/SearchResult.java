@@ -1,7 +1,6 @@
 package page;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,21 +30,12 @@ public class SearchResult extends HttpServlet {
 		 int day = Integer.parseInt(request.getParameter("stay-days"));
    	     int people = Integer.parseInt(request.getParameter("people-count"));
    	     int room = Integer.parseInt(request.getParameter("room-count"));
-	     Date date = null;
+	     String date = request.getParameter("date-picker");
 	     Calendar calendar = Calendar.getInstance();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	     String nowDate = sdf.format(calendar.getTime());
-	     String dateStr = request.getParameter("date-picker");
-				
-		 if (dateStr != null && !dateStr.isEmpty()) {
-			try {
-				date = Date.valueOf(dateStr);
-			} catch (IllegalArgumentException e) {
-				 System.out.println("エラー２: 日付変換に失敗");
-			}
-		}
-			PlanDao dao = new PlanDao();
-			ArrayList<Plan> plans = null;
+		 PlanDao dao = new PlanDao();
+		 ArrayList<Plan> plans = null;
 
 			// 日付が指定されている場合と指定されていない場合の処理
 			if (date != null) {

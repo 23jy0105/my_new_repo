@@ -17,6 +17,7 @@ public class Plan implements Serializable{
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private String mealNo;
+	private Date date;
 	
 	public Plan() {
 		
@@ -35,6 +36,7 @@ public class Plan implements Serializable{
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.mealNo = mealNo;
+		this.date = date;
 	}
 
 	public String getPlanNo() {
@@ -117,7 +119,13 @@ public class Plan implements Serializable{
 		this.mealNo = mealNo;
 	}
 	
-
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
