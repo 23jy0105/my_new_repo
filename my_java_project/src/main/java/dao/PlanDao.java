@@ -92,6 +92,7 @@ public class PlanDao {
 		}
 		return ar;
 	}
+	
 	public Plan findPlanByPlanNo(String No) {
 		Plan p = new Plan();
 		String sql = "select * from Plan where plan_number = "+No;
@@ -116,7 +117,6 @@ public class PlanDao {
 		}
 		return p;
 	}
-	
 	public ArrayList<Plan> searchPlan(String planNo){
 		ArrayList<Plan> ar = new ArrayList<>();
 		String sql ="select plan_name,plan_fee from plan";
@@ -282,8 +282,14 @@ public class PlanDao {
 		}
 		return ar;
 	}
+
+
+	
+	
+
 		
 }
+
 //	public Meal findMealById(int id) { 
 //		 Meal ml = new Meal(); 
 //		 String sql = "select * from Meal where NO = ?"; 

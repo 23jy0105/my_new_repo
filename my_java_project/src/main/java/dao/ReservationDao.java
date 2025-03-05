@@ -50,7 +50,7 @@ public class ReservationDao {
 				 Reservation r = new Reservation(); 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -89,7 +89,7 @@ public class ReservationDao {
 				 Reservation r = new Reservation(); 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -176,7 +176,7 @@ public class ReservationDao {
 			while(rs.next()) { 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -211,7 +211,7 @@ public class ReservationDao {
 			while(rs.next()) { 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -337,8 +337,9 @@ public class ReservationDao {
 				+"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
+			System.out.println(r.getLodgmentStartDate());
 			pstmt.setString(1, r.getReservationNo());
-			pstmt.setDate(2,r.getLodgmentStartDate());
+			pstmt.setString(2,r.getLodgmentStartDate());
 			pstmt.setInt(3,r.getLodgmentDays());
 			pstmt.setInt(4, r.getTotalReservationRoom());
 			pstmt.setTimestamp(5, r.getReservationDate());
@@ -353,6 +354,7 @@ public class ReservationDao {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	

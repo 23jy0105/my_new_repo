@@ -1,12 +1,11 @@
 package model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Reservation {
 	private String reservationNo;
-	private Date lodgmentStartDate;
+	private String lodgmentStartDate;
 	private int lodgmentDays;
 	private Timestamp paymentTime;
 	private int totalReservationRoom;
@@ -28,7 +27,7 @@ public class Reservation {
 		
 	}
 
-	public Reservation(String reservationNo, Date lodgmentStartDate, int lodgmentDays, Timestamp paymentTime,
+	public Reservation(String reservationNo, String lodgmentStartDate, int lodgmentDays, Timestamp paymentTime,
 			int totalReservationRoom, Timestamp reservationDate, String planNo, Timestamp cancelDate,
 			Timestamp checkInTime, String customerName, String customerNameKana, String emailAddress,
 			String phoneNumber, String address, String postalCode,int allergyCount, String password, String mealTime) {
@@ -60,11 +59,11 @@ public class Reservation {
 		this.reservationNo = reservationNo;
 	}
 
-	public Date getLodgmentStartDate() {
+	public String getLodgmentStartDate() {
 		return lodgmentStartDate;
 	}
 
-	public void setLodgmentStartDate(Date lodgmentStartDate) {
+	public void setLodgmentStartDate(String lodgmentStartDate) {
 		this.lodgmentStartDate = lodgmentStartDate;
 	}
 

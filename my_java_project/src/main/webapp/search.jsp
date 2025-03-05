@@ -33,31 +33,31 @@
                 <div class="form-row">
                     <label for="stay-days">宿泊日数</label>
                     <select id="stay-days" name="stay-days">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+					    <option value="1" <%= "1".equals(request.getParameter("stay-days")) ? "selected" : "" %>>1</option>
+					    <option value="2" <%= "2".equals(request.getParameter("stay-days")) ? "selected" : "" %>>2</option>
+					    <option value="3" <%= "3".equals(request.getParameter("stay-days")) ? "selected" : "" %>>3</option>
+					    <option value="4" <%= "4".equals(request.getParameter("stay-days")) ? "selected" : "" %>>4</option>
+					    <option value="5" <%= "5".equals(request.getParameter("stay-days")) ? "selected" : "" %>>5</option>
                     </select>
                 </div>
                 <div class="form-row">
                     <label for="people-count">人数</label>
                     <select id="people-count" name="people-count">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+					    <option value="1" <%= "1".equals(request.getParameter("people-count")) ? "selected" : "" %>>1</option>
+					    <option value="2" <%= "2".equals(request.getParameter("people-count")) ? "selected" : "" %>>2</option>
+					    <option value="3" <%= "3".equals(request.getParameter("people-count")) ? "selected" : "" %>>3</option>
+					    <option value="4" <%= "4".equals(request.getParameter("people-count")) ? "selected" : "" %>>4</option>
+					    <option value="5" <%= "5".equals(request.getParameter("people-count")) ? "selected" : "" %>>5</option>
                     </select>
                 </div>
                 <div class="form-row">
                     <label for="room-count">部屋数</label>
                     <select id="room-count" name="room-count">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+					    <option value="1" <%= "1".equals(request.getParameter("room-count")) ? "selected" : "" %>>1</option>
+					    <option value="2" <%= "2".equals(request.getParameter("room-count")) ? "selected" : "" %>>2</option>
+					    <option value="3" <%= "3".equals(request.getParameter("room-count")) ? "selected" : "" %>>3</option>
+					    <option value="4" <%= "4".equals(request.getParameter("room-count")) ? "selected" : "" %>>4</option>
+					    <option value="5" <%= "5".equals(request.getParameter("room-count")) ? "selected" : "" %>>5</option>
                     </select>
                 </div>
                 <button type="submit" id="search-button" class="button">検索</button>
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement("td");
             const link = document.createElement("a");
-            link.href = "#"+"`"+year+"-"+(month+1)+"-"+day+"`";
+            link.href = "#"+""+year+"/"+(month+1)+"/"+day+"";
             link.textContent = day;
             link.addEventListener("click", function(event) {
                 event.preventDefault();  // クリック時にページ遷移を防ぐ
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const stayDays = document.getElementById("stay-days").value;
                 const people = document.getElementById("people-count").value;
                 const room = document.getElementById("room-count").value;
-                const selectedDate ="`"+year+"-"+(month+1)+"-"+day+"`";
+                const selectedDate =""+year+"-"+(month+1)+"-"+day+"";
                 const planNum =document.getElementById("planNumInput").value;
 				
 
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 inputStayDays.name = "stayDays";
                 inputStayDays.value = stayDays;
                 form.appendChild(inputStayDays);
-
+				console.log(stayDays);
                 const inputPeople = document.createElement("input");
                 inputPeople.type = "hidden";
                 inputPeople.name = "people";

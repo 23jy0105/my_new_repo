@@ -58,7 +58,7 @@ public class SearchResult extends HttpServlet {
 
 			// リクエストにユニークなプランを設定
 			request.setAttribute("plans", uniquePlans);
-
+		
 			// JSPにフォワード
 			RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 			rd.forward(request, response);

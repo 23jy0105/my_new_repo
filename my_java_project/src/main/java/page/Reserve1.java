@@ -29,16 +29,30 @@ public class Reserve1 extends HttpServlet {
 					stayDays = Integer.parseInt(request.getParameter("stayDays"));
 					people = Integer.parseInt(request.getParameter("people"));
 					room = Integer.parseInt(request.getParameter("room"));
-					date = request.getParameter("date");
+					//date = request.getParameter("date");
+					date = "2025-03-03";
 					planNum =request.getParameter("planNum");
+					System.out.println(date);
 					ReservationInfo info =new ReservationInfo();
+//					Date Date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+//			        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			        Date startdate = null;
+//					try {
+//						System.out.println(dateFormat);
+//						startdate =dateFormat.parse(date);
+//						System.out.println(startdate);
+//					} catch (ParseException e) {
+//						// TODO 自動生成された catch ブロック
+//						System.out.println(e.getMessage());
+//				        e.printStackTrace();
+//					}
 								info.setStayDays(stayDays);
 								info.setPeople(people);
 								info.setRoom(room);
 								info.setStartDate(date);
 								info.setPlanNum(planNum);
 								HttpSession session = request.getSession();
-								session.setAttribute("info",info);
+								session.setAttribute("searchInfo",info);
 								RequestDispatcher rd = request.getRequestDispatcher("reserve1.jsp");
 								rd.forward(request, response);
 	}

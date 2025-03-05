@@ -45,6 +45,7 @@ public class PlanidAndPasswordGenerateDao {
 		String formattedDate = sdf.format(calendar.getTime());
 		String reserveNum = formattedDate+countReservation();
 		return reserveNum;
+
 	}
 	
 	public String generatePassword() {
@@ -69,7 +70,6 @@ public class PlanidAndPasswordGenerateDao {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDD");
 			String formattedDate = sdf.format(calendar.getTime());
 			pstmt.setString(1,formattedDate);
-			pstmt.setString(1, formattedDate);
 
             ResultSet rs = pstmt.executeQuery() ;
                 if (rs.next()) {
