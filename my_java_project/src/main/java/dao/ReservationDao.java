@@ -50,7 +50,7 @@ public class ReservationDao {
 				 Reservation r = new Reservation(); 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentStartDate(rs.getString("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -64,7 +64,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-//				 r.setAllergyCount(rs.getInt("allergy_count"));
+				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 
@@ -89,7 +89,7 @@ public class ReservationDao {
 				 Reservation r = new Reservation(); 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentStartDate(rs.getString("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -176,7 +176,7 @@ public class ReservationDao {
 			while(rs.next()) { 
 				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentStartDate(rs.getString("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -190,7 +190,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-//				 r.setAllergyCount(rs.getInt("allergy_count"));
+				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 			}
@@ -209,9 +209,8 @@ public class ReservationDao {
 			PreparedStatement state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
 			while(rs.next()) { 
-				 
 				 r.setReservationNo(rs.getString("reservation_number"));
-//				 r.setLodgmentStartDate(rs.getDate("lodgment_start_date"));
+				 r.setLodgmentStartDate(rs.getString("lodgment_start_date"));
 				 r.setLodgmentDays(rs.getInt("lodgment_days"));
 				 r.setPaymentTime(rs.getTimestamp("payment_time"));
 				 r.setTotalReservationRoom(rs.getInt("total_reservation_room"));
@@ -225,7 +224,7 @@ public class ReservationDao {
 				 r.setPhoneNumber(rs.getString("phone_number"));
 				 r.setAddress(rs.getString("address"));
 				 r.setPostalCode(rs.getString("postal_code"));
-//				 r.setAllergyCount(rs.getInt("allergy_count"));
+				 r.setAllergyCount(rs.getInt("allergy_count"));
 				 r.setPassword(rs.getString("password"));
 				 r.setMealTime(rs.getString("meal_time")); 
 			}
@@ -333,11 +332,9 @@ public class ReservationDao {
 	}
 	
 	public void addReservation(Reservation r) {
-		String sql = "INSERT INTO reservation(reservation_number,lodgment_start_date,lodgment_days,total_reservation_room,reservation_date,plan_number,customer_name,customer_name_kana,email_address,phone_number,address,postal_code,PASSWORD)+\r\n"
-				+"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO reservation(reservation_number,lodgment_start_date,lodgment_days,total_reservation_room,reservation_date,plan_number,customer_name,customer_name_kana,email_address,phone_number,address,postal_code,PASSWORD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			System.out.println(r.getLodgmentStartDate());
 			pstmt.setString(1, r.getReservationNo());
 			pstmt.setString(2,r.getLodgmentStartDate());
 			pstmt.setInt(3,r.getLodgmentDays());
@@ -360,13 +357,14 @@ public class ReservationDao {
 	
 	}
 	
-	public void addLodgmentInfo(String s,String t,String r) {
-		String sql = "INSERT INTO lodgment_information(lodgment_number,lodgment_count,allergy_count) VALUE(?,?,?) ";
+	public void addLodgmentInfo(String c,String s,int t,int r) {
+		String sql = "INSERT INTO lodgment_information(reservation_number,lodgment_number,lodgment_count,allergy_count) VALUE(?,?,?,?) ";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,s);
-			pstmt.setString(2,t);
-			pstmt.setString(3,r);
+			pstmt.setString(1,c);
+			pstmt.setString(2,s);
+			pstmt.setInt(3,t);
+			pstmt.setInt(4,r);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック

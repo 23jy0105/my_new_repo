@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class PlanidAndPasswordGenerateDao {
 	private Connection con = null;
-	private static final  String CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?";
+	private static final  String CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 	public PlanidAndPasswordGenerateDao() {
 		try {
@@ -44,6 +44,7 @@ public class PlanidAndPasswordGenerateDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDD");
 		String formattedDate = sdf.format(calendar.getTime());
 		String reserveNum = formattedDate+countReservation();
+		System.out.println(reserveNum);
 		return reserveNum;
 
 	}
@@ -55,6 +56,7 @@ public class PlanidAndPasswordGenerateDao {
 			int index = random.nextInt(CHARSET.length());
 			password.append(CHARSET.charAt(index));
 		}
+		System.out.println(password);
 		return password.toString();
 		
 	}
@@ -80,7 +82,7 @@ public class PlanidAndPasswordGenerateDao {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		String formatcount = String.format("%05d", count);
+		String formatcount = String.format("%04d", count);
         return formatcount;
 		}
 }

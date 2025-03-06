@@ -32,19 +32,20 @@ public class Reserve2 extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String building = request.getParameter("building");
-        String allergy = "";
         String people = request.getParameter("people");
         String stayDays =request.getParameter("stayDays");
         int room = Integer.parseInt(request.getParameter("room"));
         ArrayList<String> roomCount = new ArrayList<>();
         ArrayList<String> allergyCount = new ArrayList<>();      
         if(room==1) {
-        	allergy = request.getParameter("allergy");
+        	roomCount.add(people);
+        	allergyCount.add(request.getParameter("roomAllergy1"));
+        	
         }else {
 
         	for(int i=1;i<=room;i++) {
         		roomCount.add(request.getParameter("roomPeople"+i));
-        		allergyCount.add(request.getParameter("roomallergy"+i));
+        		allergyCount.add(request.getParameter("roomAllergy"+i));
         	}
         }
         String planNum = request.getParameter("planNum");
@@ -64,9 +65,9 @@ public class Reserve2 extends HttpServlet {
 		ri.setBuilding(building);
 		ri.setPeople(Integer.parseInt(people));
 		ri.setRoom(room);
-		ri.setAllergy(allergy);
 		ri.setStartDate(startdate);
 		ri.setStayDays(Integer.parseInt(stayDays));
+		ri.setPlanNum(planNum);
 		session.setAttribute("info",ri);
 		PlanDao dao = new PlanDao();
 		ArrayList<Plan> plan = null;

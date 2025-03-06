@@ -1,9 +1,9 @@
 package mailSend;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -18,63 +18,79 @@ import dao.PlanDao;
 import dao.ReservationDao;
 import model.LodgmentInformation;
 import model.Plan;
+import model.Reservation;
 
 public class Mailsend {
+	private final String from = "23jy0129@jec.ac.jp";
+	private final String host = "10.64.144.9";
+
+//		String combinedString = reserveNo + currentTime;
+//		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+//		byte[] hashBytes = digest.digest(combinedString.getBytes());
+//		StringBuilder hexString = new StringBuilder();
+//		for (byte b : hashBytes) {
+//			 hexString.append(String.format("%02x", b));
+//		}
+//		String hex = hexString.toString();
+//		reserve.setPassword(hex);
+//		String body = "ご予約完了致しました。詳細はWebサイトからご確認ください。\r\n";
+//		body += "予約番号："+reserveNo+"\r\n";
+//		body += "パスワード："+reserve.getPassword()+"\r\n";
+//		body += "料金："+fee+"\r\n";
+//		body += "\r\n問い合わせ先";
+//		body += "日電旅館　株式会社　千景\n";
+//		body += "TEL：03-3363-7761\n";
+//		body += "FAX：03-3363-7761\n";
+//		body += "mail：info@tikage.jp\n";
+//		this.send(to, subject, body);
 	
-	public Mailsend() {
-	    String to = r.getEmailAddress();
-		String subject = request.getParameter("予約完了メール");
-		String planNo=r.getPlanNo();
+	public void  reservesend(String mailaddress,String pnum) {
+		String to = mailaddress;
+		String subject = "ご予約完了";
+		String planNo = pnum;
 		Plan plan = new Plan();
 		PlanDao d = new PlanDao();
-		plan = d.findPlanByPlanNo(planNo);
-		ArrayList<LodgmentInformation> list = new ArrayList<>();
+		plan = d.findPlanByPlanNo(pnum);
+		ArrayList<LodgmentInformation> info = new ArrayList<>(); 
 		ReservationDao dao2 = new ReservationDao();
-		list=dao2.findLodgment(planNo);
-		int i = 0;
-		for(LodgmentInformation l: list) {
-			i+=l.getLodgmentCount();
+		Reservation r = dao2.findReservation(pnum);
+		int people = 0;
+		for(LodgmentInformation i:info) {
+			people+=i.getLodgmentCount();
 		}
-		LocalDate now=LocalDate.now();
-		Date date1=r.getLodgmentStartDate();
-		LocalDate reserveDay = date1.toInstant().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
-		LocalDate no = reserveDay.plusDays(8);
-		long daysBetween = ChronoUnit.DAYS.between(no, now);
-		int day = (int)daysBetween;
-		int cancelFee = 0;
-		if(day >= 8) {
-			cancelFee=0;
-		}else if(4 <= day && day <= 7){
-			cancelFee = plan.getFee()/5;
-		}else if(day == 3) {
-			cancelFee = plan.getFee()/2;
-		}else if(1 <= day && day <= 2) {
-			cancelFee = plan.getFee()/10*8;
-		}else if(day == 0) {
-			cancelFee=plan.getFee();
+		String reserveNo = r.getReservationNo();
+		int fee = people*plan.getFee()*r.getLodgmentDays();
+		String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+		String combinedString = reserveNo + currentTime;
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
-		cancelFee *= i;
-		String body = r.getCustomerName() + "様、以下の内容でご予約致しました\n";
-		body += "宿泊日："+r.getLodgmentStartDate()+"("+r.getLodgmentDays()+"泊)\n";
-		body += "人数："+i+"\n";
-		body += "部屋数："+r.getTotalReservationRoom()+"\r\n";
-		body += "プラン名："+plan.getPlanName()+"\n";
-		body += "料金："+plan.getFee()+"\n";
-		body += "支払い口座はこちら\n";
-		body += "キャンセル料："+cancelFee+"円";
-		body += "ゆうちょ銀行　銀座支店　普通　123456789011\n";
-		body += "\r\n問い合わせ先";
-		body += "日電旅館　株式会社　千景\n";
-		body += "TEL：03-3363-7761\n";
+		byte[] hashBytes = digest.digest(combinedString.getBytes());
+		StringBuilder hexString = new StringBuilder();
+		for(byte b : hashBytes) {
+			hexString.append(String.format("%02x", b));
+		}
+		String hex = hexString.toString();
+		String body ="ご予約完了致しました。詳細はWebサイトからご確認ください。\r\n";
+		body +="予約番号："+reserveNo+"\r\n";
+		body +="パスワード："+r.getPassword()+"\r\n";
+		body +="料金："+fee+"\r\n";
+		body +="\r\n問い合わせ先";
+		body +="日電旅館　株式会社　千景\n";
+		body += "TEL:03-3363-7761\n";
 		body += "FAX：03-3363-7761\n";
 		body += "mail：info@tikage.jp\n";
-		this.send(from, to, subject, body);
+		this.send(to, subject, body);
 	}
 
+	
 
 
-
-	private void send(String from, String to, String subject, String body) {
+	private void send(String to, String subject, String body) {
 	
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);

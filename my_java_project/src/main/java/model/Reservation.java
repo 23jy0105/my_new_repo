@@ -63,8 +63,8 @@ public class Reservation {
 		return lodgmentStartDate;
 	}
 
-	public void setLodgmentStartDate(String lodgmentStartDate) {
-		this.lodgmentStartDate = lodgmentStartDate;
+	public void setLodgmentStartDate(String date) {
+		this.lodgmentStartDate = date;
 	}
 
 	public int getLodgmentDays() {

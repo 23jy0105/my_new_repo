@@ -119,9 +119,10 @@ public class PlanDao {
 	}
 	public ArrayList<Plan> searchPlan(String planNo){
 		ArrayList<Plan> ar = new ArrayList<>();
-		String sql ="select plan_name,plan_fee from plan";
+		String sql ="select plan_name,plan_fee from plan where plan_number =  ?";
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
+			state.setString(1,planNo);
 			ResultSet rs = state.executeQuery();
 			while(rs.next()) {
 				Plan p = new Plan();

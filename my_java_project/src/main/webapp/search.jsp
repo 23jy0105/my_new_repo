@@ -209,67 +209,78 @@ document.addEventListener("DOMContentLoaded", function() {
         const calendar = document.createElement("table");
         calendar.innerHTML = "<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>";
 
+        let today = new Date();
+        let minDate = new Date();
+        minDate.setDate(today.getDate() + 1);
         let row = document.createElement("tr");
         for (let i = 0; i < firstDay; i++) {
             row.appendChild(document.createElement("td"));
         }
-
+		
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement("td");
-            const link = document.createElement("a");
-            link.href = "#"+""+year+"/"+(month+1)+"/"+day+"";
+            const link = document.createElement("label");
+            link.href = "#"+""+year+""+(month+1)+""+day+"";
+            link.id = "check";
+            link.style.hover = "red";
             link.textContent = day;
-            link.addEventListener("click", function(event) {
-                event.preventDefault();  // クリック時にページ遷移を防ぐ
+            let date =new Date(year,month,day);
+            if(date >= minDate){
+	            link.addEventListener("click", function(event) {
+	                event.preventDefault();  // クリック時にページ遷移を防ぐ
+	
+	                const stayDays = document.getElementById("stay-days").value;
+	                const people = document.getElementById("people-count").value;
+	                const room = document.getElementById("room-count").value;
+	                const selectedDate =""+year+"-"+(month+1)+"-"+day+"";
+	                const planNum =document.getElementById("planNumInput").value;
+					
+	
+	                // フォームを作成してPOSTリクエストを送信
+	                const form = document.createElement("form");
+	                form.method = "POST";
+	                form.action = "Reserve1"; // Reserve1 サーブレットに遷移
+	
+	                // フォームにパラメータを追加
+	                const inputStayDays = document.createElement("input");
+	                inputStayDays.type = "hidden";
+	                inputStayDays.name = "stayDays";
+	                inputStayDays.value = stayDays;
+	                form.appendChild(inputStayDays);
+					console.log(stayDays);
+	                const inputPeople = document.createElement("input");
+	                inputPeople.type = "hidden";
+	                inputPeople.name = "people";
+	                inputPeople.value = people;
+	                form.appendChild(inputPeople);
+	
+	                const inputRoom = document.createElement("input");
+	                inputRoom.type = "hidden";
+	                inputRoom.name = "room";
+	                inputRoom.value = room;
+	                form.appendChild(inputRoom);
+	
+	                const inputDate = document.createElement("input");
+	                inputDate.type = "hidden";
+	                inputDate.name = "date";
+	                inputDate.value = selectedDate;
+	                form.appendChild(inputDate);
+	
+	                const inputPlanNum = document.createElement("input");
+	                inputPlanNum.type = "hidden";
+	                inputPlanNum.name = "planNum";
+	                inputPlanNum.value = planNum;
+	                form.appendChild(inputPlanNum); 
+	
+	                // フォームを送信
+	                document.body.appendChild(form);
+	                form.submit();
+	            });
+            } else {
 
-                const stayDays = document.getElementById("stay-days").value;
-                const people = document.getElementById("people-count").value;
-                const room = document.getElementById("room-count").value;
-                const selectedDate =""+year+"-"+(month+1)+"-"+day+"";
-                const planNum =document.getElementById("planNumInput").value;
-				
-
-                // フォームを作成してPOSTリクエストを送信
-                const form = document.createElement("form");
-                form.method = "POST";
-                form.action = "Reserve1"; // Reserve1 サーブレットに遷移
-
-                // フォームにパラメータを追加
-                const inputStayDays = document.createElement("input");
-                inputStayDays.type = "hidden";
-                inputStayDays.name = "stayDays";
-                inputStayDays.value = stayDays;
-                form.appendChild(inputStayDays);
-				console.log(stayDays);
-                const inputPeople = document.createElement("input");
-                inputPeople.type = "hidden";
-                inputPeople.name = "people";
-                inputPeople.value = people;
-                form.appendChild(inputPeople);
-
-                const inputRoom = document.createElement("input");
-                inputRoom.type = "hidden";
-                inputRoom.name = "room";
-                inputRoom.value = room;
-                form.appendChild(inputRoom);
-
-                const inputDate = document.createElement("input");
-                inputDate.type = "hidden";
-                inputDate.name = "date";
-                inputDate.value = selectedDate;
-                form.appendChild(inputDate);
-
-                const inputPlanNum = document.createElement("input");
-                inputPlanNum.type = "hidden";
-                inputPlanNum.name = "planNum";
-                inputPlanNum.value = planNum;
-                form.appendChild(inputPlanNum); 
-
-                // フォームを送信
-                document.body.appendChild(form);
-                form.submit();
-            });
-
+                link.style.pointerEvents = "none";
+                link.style.opacity = "0.5";
+            }
             cell.appendChild(link);
             row.appendChild(cell);
 

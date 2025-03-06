@@ -36,7 +36,8 @@ public class SearchResult extends HttpServlet {
 	     String nowDate = sdf.format(calendar.getTime());
 		 PlanDao dao = new PlanDao();
 		 ArrayList<Plan> plans = null;
-
+		 System.out.println(date);
+		 System.out.println("ss");
 			// 日付が指定されている場合と指定されていない場合の処理
 			if (date != null) {
 				plans = dao.searchPlan(day, people, room, date, nowDate);

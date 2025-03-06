@@ -74,3 +74,13 @@
             text-align: center;
             margin-top: 50px;
         }
+		#caution {
+		   font-size: 24px;
+		   color: #D9534F; /* 目立つ赤色 */
+		   text-align: center;
+		   margin-top: 20px;
+		   padding: 20px;
+		   background-color: #F2DEDE; /* 薄い赤の背景 */
+		   border: 1px solid #D43F00;
+		   border-radius: 5px;
+		}
