@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.PlanidAndPasswordGenerateDao;
 import dao.ReservationDao;
+import mailSend.Mailsend;
 import model.Reservation;
 import model.ReservationInfo;
 
@@ -83,12 +84,14 @@ public class Reserve3 extends HttpServlet {
         	System.out.println(strp);
         	System.out.println(stra);
         	System.out.println("aa");
+        int pt=0;
         for (int i = 0; i < room; i++) {
             String people = strp.get(i);
             int p =Integer.parseInt(people);
             String allergy = stra.get(i);
             int a = Integer.parseInt(allergy);
             String rstr = String.format("%02d", i);
+            pt =pt+p;
             try {
 				dao.addLodgmentInfo(r.getReservationNo(),rstr,p,a);
 			} catch (Exception e) {
@@ -96,8 +99,8 @@ public class Reserve3 extends HttpServlet {
 				System.out.println("エラー２");
 			}
         }
-//        Mailsend mail = new Mailsend();
-//        mail.reservesend(r.getEmailAddress(),r.getPlanNo());
+        Mailsend mail = new Mailsend();
+        mail.reservesend(r.getEmailAddress(),planNumber,reservenum,pt,password,staydays);
         
 		RequestDispatcher rd = request.getRequestDispatcher("reserve3.jsp");
 		rd.forward(request, response);

@@ -168,7 +168,7 @@ public class ReservationDao {
 	
 	public Reservation findReservation(String input) {
 		Reservation r = new Reservation();
-		String sql = "select * from Reservation where reservation_number = "+input;
+		String sql = "select * from Reservation where reservation_number = '" + input + "'";
 		
 		try {
 			PreparedStatement state = con.prepareStatement(sql);
@@ -198,6 +198,7 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return r;
 	}

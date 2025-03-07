@@ -44,8 +44,8 @@ public class Reserve2 extends HttpServlet {
         }else {
 
         	for(int i=1;i<=room;i++) {
-        		roomCount.add(request.getParameter("roomPeople"+i));
-        		allergyCount.add(request.getParameter("roomAllergy"+i));
+        		roomCount.add(request.getParameter("roomPeople"+String.valueOf(i)));
+        		allergyCount.add(request.getParameter("roomAllergy"+String.valueOf(i)));
         	}
         }
         String planNum = request.getParameter("planNum");
